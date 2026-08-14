@@ -96,7 +96,9 @@ def main(
     test_background=False,
     dry_run=False,
     field_binaries=False,
-    resume=False
+    resume=False,
+    stellar_evolution=False,
+    metallicity = 0.02,
 ):
 
     if dry_run:
@@ -219,11 +221,14 @@ def main(
     cfg["petar"].r_bin = 1000 | units.au
     cfg["petar"].dt_soft = 2**(-dt_level) | nbody_system.time
 
+    cfg['stellar_evolution'].metallicity = metallicity
+
     system = DcafSystem(
         framework,
         converter=converter,
         config=cfg,
         gas_code=cloud,
+        stellar_evolution=stellar_evolution,
         track_background_gas_energy=track_background_gas_energy,
         stars_per_worker=stars_per_worker,
         resume=resume
@@ -267,6 +272,8 @@ PARAMETER_SPECS = {
     "test_background": {"cast": bool},
     "field_binaries": {"cast": bool},
     "dry_run": {"cast": bool},
+    "stellar_evolution" : {"cast":bool},
+    "metallicity" : {"cast": float},
 }
 
 
@@ -297,6 +304,8 @@ def get_default_params():
         dry_run=False,
         field_binaries=False,
         resume=False,
+        stellar_evolution = False,
+        metallicity = 0.02,
     )
 
 
@@ -368,6 +377,10 @@ def build_parser():
     p.add_argument("--field_binaries", action="store_true")
     p.add_argument("--dry_run", action="store_true")
 
+    #stellar evolution:
+    p.add_argument("--stellar_evolution",type=bool,default = None )
+    p.add_argument("--metallicity",type=float,default = None )
+
     return p
 
 
@@ -398,6 +411,7 @@ def parse_args():
         "dt_out",
         "dt_level",
         "stars_per_worker",
+        "metallicity",
     )
 
     if a.resume:
@@ -428,6 +442,7 @@ def parse_args():
     if a.test_background: params["test_background"] = True
     if a.track_background_gas_energy: params["track_background_gas_energy"] = True
     if a.field_binaries: params["field_binaries"] = True
+    if a.stellar_evolution : params["stellar_evolution"] = True
     if a.dry_run: params["dry_run"] = True
 
     return params

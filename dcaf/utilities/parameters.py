@@ -39,7 +39,15 @@ class GasConfig:
     def __init__(self,**kw):
         pass
 
+class StellarEvolutionConfig:
+    """Stellar evolution configuration."""
+    def __init__(self, **kw):
+        self.metallicity = 0.02
+
 
 def get_default_configuration():
-    return dict( petar = PetarConfig() , bridge = BridgeConfig(), 
-                gas = GasConfig()  )
+    return dict( petar = PetarConfig() , 
+                bridge = BridgeConfig(), 
+                gas = GasConfig(),
+                stellar_evolution = StellarEvolutionConfig() 
+                )

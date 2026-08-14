@@ -85,6 +85,10 @@ class StarFormationFramework :
         self.background_gas = background_gas
         self.dt_tolerance = dt_tolerance
 
+        # initialize the is_active flag. We will use this to distinguish stars
+        # that are already formed.
+        self.target_stars.is_active = False
+
         self.schedule_formation()
 
     def get_next_formation_time(self):
@@ -108,9 +112,16 @@ class StarFormationFramework :
         Retrieve next scheduled stars and setup the next formation event.
         This function should be called by form_stars to obtain new stars to
         form.
+        NOTE: we are also flaggin stars as active here. SO this function MUST be
+        called by form_stars.
         """
         #retrieve the new stars and forward framework time to current time
         new_stars = self.__next_stars
+
+        if new_stars is not None and len(new_stars) > 0:
+            active_mask = np.isin(self.target_stars.key, new_stars.key)
+            self.target_stars[active_mask].is_active = True
+
         self.model_time = self.__next_formation_time
         self.__setup_next_event()
 

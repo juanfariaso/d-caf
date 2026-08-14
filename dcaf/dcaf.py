@@ -17,10 +17,18 @@ except:
     print('Warning PeTar not installed, can not run simulations' )
     PETAR_INSTALLED = False
 
+try: 
+    from amuse.community.seba.interface import SeBa
+    SEBA_INSTALLED = True
+except:
+    print('Warning SEBA not installed, can not initalize stellar evolution' )
+    SEBA_INSTALLED = False
+
 from amuse.io import write_set_to_file
 
 from dcaf.utilities.parameters import get_default_configuration
 from dcaf.utilities.logger import setup_logger
+from dcaf.utilities.particles import get_key_positions
 
 from dcaf.io.restart import get_resume_state
 from dcaf.io.output import get_output_folders, find_snapshot_files
@@ -39,6 +47,7 @@ class DcafSystem:
         log_level = 'debug',
         stars_per_worker = None,
         workers_step = 5,
+        stellar_evolution = False,
         resume = False
     ):
         base_output_folder = output_folder.rstrip("/")
@@ -47,6 +56,9 @@ class DcafSystem:
 
         self.snapshot_basename = "stars_"
         reuse_empty_output_folder = False
+
+        self.stellar_evolution = stellar_evolution
+
         self.resume = resume
         if self.resume:
             folders = get_output_folders(base_output_folder)
@@ -125,13 +137,11 @@ class DcafSystem:
 
         # Runtime state
         self.target_stars = stars0
-        self._formed_stars = Particles()
-        self._formed_stars_mod = True # this tells that the formed_stars set may
-                            #   have changed or not yet ready
         self.model_time = None
 
         # Codes 
         self.petar_code = None
+        self.seba_code = None
         self.bridge_code = None
         self.code = None
 
@@ -158,23 +168,44 @@ class DcafSystem:
     @property
     def formed_stars(self):
         """
-        Return already formed stars updated. Only update the particles if model
-        time has drifted or more stars has been added. Otherwise, the stored copy is provided.
-        """
-        if self.petar_code is None:
-            return self._formed_stars
+        Return the active stars.
 
-        self.logger.debug( f'[FORMED STARS] Requested at time: {self.model_time.in_(units.Myr)} '
-                          )
-        if ( getattr(self._formed_stars.collection_attributes, "code_time", -1|units.Myr) != self.petar_code.model_time 
-            or len(self._formed_stars) != len(self.petar_code.particles) ):
+        self.target_stars contain all stars that will be in the simulation.
+        This function just make it return the ones that have already formed and
+        are updated by the evolving codes.
+        Before giving th stars, we synchornize the active stars with the ones in
+        the codes.
+        """
+        active_mask = self.target_stars.is_active
+
+        if self.petar_code is not None:
             self.update_formed_stars()
-        return self._formed_stars
+
+        return self.target_stars[active_mask]
 
     def update_formed_stars(self):
         with self.logger.timing('[UPDATING STARS] ********************'):
-            self._formed_stars = self.petar_code.particles.copy()
-            self._formed_stars.collection_attributes.code_time = self.petar_code.model_time
+            active_mask = self.target_stars.is_active
+            active_stars = self.target_stars[active_mask]
+            code_stars = self.petar_code.particles
+
+            assert len(active_stars) == len(code_stars), (
+                "[DCAF][SYNC] Active target stars and PeTar particles have "
+                f"different lengths: {len(active_stars)} != {len(code_stars)}"
+            )
+
+            indices = get_key_positions(code_stars, active_stars.key)
+            code_match = code_stars[indices]
+
+            active_stars.x = code_match.x
+            active_stars.y = code_match.y
+            active_stars.z = code_match.z
+            active_stars.vx = code_match.vx
+            active_stars.vy = code_match.vy
+            active_stars.vz = code_match.vz
+
+            self.target_stars.collection_attributes.code_time = self.petar_code.model_time
+
     def initialize_system(self):
         """Instantiate PeTar and, if present, Bridge. Also add initial stars,
         or resume from the latest saved snapshot if self.resume is True.
@@ -211,6 +242,10 @@ class DcafSystem:
             with self.logger.timing('Initializing PeTar'):
                 self._setup_petar()
 
+            if self.stellar_evolution:
+                with self.logger.timing('Initializing SeBa'):
+                    self._setup_seba()
+
             # Make sure output directory exists
             os.makedirs(self.output_folder, exist_ok=True)
 
@@ -224,21 +259,45 @@ class DcafSystem:
                     snapshot_basename=self.snapshot_basename,
                 )
 
-                self.logger.info(f"[DCAF] Resume source folder: {state['source_folder']}")
+                self.logger.info(
+                    f"[DCAF] Resume source folder: {state['source_folder']}"
+                )
 
                 stars = state["stars"]
                 self.model_time = state["model_time"]
                 snapshot_index = state["snapshot_index"]
 
                 self.logger.info(
-                    f'[DCAF] Resuming from snapshot {snapshot_index:03d} '
-                    f'at {self.model_time.in_(units.Myr)}'
+                    f"[DCAF] Resuming from snapshot {snapshot_index:03d} "
+                    f"at {self.model_time.in_(units.Myr)}"
                 )
 
                 self.petar_code.particles.add_particles(stars.copy())
 
-                self._formed_stars = stars.copy()
-                self._formed_stars.collection_attributes.code_time = self.model_time
+                self.target_stars.is_active = False
+                active_mask = np.isin(self.target_stars.key, stars.key)
+                self.target_stars[active_mask].is_active = True
+
+                active_stars = self.target_stars[active_mask]
+
+                assert len(active_stars) == len(stars), (
+                    "[DCAF][RESUME] Active target stars and resumed stars have "
+                    f"different lengths: {len(active_stars)} != {len(stars)}"
+                )
+
+                indices = get_key_positions(stars, active_stars.key)
+                resume_match = stars[indices]
+
+                active_stars.x = resume_match.x
+                active_stars.y = resume_match.y
+                active_stars.z = resume_match.z
+                active_stars.vx = resume_match.vx
+                active_stars.vy = resume_match.vy
+                active_stars.vz = resume_match.vz
+                active_stars.mass = resume_match.mass
+
+                if hasattr(stars, "radius"):
+                    active_stars.radius = resume_match.radius
 
                 self._disable_future_formation()
 
@@ -340,6 +399,23 @@ class DcafSystem:
         self.petar_code.parameters.r_out = cfg.r_out 
         self.petar_code.parameters.dt_soft = cfg.dt_soft
 
+
+    def _setup_seba(self):
+        """
+        Initialize SeBa. No particles are added here.
+        """
+
+        if "stellar_evolution" not in self.config:
+            raise ValueError(
+                "stellar_evolution=True requires a 'stellar_evolution' "
+                "configuration block."
+            )
+
+        self.seba_code = SeBa()
+
+        cfg = self.config["stellar_evolution"]
+        self.seba_code.parameters.metallicity = cfg.metallicity
+
     def _setup_bridge(self):
         cfg = self.config["bridge"]
         if cfg.timestep is None:
@@ -438,8 +514,6 @@ class DcafSystem:
                 # Evolve only if there is either a reasonable N or no stars (some codes allow)
                 with self.logger.timing('[DCAF] Evolving *********************'):
                     self.code.evolve_model(t_stop)
-                    # make formed stars is updated next time is accessed
-                    self._formed_stars_mod = True
 
 
             # Update clock
@@ -482,8 +556,12 @@ class DcafSystem:
             )
             filename = os.path.join(self.output_folder, f"{self.snapshot_basename}{self.__current_snapshot:03d}")
 
-            self.formed_stars.collection_attributes.model_time = self.model_time
-            write_set_to_file(self.formed_stars, filename + ".amuse", format='amuse')
+            stars = self.formed_stars
+            stars.collection_attributes.model_time = self.model_time
+            stars.collection_attributes.code_time = (
+                self.target_stars.collection_attributes.code_time
+            )
+            write_set_to_file(stars, filename + ".amuse", format='amuse')
             self.__current_snapshot += 1
 
             if self.framework.background_gas and hasattr(self.framework.background_gas, 'write_output'):
