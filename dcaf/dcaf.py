@@ -58,6 +58,8 @@ class DcafSystem:
         reuse_empty_output_folder = False
 
         self.stellar_evolution = stellar_evolution
+        if self.stellar_evolution and not SEBA_INSTALLED:
+            raise ImportError("SeBa not installed. We can not start stellar evolution")
 
         self.resume = resume
         if self.resume:
@@ -246,6 +248,20 @@ class DcafSystem:
                 with self.logger.timing('Initializing SeBa'):
                     self._setup_seba()
 
+                    stars = self.target_stars
+
+                    if not hasattr(stars, "birth_time"):
+                        stars.birth_time = -np.ones(len(stars)) | units.Myr
+
+                    if not hasattr(stars, "initial_mass"):
+                        stars.initial_mass = stars.mass.copy()
+
+                    if not hasattr(stars, "stellar_type"):
+                        stars.stellar_type = -np.ones(len(stars), dtype=int)
+
+                    if not hasattr(stars, "in_seba"):
+                        stars.in_seba = np.zeros(len(stars), dtype=bool)
+
             # Make sure output directory exists
             os.makedirs(self.output_folder, exist_ok=True)
 
@@ -272,32 +288,34 @@ class DcafSystem:
                     f"at {self.model_time.in_(units.Myr)}"
                 )
 
-                self.petar_code.particles.add_particles(stars.copy())
+                if self.stellar_evolution:
+                    raise NotImplementedError(
+                        "Resume with stellar evolution is not supported yet. "
+                        "The full SeBa internal state is not stored in "
+                        "snapshots."
+                    )
 
-                self.target_stars.is_active = False
-                active_mask = np.isin(self.target_stars.key, stars.key)
-                self.target_stars[active_mask].is_active = True
-
-                active_stars = self.target_stars[active_mask]
-
-                assert len(active_stars) == len(stars), (
-                    "[DCAF][RESUME] Active target stars and resumed stars have "
-                    f"different lengths: {len(active_stars)} != {len(stars)}"
+                assert len(self.target_stars) == len(stars), (
+                    "[DCAF][RESUME] Target stars and resumed stars have "
+                    f"different lengths: {len(self.target_stars)} != {len(stars)}"
                 )
 
-                indices = get_key_positions(stars, active_stars.key)
+                indices = get_key_positions(stars, self.target_stars.key)
                 resume_match = stars[indices]
 
-                active_stars.x = resume_match.x
-                active_stars.y = resume_match.y
-                active_stars.z = resume_match.z
-                active_stars.vx = resume_match.vx
-                active_stars.vy = resume_match.vy
-                active_stars.vz = resume_match.vz
-                active_stars.mass = resume_match.mass
+                self.target_stars.is_active = True
+                self.target_stars.x = resume_match.x
+                self.target_stars.y = resume_match.y
+                self.target_stars.z = resume_match.z
+                self.target_stars.vx = resume_match.vx
+                self.target_stars.vy = resume_match.vy
+                self.target_stars.vz = resume_match.vz
+                self.target_stars.mass = resume_match.mass
 
                 if hasattr(stars, "radius"):
-                    active_stars.radius = resume_match.radius
+                    self.target_stars.radius = resume_match.radius
+
+                self.petar_code.particles.add_particles(self.target_stars.copy())
 
                 self._disable_future_formation()
 
@@ -316,6 +334,11 @@ class DcafSystem:
                 newstars = self.framework.form_stars(Particles())
 
                 self.model_time = tnext
+                if self.stellar_evolution:
+                    # get seba into the same time as the rest
+                    # note that on petar we do this by setting its initial time
+                    # to model time. Here we just advance an empty seba
+                    self.seba_code.evolve_model(self.model_time)
                 self._add_new_stars(newstars)
 
             # ------------------------------------------------------------
@@ -520,6 +543,31 @@ class DcafSystem:
             time = t_stop
             self.model_time = time
 
+            # Sync stellar evolution with petar
+
+            if self.stellar_evolution and len(self.seba_code.particles) > 0:
+                self.seba_code.evolve_model(self.model_time)
+
+                # SeBa -> authoritative target_stars
+                seba_stars = self.seba_code.particles
+                positions = get_key_positions(self.target_stars, seba_stars.key)
+                target_seba_stars = self.target_stars[positions]
+
+                target_seba_stars.mass = seba_stars.mass
+                target_seba_stars.radius = seba_stars.radius
+                target_seba_stars.stellar_type = seba_stars.stellar_type
+
+                # Optional later, after first test:
+                # target_seba_stars.stellar_type = seba_stars.stellar_type
+
+                # authoritative target_stars -> active PeTar particles
+                code_positions = get_key_positions(self.petar_code.particles, seba_stars.key)
+                petar_stars = self.petar_code.particles[code_positions]
+
+                petar_stars.mass = target_seba_stars.mass
+                petar_stars.radius = target_seba_stars.radius
+
+
             # 1) Output event
             if i_event == 1:
                 self.write_output()
@@ -597,6 +645,22 @@ class DcafSystem:
                 U0 = self.petar_code.potential_energy
             self.petar_code.particles.add_particles(stars)
             self.__inject_new_stars_energy(stars,U0=U0)
+
+            if self.stellar_evolution:
+                positions = get_key_positions(self.target_stars, stars.key)
+                target_new_stars = self.target_stars[positions]
+
+                target_new_stars.birth_time = self.model_time
+                target_new_stars.initial_mass = target_new_stars.mass
+
+                #sanity check
+                if np.any(target_new_stars.in_seba):
+                    raise ValueError(
+                        "[DCAF][SEBA] Attempted to register stars already present in SeBa."
+                    )
+
+                target_new_stars.in_seba = True
+                self.seba_code.particles.add_particles(target_new_stars.copy())
 
 
             for s in stars:

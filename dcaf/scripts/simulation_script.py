@@ -32,7 +32,7 @@ def sample_masses(Mtot, mmin=0.08 | units.MSun, mmax=100 | units.MSun):
     total = masses.sum()
     while total < 0.98 * Mtot:
         add = new_kroupa_mass_distribution(N // 2 + 1, mmin, mmax)
-        masses = masses.append(add)
+        masses.append(add)
         total = masses.sum()
     return masses
 
@@ -378,7 +378,7 @@ def build_parser():
     p.add_argument("--dry_run", action="store_true")
 
     #stellar evolution:
-    p.add_argument("--stellar_evolution",type=bool,default = None )
+    p.add_argument("--stellar_evolution", action = "store_true")
     p.add_argument("--metallicity",type=float,default = None )
 
     return p
