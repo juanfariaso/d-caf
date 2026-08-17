@@ -60,6 +60,62 @@ make stopcond.code petar.code
 But even if you will use the GPU version, make it anyway to make sure you have the correct configuration to make it work.
 
 
+## Appendix: SeBa build note on this machine
+
+On this machine, building `SeBa` directly from the local AMUSE tree required
+building `stopcond` first and then passing its include and library paths
+explicitly.
+
+Activate the environment and define the AMUSE path:
+
+```shell
+source /Users/juan.farias/venv/base/bin/activate
+export AMUSE_DIR=/Users/juan.farias/Codes/amuse
+export PYTHONPATH=$AMUSE_DIR/src:$PYTHONPATH
+```
+
+Build `stopcond`:
+
+```shell
+cd $AMUSE_DIR/lib/stopcond
+make
+```
+
+Then build the `SeBa` worker:
+
+```shell
+cd $AMUSE_DIR/src/amuse_seba
+make STOPCOND_CFLAGS="-I$AMUSE_DIR/lib/stopcond" \
+     STOPCOND_LIBS="-L$AMUSE_DIR/lib/stopcond -lstopcond" \
+     seba_worker
+```
+
+The worker should then exist at:
+
+```shell
+$AMUSE_DIR/src/amuse_seba/seba_worker
+```
+
+On this machine, the `SeBa` worker also required the `stopcond` library path
+to be added at runtime. Before launching Python or a DCAF simulation, export:
+
+```shell
+export DYLD_LIBRARY_PATH=$AMUSE_DIR/lib/stopcond:$DYLD_LIBRARY_PATH
+```
+
+You can test the worker with:
+
+```shell
+python3 - <<'PY'
+from amuse.community.seba.interface import SeBa
+print("before")
+se = SeBa(redirection='none')
+print("after")
+se.stop()
+PY
+```
+
+
 This may be just enough if you want to use DCAF without GPU.
 However, the framework will work much more efficiently with GPU enabled. This because we intend to grow the system gradually. Running a  few stars with many processors is quite inefficient, and using one processor only works well for small systems (<2000 stars).
 The best performance is achieved if we manage to build PeTar with activated GPU since the GPU optimization can smoothly transition from a small system into a large one. The alternative would be to stop the code and add more workers on the go, but the initialization of PeTar in amuse several times is very inefficient and ended up being worse when I tested it.
@@ -224,4 +280,3 @@ make petar.code
 ```
 
 and if all goes fine, PeTar should be ready
-

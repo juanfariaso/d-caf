@@ -113,6 +113,7 @@ class DcafSystem:
         self._current_workers = None
 
         # I will move this inside dcaf_output in the future..
+        self.gas_code = gas_code
         if self.framework.background_gas:
             self.gas_code = self.framework.background_gas
             if seg == 0:
@@ -257,7 +258,19 @@ class DcafSystem:
                         stars.initial_mass = stars.mass.copy()
 
                     if not hasattr(stars, "stellar_type"):
-                        stars.stellar_type = -np.ones(len(stars), dtype=int)
+                        stars.stellar_type = np.zeros(len(stars)) | units.stellar_type
+
+                    if not hasattr(stars, "relative_age"):
+                        stars.relative_age = np.zeros(len(stars)) | units.Myr
+
+                    if not hasattr(stars, "relative_mass"):
+                        stars.relative_mass = np.zeros(len(stars)) | units.MSun
+
+                    if not hasattr(stars, "core_mass"):
+                        stars.core_mass = np.zeros(len(stars)) | units.MSun
+
+                    if not hasattr(stars, "COcore_mass"):
+                        stars.COcore_mass = np.zeros(len(stars)) | units.MSun
 
                     if not hasattr(stars, "in_seba"):
                         stars.in_seba = np.zeros(len(stars), dtype=bool)
@@ -288,20 +301,23 @@ class DcafSystem:
                     f"at {self.model_time.in_(units.Myr)}"
                 )
 
-                if self.stellar_evolution:
-                    raise NotImplementedError(
-                        "Resume with stellar evolution is not supported yet. "
-                        "The full SeBa internal state is not stored in "
-                        "snapshots."
-                    )
-
                 assert len(self.target_stars) == len(stars), (
                     "[DCAF][RESUME] Target stars and resumed stars have "
                     f"different lengths: {len(self.target_stars)} != {len(stars)}"
                 )
 
-                indices = get_key_positions(stars, self.target_stars.key)
-                resume_match = stars[indices]
+                # copy the framework target stars (original) to the current set.
+                # note that both should point to the same set which is the 
+                # authoritative copy.
+                self.target_stars = self.target_stars.copy_to_new_particles(
+                    keys=stars.key
+                )
+                self.framework.target_stars = self.target_stars
+
+                # the resume stars are the old state stars
+                # so now we update the properties of the framework target stars
+                # with the advanced stored set.
+                resume_match = stars
 
                 self.target_stars.is_active = True
                 self.target_stars.x = resume_match.x
@@ -315,9 +331,49 @@ class DcafSystem:
                 if hasattr(stars, "radius"):
                     self.target_stars.radius = resume_match.radius
 
+                if self.stellar_evolution:
+                    required_attrs = (
+                        "birth_time",
+                        "initial_mass",
+                        "in_seba",
+                        "stellar_type",
+                        "relative_age",
+                        "relative_mass",
+                        "core_mass",
+                        "COcore_mass",
+                    )
+                    missing = [
+                        name for name in required_attrs if not hasattr(stars, name)
+                    ]
+                    if missing:
+                        raise ValueError(
+                            "Resume with stellar evolution requires snapshots "
+                            "to contain SeBa restart fields. Missing: "
+                            + ", ".join(missing)
+                        )
+
+                    self.target_stars.birth_time = resume_match.birth_time
+                    self.target_stars.initial_mass = resume_match.initial_mass
+                    self.target_stars.in_seba = resume_match.in_seba
+                    self.target_stars.stellar_type = resume_match.stellar_type
+                    self.target_stars.relative_age = resume_match.relative_age
+                    self.target_stars.relative_mass = resume_match.relative_mass
+                    self.target_stars.core_mass = resume_match.core_mass
+                    self.target_stars.COcore_mass = resume_match.COcore_mass
+
                 self.petar_code.particles.add_particles(self.target_stars.copy())
 
-                self._disable_future_formation()
+                if self.stellar_evolution:
+                    self.seba_code.evolve_model(self.model_time)
+                    self.seba_code.particles.add_particles(self.target_stars.copy())
+
+                # disable formation. We assume star formation is over in the
+                # resume case.
+                # TODO: Make resume branch to work during formation.
+                self.framework.formation_sequence = []
+                self.framework.formation_times = []
+                self.framework._StarFormationFramework__next_formation_time = None
+                self.framework._StarFormationFramework__next_stars = None
 
                 self.__current_snapshot = snapshot_index + 1
 
@@ -548,7 +604,7 @@ class DcafSystem:
             if self.stellar_evolution and len(self.seba_code.particles) > 0:
                 self.seba_code.evolve_model(self.model_time)
 
-                # SeBa -> authoritative target_stars
+                # SeBa ->  target_stars
                 seba_stars = self.seba_code.particles
                 positions = get_key_positions(self.target_stars, seba_stars.key)
                 target_seba_stars = self.target_stars[positions]
@@ -556,9 +612,11 @@ class DcafSystem:
                 target_seba_stars.mass = seba_stars.mass
                 target_seba_stars.radius = seba_stars.radius
                 target_seba_stars.stellar_type = seba_stars.stellar_type
-
-                # Optional later, after first test:
-                # target_seba_stars.stellar_type = seba_stars.stellar_type
+                target_seba_stars.relative_age = seba_stars.relative_age
+                target_seba_stars.relative_mass = seba_stars.relative_mass
+                target_seba_stars.core_mass = seba_stars.core_mass
+                target_seba_stars.COcore_mass = seba_stars.COcore_mass
+                target_seba_stars.stellar_type = seba_stars.stellar_type
 
                 # authoritative target_stars -> active PeTar particles
                 code_positions = get_key_positions(self.petar_code.particles, seba_stars.key)
@@ -882,11 +940,6 @@ class DcafSystem:
                 "setting the dt_tolerance > dt_soft "
             )
 
-    def _disable_future_formation(self):
-        self.framework.formation_sequence = []
-        self.framework.formation_times = []
-        self.framework._StarFormationFramework__next_formation_time = None
-        self.framework._StarFormationFramework__next_stars = None
 
 class GasEnergyTracker:
     """
