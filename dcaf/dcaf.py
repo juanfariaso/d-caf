@@ -581,49 +581,74 @@ class DcafSystem:
             # 0: finish; 1: output; 2: form stars
             event_times = (t_end, t_output, tnext)
             i_event, t_stop = min(enumerate(event_times), key=lambda x: x[1])
+
             self.logger.info(
                     f"[DCAF] (next event id: {i_event}) evolving from  "
                     f"{self.model_time.in_(units.Myr)} to "
                     f"{t_stop.in_(units.Myr)}"
                     )
 
+################ Secondary inner loop updating stellar evolution if necessary
             # Evolve dynamics up to t_stop if we actually need to advance time
             n_now = len(self.petar_code.particles)
+            # Evolve only if there is either a reasonable N or no stars (some codes allow)
             if (time < t_stop) and (n_now >= 2 or n_now == 0):
-                # Evolve only if there is either a reasonable N or no stars (some codes allow)
-                with self.logger.timing('[DCAF] Evolving *********************'):
-                    self.code.evolve_model(t_stop)
+                #Check the stellar evolution timestep if present.
+                while time < t_stop :
+                    t_inner = t_stop # by default we just go to t_stop
+                    # If seba has a smaller timestep, we need to reduce the
+                    # timestep.
+                    if self.stellar_evolution and len(self.seba_code.particles)>0 :
+                        t_seba = self.model_time + min(self.seba_code.particles.time_step)
+                        t_seba = self._ceil_to_block(t_seba)
+                        if t_seba < t_stop: 
+                            if t_seba <= self.model_time:
+                                raise ValueError(
+                                    "[DCAF][SEBA] Block-rounded SeBa timestep did not advance time."
+                                )
+                            t_inner = t_seba
+
+
+                    with self.logger.timing(f'[DCAF] Evolving to {t_inner} *******'):
+                        self.code.evolve_model(t_inner)
+
+                    time = t_inner
+                    self.model_time = time
+
+                    # Sync stellar evolution with petar
+                    with self.logger.timing('[DCAF][SeBa] syncing SE'):
+                        if self.stellar_evolution and len(self.seba_code.particles) > 0:
+                            self.seba_code.evolve_model(self.model_time)
+
+                            # SeBa ->  target_stars
+                            seba_stars = self.seba_code.particles
+                            positions = get_key_positions(self.target_stars, seba_stars.key)
+                            target_seba_stars = self.target_stars[positions]
+
+                            target_seba_stars.mass = seba_stars.mass
+                            target_seba_stars.radius = seba_stars.radius
+                            target_seba_stars.stellar_type = seba_stars.stellar_type
+                            target_seba_stars.relative_age = seba_stars.relative_age
+                            target_seba_stars.relative_mass = seba_stars.relative_mass
+                            target_seba_stars.core_mass = seba_stars.core_mass
+                            target_seba_stars.COcore_mass = seba_stars.COcore_mass
+                            target_seba_stars.stellar_type = seba_stars.stellar_type
+
+                            # authoritative target_stars -> active PeTar particles
+                            code_positions = get_key_positions(self.petar_code.particles, seba_stars.key)
+                            petar_stars = self.petar_code.particles[code_positions]
+
+                            petar_stars.mass = target_seba_stars.mass
+                            petar_stars.radius = target_seba_stars.radius
+
+############# Finished the evolution until t_stop (next event)
 
 
             # Update clock
+            # This is needed in case we skip the above loop (n=1)
             time = t_stop
             self.model_time = time
 
-            # Sync stellar evolution with petar
-
-            if self.stellar_evolution and len(self.seba_code.particles) > 0:
-                self.seba_code.evolve_model(self.model_time)
-
-                # SeBa ->  target_stars
-                seba_stars = self.seba_code.particles
-                positions = get_key_positions(self.target_stars, seba_stars.key)
-                target_seba_stars = self.target_stars[positions]
-
-                target_seba_stars.mass = seba_stars.mass
-                target_seba_stars.radius = seba_stars.radius
-                target_seba_stars.stellar_type = seba_stars.stellar_type
-                target_seba_stars.relative_age = seba_stars.relative_age
-                target_seba_stars.relative_mass = seba_stars.relative_mass
-                target_seba_stars.core_mass = seba_stars.core_mass
-                target_seba_stars.COcore_mass = seba_stars.COcore_mass
-                target_seba_stars.stellar_type = seba_stars.stellar_type
-
-                # authoritative target_stars -> active PeTar particles
-                code_positions = get_key_positions(self.petar_code.particles, seba_stars.key)
-                petar_stars = self.petar_code.particles[code_positions]
-
-                petar_stars.mass = target_seba_stars.mass
-                petar_stars.radius = target_seba_stars.radius
 
 
             # 1) Output event
