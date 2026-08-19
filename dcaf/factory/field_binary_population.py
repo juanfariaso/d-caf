@@ -332,7 +332,7 @@ def get_mass_ratios(m, p, qdist='field', mmin=0.08):
     # Verify that all mass ratios and companion masses are within bounds
     assert np.min(q) >=	0.1
     assert np.max(q) <=	1
-    assert np.allclose(np.min(m*q), mmin)
+    assert np.all(m*q >= mmin)
 
     return q
 

@@ -10,16 +10,24 @@ be adding.
 note that by default we use a flat imf here. 
 """
 import argparse
+import os
 import numpy as np
 import yaml
 
 from amuse.lab import nbody_system, new_kroupa_mass_distribution, units, new_plummer_model
+from amuse.datamodel import Particles
 from amuse.units.quantities import zero
 from amuse.units.constants import G
+try:
+    from amuse.community.seba.interface import SeBa
+    SEBA_INSTALLED = True
+except:
+    SEBA_INSTALLED = False
 
 from dcaf.dcaf import DcafSystem
 from dcaf.framework import StarFormationFramework
 from dcaf.utilities.parameters import get_default_configuration
+from dcaf.utilities.particles import get_key_positions
 from dcaf.backgroundgas.plummer import PlummerSphere, test_plummer_evolution
 from dcaf.factory import FieldBinaryPopulation
 
@@ -160,6 +168,154 @@ def build_stellar_distribution(
     )
 
 
+def run_seba_only(
+    framework,
+    config,
+    t_end,
+    output_folder="dcaf_output",
+    min_timestep=None,
+    adaptive_timestep=False,
+):
+    """
+    Run only SeBa on the scheduled star-formation history.
+
+    The base integration step is limited by framework.dt_tolerance, which is
+    the minimum formation-time spacing used by the scheduler.
+
+    If adaptive_timestep is True, SeBa can insert extra events using its own
+    minimum particle timestep whenever that is shorter than the base step.
+    """
+    if not SEBA_INSTALLED:
+        raise ImportError("SeBa not installed. We can not start seba-only runs")
+
+    stars = framework.target_stars
+
+    if not hasattr(stars, "birth_time"):
+        stars.birth_time = -np.ones(len(stars)) | units.Myr
+    if not hasattr(stars, "initial_mass"):
+        stars.initial_mass = stars.mass.copy()
+    if not hasattr(stars, "stellar_type"):
+        stars.stellar_type = np.zeros(len(stars)) | units.stellar_type
+    if not hasattr(stars, "relative_age"):
+        stars.relative_age = np.zeros(len(stars)) | units.Myr
+    if not hasattr(stars, "relative_mass"):
+        stars.relative_mass = np.zeros(len(stars)) | units.MSun
+    if not hasattr(stars, "core_mass"):
+        stars.core_mass = np.zeros(len(stars)) | units.MSun
+    if not hasattr(stars, "COcore_mass"):
+        stars.COcore_mass = np.zeros(len(stars)) | units.MSun
+    if not hasattr(stars, "in_seba"):
+        stars.in_seba = np.zeros(len(stars), dtype=bool)
+
+    seba = SeBa()
+    seba.parameters.metallicity = config["stellar_evolution"].metallicity
+
+    os.makedirs(output_folder, exist_ok=True)
+    history_name = "seba_history_adaptive.csv" if adaptive_timestep else "seba_history_fixed.csv"
+    history_path = os.path.join(output_folder, history_name)
+
+    def sync_seba_to_target():
+        if len(seba.particles) == 0:
+            return
+
+        seba_stars = seba.particles
+        positions = get_key_positions(stars, seba_stars.key)
+        target_seba_stars = stars[positions]
+        target_seba_stars.mass = seba_stars.mass
+        target_seba_stars.radius = seba_stars.radius
+        target_seba_stars.stellar_type = seba_stars.stellar_type
+        target_seba_stars.relative_age = seba_stars.relative_age
+        target_seba_stars.relative_mass = seba_stars.relative_mass
+        target_seba_stars.core_mass = seba_stars.core_mass
+        target_seba_stars.COcore_mass = seba_stars.COcore_mass
+
+    def register_new_stars(new_stars, model_time):
+        if len(new_stars) == 0:
+            return
+
+        positions = get_key_positions(stars, new_stars.key)
+        target_new_stars = stars[positions]
+        target_new_stars.birth_time = model_time
+        target_new_stars.initial_mass = target_new_stars.mass
+
+        if np.any(target_new_stars.in_seba):
+            raise ValueError(
+                "[SEBA-ONLY] Attempted to register stars already present in SeBa."
+            )
+
+        target_new_stars.in_seba = True
+        seba.particles.add_particles(target_new_stars.copy())
+
+    def current_seba_timestep():
+        if len(seba.particles) == 0:
+            return None
+        return min(seba.particles.time_step)
+
+    def write_history_row(history_file, row_index, model_time):
+        active_stars = stars[stars.is_active]
+        if len(active_stars) == 0:
+            total_mass = 0.0
+            total_radius = 0.0
+        else:
+            total_mass = active_stars.mass.sum().value_in(units.MSun)
+            total_radius = active_stars.radius.sum().value_in(units.RSun)
+
+        history_file.write(
+            f"{row_index},"
+            f"{model_time.value_in(units.Myr):.16e},"
+            f"{len(active_stars)},"
+            f"{total_mass:.16e},"
+            f"{total_radius:.16e}\n"
+        )
+
+    model_time = framework.get_next_formation_time()
+    if model_time is None:
+        raise ValueError("No formation events in framework")
+
+    new_stars = framework.form_stars(Particles())
+    register_new_stars(new_stars, model_time)
+    sync_seba_to_target()
+
+    dt_step = framework.dt_tolerance if min_timestep is None else min_timestep
+    with open(history_path, "w") as history_file:
+        history_file.write("step,time_myr,nstars,total_mass_msun,total_radius_rsun\n")
+
+        row_index = 0
+        write_history_row(history_file, row_index, model_time)
+        row_index += 1
+
+        while model_time < t_end:
+            next_formation_time = framework.get_next_formation_time()
+            next_step_time = model_time + dt_step
+
+            candidate_times = [next_step_time, t_end]
+            if next_formation_time is not None:
+                candidate_times.append(next_formation_time)
+
+            if adaptive_timestep:
+                seba_dt = current_seba_timestep()
+                if seba_dt is not None:
+                    candidate_times.append(model_time + seba_dt)
+
+            t_stop = min(candidate_times)
+
+            if len(seba.particles) > 0 and t_stop > model_time:
+                seba.evolve_model(t_stop)
+
+            model_time = t_stop
+            sync_seba_to_target()
+
+            if next_formation_time is not None and model_time == next_formation_time:
+                new_stars = framework.form_stars(stars[stars.is_active])
+                register_new_stars(new_stars, model_time)
+                sync_seba_to_target()
+
+            write_history_row(history_file, row_index, model_time)
+            row_index += 1
+
+    seba.stop()
+
+
 def main(
     seed_index=0,
     tff=None,
@@ -185,9 +341,12 @@ def main(
     test_background=False,
     dry_run=False,
     field_binaries=False,
-    flat_imf=True,
-    n_forced_massive=2,
+    flat_imf=False,
+    n_forced_massive=0,
     forced_mass=100 | units.MSun,
+    seba_only=False,
+    seba_min_timestep=None,
+    seba_adaptive_timestep=False,
     resume=False,
     stellar_evolution=False,
     metallicity=0.02,
@@ -332,22 +491,32 @@ def main(
     cfg["petar"].dt_soft = 2**(-dt_level) | nbody_system.time
     cfg["stellar_evolution"].metallicity = metallicity
 
-    system = DcafSystem(
-        framework,
-        converter=converter,
-        config=cfg,
-        gas_code=cloud,
-        stellar_evolution=stellar_evolution,
-        track_background_gas_energy=track_background_gas_energy,
-        stars_per_worker=stars_per_worker,
-        resume=resume
-    )
+    if seba_only:
+        run_seba_only(
+            framework,
+            config=cfg,
+            t_end=t_end,
+            output_folder="dcaf_output",
+            min_timestep=seba_min_timestep,
+            adaptive_timestep=seba_adaptive_timestep,
+        )
+    else:
+        system = DcafSystem(
+            framework,
+            converter=converter,
+            config=cfg,
+            gas_code=cloud,
+            stellar_evolution=stellar_evolution,
+            track_background_gas_energy=track_background_gas_energy,
+            stars_per_worker=stars_per_worker,
+            resume=resume
+        )
 
-    dt_out_nbody = 2**round(np.log2(dt_out / converter.to_si(1.0 | nbody_system.time))) | nbody_system.time
-    system.dt_out = converter.to_si(dt_out_nbody)
+        dt_out_nbody = 2**round(np.log2(dt_out / converter.to_si(1.0 | nbody_system.time))) | nbody_system.time
+        system.dt_out = converter.to_si(dt_out_nbody)
 
-    system.initialize_system()
-    system.evolve_model(t_end)
+        system.initialize_system()
+        system.evolve_model(t_end)
 
 
 # ---------------- YAML + CLI glue ----------------
@@ -383,6 +552,9 @@ PARAMETER_SPECS = {
     "flat_imf": {"cast": bool},
     "n_forced_massive": {"cast": int, "allow_none": True},
     "forced_mass": {"unit": units.MSun},
+    "seba_only": {"cast": bool},
+    "seba_min_timestep": {"unit": units.Myr, "allow_none": True},
+    "seba_adaptive_timestep": {"cast": bool},
     "dry_run": {"cast": bool},
     "stellar_evolution": {"cast": bool},
     "metallicity": {"cast": float},
@@ -415,9 +587,12 @@ def get_default_params():
         test_background=False,
         dry_run=False,
         field_binaries=False,
-        flat_imf=True,
-        n_forced_massive=2,
+        flat_imf=False,
+        n_forced_massive=0,
         forced_mass=100 | units.MSun,
+        seba_only=False,
+        seba_min_timestep=None,
+        seba_adaptive_timestep=False,
         resume=False,
         stellar_evolution=False,
         metallicity=0.02,
@@ -493,6 +668,9 @@ def build_parser():
     p.add_argument("--flat-imf", action="store_true")
     p.add_argument("--n-forced-massive", type=int, default=None)
     p.add_argument("--forced-mass", type=float, default=None, help="forced stellar mass [Msun]")
+    p.add_argument("--seba-only", action="store_true")
+    p.add_argument("--seba-min-timestep", type=float, default=None, help="minimum SeBa-only step [Myr]")
+    p.add_argument("--seba-adaptive-timestep", action="store_true")
     p.add_argument("--stellar_evolution", action="store_true")
     p.add_argument("--dry_run", action="store_true")
     p.add_argument("--metallicity", type=float, default=None)
@@ -530,6 +708,7 @@ def parse_args():
         "metallicity",
         "n_forced_massive",
         "forced_mass",
+        "seba_min_timestep",
     )
 
     if a.resume:
@@ -545,6 +724,10 @@ def parse_args():
             params["track_background_gas_energy"] = True
         if a.flat_imf:
             params["flat_imf"] = True
+        if a.seba_only:
+            params["seba_only"] = True
+        if a.seba_adaptive_timestep:
+            params["seba_adaptive_timestep"] = True
         if a.dry_run:
             params["dry_run"] = True
 
@@ -563,6 +746,8 @@ def parse_args():
     if a.track_background_gas_energy: params["track_background_gas_energy"] = True
     if a.field_binaries: params["field_binaries"] = True
     if a.flat_imf: params["flat_imf"] = True
+    if a.seba_only: params["seba_only"] = True
+    if a.seba_adaptive_timestep: params["seba_adaptive_timestep"] = True
     if a.stellar_evolution: params["stellar_evolution"] = True
     if a.dry_run: params["dry_run"] = True
 
