@@ -430,6 +430,16 @@ class DcafSystem:
                 )
                 self.gas_code.evolve_model(self.model_time)
 
+            # If on resume and after star formation finish, we decide if we
+            # still need the gas, if not we turn it off
+            if (
+                self.gas_code is not None
+                and self.framework.get_next_formation_time() is None
+                and hasattr(self.gas_code, "is_gas_relevant")
+            ):
+                if not self.gas_code.is_gas_relevant(self.formed_stars):
+                    self._turn_off_gas()
+
             # initialize bridge
             if self.gas_code is not None:
                 n_timestep = 1
@@ -661,6 +671,21 @@ class DcafSystem:
                 with self.logger.timing('[GENERATE STARS]*********'):
                     new_stars = self.framework.form_stars(self.formed_stars)
                 self._add_new_stars(new_stars)
+
+
+            # Check if we still need the gas, if not, turn it off:
+
+            if (
+                self.bridge_code is not None
+                and self.gas_code is not None
+                and self.framework.get_next_formation_time() is None
+                and hasattr(self.gas_code, "is_gas_relevant")
+            ):
+
+                if not self.gas_code.is_gas_relevant(self.formed_stars):
+                    self._turn_off_gas()
+
+
 
             # check if we need to rescale
             if self.stars_per_worker is not None:
@@ -964,6 +989,23 @@ class DcafSystem:
                 "dcaf.framework.starformation.StarFormationFramework this means "
                 "setting the dt_tolerance > dt_soft "
             )
+
+    def _turn_off_gas(self):
+        """
+        Disable the background gas completely and continue evolving only with PeTar.
+        """
+        if self.gas_code is None:
+            return
+
+        self.logger.info(
+            f"[DCAF][BGAS] Turning off gas at {self.model_time.in_(units.Myr)}"
+        )
+
+        self.code = self.petar_code
+        self.bridge_code = None
+        self.gas_code = None
+        self.framework.background_gas = None
+        self._gas_tracker = None
 
 
 class GasEnergyTracker:
