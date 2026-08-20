@@ -626,8 +626,8 @@ class DcafSystem:
                     self.model_time = time
 
                     # Sync stellar evolution with petar
-                    with self.logger.timing('[DCAF][SeBa] syncing SE'):
-                        if self.stellar_evolution and len(self.seba_code.particles) > 0:
+                    if self.stellar_evolution and len(self.seba_code.particles) > 0:
+                        with self.logger.timing('[DCAF][SeBa] syncing SE'):
                             self.seba_code.evolve_model(self.model_time)
 
                             # SeBa ->  target_stars
@@ -642,7 +642,6 @@ class DcafSystem:
                             target_seba_stars.relative_mass = seba_stars.relative_mass
                             target_seba_stars.core_mass = seba_stars.core_mass
                             target_seba_stars.COcore_mass = seba_stars.COcore_mass
-                            target_seba_stars.stellar_type = seba_stars.stellar_type
 
                             # authoritative target_stars -> active PeTar particles
                             code_positions = get_key_positions(self.petar_code.particles, seba_stars.key)
