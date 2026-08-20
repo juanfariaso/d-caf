@@ -330,9 +330,14 @@ def get_mass_ratios(m, p, qdist='field', mmin=0.08):
     q = inv_transform_sampling(p, m)
 
     # Verify that all mass ratios and companion masses are within bounds
-    assert np.min(q) >=	0.1
-    assert np.max(q) <=	1
-    assert np.all(m*q >= mmin)
+    # We must give a small tolerance, otherwise the script fail on rounding errors
+    tol = 1e-12
+    comp_mass = m*q
+
+
+    assert np.min(q) >=	0.1 - tol
+    assert np.max(q) <=	1 + tol
+    assert np.all(comp_mass >= mmin - tol)
 
     return q
 
