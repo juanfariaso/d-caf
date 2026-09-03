@@ -1764,17 +1764,17 @@
 
 <h1 id="install">Install</h1>
 <h2 id="about-performance">About performance</h2>
-<p>I tested Dcaf on a specific version of amuse that allowed me to patch it in order to install PeTar with GPU.
-A GPU is not mandatory but it considerably improves performance of the gradual formation of stars so it can grow naturallt to large number of particles.</p>
-<p>On the CPU side the best performance is still using a single CPU. I have tried increasing the number of workers as the number of stars raise, e.g.: stopping PeTar, and initialize it again with more workers. However that has not been faster than letting a single worker to do the job.</p>
-<p>On small enough systems (N&lt;5000) it works fine. But larger systems would be most efficient using GPU instead with only 1 worker (no more). I already tested it and gives the best perfomance.</p>
-<p>If you are doing only CPU, then the GPU part below can be skipped and in principle a newer version of AMUSE should not be a problem as far as PeTar works.</p>
+<p>I tested D-CAF on a specific version of AMUSE that allowed me to patch it in order to install PeTar with GPU.
+A GPU is not mandatory but it considerably improves performance of the gradual formation of stars so simulations can grow naturally to large number of particles.</p>
+<p>On the CPU side the best performance is still using a single CPU. I have tried increasing the number of workers as the number of stars increase, e.g.: stopping PeTar, and reinitialize it again with more workers. However that has not been faster than letting a single worker to do the job.</p>
+<p>On small enough systems (N&lt;5000) it works fine. But larger systems are more efficient using GPU instead with only 1 worker (no more). I already tested it and gives the best performance.</p>
+<p>If you are using only CPU, then the GPU part below can be skipped and in principle a newer version of AMUSE should not be a problem as far as PeTar works.</p>
 <h2 id="installation-steps">Installation steps</h2>
 <p>Create a python environment and activate it:</p>
 <pre><code class="language-shell">python -m venv ~/.venv/dcaf
 source ~/.venv/dcaf/bin/activate
 </code></pre>
-<p>Add the AMUSE environment variables to your environment <code>~/.bashrc</code> </p>
+<p>Add the AMUSE environment variables to <code>~/.bashrc</code> </p>
 <pre><code class="language-shell">export AMUSE_DIR=$HOME/codes/amuse
 export PYTHONPATH=$AMUSE_DIR/src:$PYTHONPATH
 </code></pre>
@@ -1799,20 +1799,20 @@ pip install docutils
 </code></pre>
 <p>But even if you will use the GPU version, make it anyway to make sure you have the correct configuration to make it work.</p>
 <p>This may be just enough if you want to use DCAF without GPU.
-However, the framework will work much more efficiently with GPU enabled. This because we intend to grow the system gradually. Running a  few stars with many processors is quite inefficient, and using one processor only works well for small systems (&lt;2000 stars).
+However, the framework will work much more efficiently with GPU enabled. This is because we intend to grow the system gradually. Running a few stars with many processors is quite inefficient, and using one processor only works well for small systems (&lt;2000 stars).
 The best performance is achieved if we manage to build PeTar with activated GPU since the GPU optimization can smoothly transition from a small system into a large one. The alternative would be to stop the code and add more workers on the go, but the initialization of PeTar in amuse several times is very inefficient and ended up being worse when I tested it.</p>
 <p>For this however, we need to modify the installation instructions for PeTar in AMUSE. Unfortunately, after this, we will not be able to switch back to cpu case unless we build again.</p>
 <h2 id="petar-with-gpu-enabled-in-amuse">PeTar with GPU enabled in AMUSE</h2>
-<p>Below has been tested with cuda 12.6.9</p>
+<p>Below has been tested with CUDA 12.6.9</p>
 <p>First make sure PeTar can compile normally with amuse</p>
 <p>make sure these environment variables are set:</p>
 <pre><code>export CUDA_TK=/path_to_cuda
 </code></pre>
-<p>We need to link the CUDA libraries to PeTar and backup the Makefile:</p>
+<p>We need to link the CUDA libraries to PeTar and back up the Makefile:</p>
 <pre><code>cd $AMUSE_DIR/src/amuse/community/petar
 cp Makefile Makefile.cpu_backup
 </code></pre>
-<p>Now lets modify this block on the Makefile, add the GPU support block at this point (around line 38)
+<p>Now let's modify this block on the Makefile, add the GPU support block at this point (around line 38)
 And remember to add the helpers on the INCLUDE at the beginning.</p>
 <p>(Actually better to just provide the makefile)</p>
 <pre><code class="language-make">INCLUDE  += -I src/PeTar/src -I src/SDAR/src -I src/FDPS/src -I src/PeTar/cuda_helper
@@ -1851,9 +1851,8 @@ LDFLAGS  += -lm $(MUSE_LD_FLAGS)
 force_gpu_cuda.o: src/PeTar/src/force_gpu_cuda.cu
     $(NVCC) -c $&lt; -o $@ -Xcompiler &quot;$(CXXFLAGS)&quot;
 </code></pre>
-<h1 id="make-sure-the-cuda-headers-are-created">Make sure the cuda headers are created</h1>
-<p>(again, better to provide these files)
-We now need to create the <code>cuda_helper</code> folder that contains the cuda headers.</p>
+<h1 id="make-sure-the-cuda-headers-exists">Make sure the CUDA headers exists</h1>
+<p>We now need to create the <code>cuda_helper</code> folder that contains the CUDA headers.</p>
 <p>The folder <code>amuse/src/amuse/community/petar/src/PeTar/cuda_helper</code> must exist and contain the following files:</p>
 <p>helper_cuda.h</p>
 <pre><code class="language-c++">#pragma once
@@ -1895,14 +1894,16 @@ inline __host__ __device__ float3 operator/(const float3 &amp;a, float s){
     return make_float3(a.x/s, a.y/s, a.z/s);
 }
 </code></pre>
-<h1 id="compile-petar">Compile petar</h1>
-<p>With all this, we should be able to compile petar. Apparently it requires that <code>stopcond</code> code to be built first, so from the amuse root directory we do:
-``
-first try enable cuda on the amuse directory:</p>
+<h1 id="compile-petar">Compile PeTar</h1>
+<p>With all this, we should be able to compile PeTar. The AMUSE <code>stopcond</code> code to be built first, so from the amuse root directory we do:</p>
+<pre><code>cd $AMUSE_DIR
+make stopcond.code
+</code></pre>
+<p>Then we try enable cuda on the amuse directory:</p>
 <pre><code>cd $AMUSE_DIR
 ./configure --enable-cuda
 </code></pre>
-<p>Since we are using an old checkpoint fo AMUSE the format it guesses for Cuda directiories is outdated. If this is the case for you, make the configuration without the cuda and modify config.mk manually.</p>
+<p>Since we are using an old checkpoint of AMUSE the format it guesses for CUDA directiories is outdated. If this is the case for you, make the configuration without the cuda and modify config.mk manually.</p>
 <p>For this first we must make sure cuda libraries are working and properly linked on the system. Mainly, make sure this works with no errors:</p>
 <pre><code>echo 'int main(){return 0;}' &gt; conftest.c &amp;&amp; gcc conftest.c -L$CUDA_TK/targets/x86_64-linux/lib -lcudart 
 </code></pre>
@@ -1914,17 +1915,16 @@ CUDA_TK=/path/to/cuda
 CUDA_LIBS= -lcuda -lcudart
 
 </code></pre>
-<p>If nvcc fails with mpi.h: No such file or directory, make sure the OpenMPI include directory is available through CPATH.</p>
+<p>If nvcc fails with <code>mpi.h: No such file or directory</code>, make sure the OpenMPI include directory is available through CPATH.</p>
 <pre><code>export CPATH=&quot;/path_to_openmpi/include:$CPATH&quot;
 </code></pre>
-<p>then, finally
-``</p>
+<p>then, finally</p>
 <pre><code>cd $AMUSE_DIR/src/amuse/community/petar
 make clean
 cd $AMUSE_DIR
 make petar.code
 </code></pre>
-<p>and if all goes fine, PeTar should be ready</p>
+<p>and if all goes well, PeTar should be ready</p>
 
 
 
