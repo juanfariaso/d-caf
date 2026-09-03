@@ -330,7 +330,7 @@ class DcafSystem:
         cfg = self.config["petar"]
         if nworkers is None:
             nworkers = cfg.number_of_workers
-        self.petar_code = Petar(self.converter,mode = 'gpu',
+        self.petar_code = Petar(self.converter,
                                 redirection = cfg.redirection,
                                 number_of_workers = nworkers )
         self._current_workers = nworkers

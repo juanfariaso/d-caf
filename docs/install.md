@@ -13,6 +13,10 @@ On small enough systems (N<5000) it works fine. But larger systems are more effi
 If you are using only CPU, then the GPU part below can be skipped and in principle a newer version of AMUSE should not be a problem as far as PeTar works.
 
 
+**NOTE:**  Once compiled, in the current implementation, PeTar will run with or without GPU depending on the build. We can not switch back and forth. If you need both, you will need two separate installations of AMUSE.
+This is because PeTar GPU is not implemented in AMUSE naturally.
+
+
 ## Installation steps
 
 Create a python environment and activate it:

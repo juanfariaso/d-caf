@@ -1,84 +1,96 @@
+"""
+Star formation decision making. 
+
+This module defines the base class `StarFormationFramework` which handles the
+star formation decision making such as:
+- How fast stars form (star formation rate). 
+- The initial phase-space coordinates of the new stars stars.
+- The new stars phase-space coordinates 
+- How the background gas potential changes as new stars form (e.g. via star formation efficiency)
+
+Along with any other more complex formation mechanism the user may want to include.
+
+The typical workflow will be by the User creating an inherited class using
+`StarFormationFramework` as parent class and overwriting the appropriate
+functions.
+
+"""
+from __future__ import annotations
+
 from math import isfinite
+from typing import TYPE_CHECKING, Literal
 import numpy as np
 from amuse.units import units
+from amuse.units.quantities import Quantity
 from amuse.datamodel.particles import Particles
 #pop would do, but this is more efficient
 from collections import deque
 
-class StarFormationFramework :
-    """ Star Formation Framework 
+if TYPE_CHECKING:
+    from dcaf.backgroundgas.base import BackgroundPotential
 
-    This class handles the decision making during the star formation process. It
-    includes how fast stars form (star formation rate), what are the initial
-    phase-space coordinates of the new stars stars, what are the new phase-space
-    coordinates of those stars and how the background gas potential changes as
-    new stars form (e.g. via star formation efficiency) and any other more
-    complex formation mechanism the user may want to include.
+class StarFormationFramework:
+    """Base star-formation framework class.
 
-    Input: 
-        target_stars : amuse.Particles - The list of stars that will be added to
-            the simulation. The order of appearance will be the same as this
-            set.
+    The user should rewrite some functions of this class. The default behaviour
+    is as follows:
 
-        star_formation_rate : The star formation rate at which new stars will
-            appear. If is an amuse.quantity (in e.g. Msun/Myr) the value will be
-            constant through the simulation.
-            If star_formation_rate == 'infty', all stars will be added at the
-            beginning of the simulation.
-            If a (time,star_formation_rate) tuple is provided, then the instant
-            star formation rate will be linearly interpolated over time within
-            the range provided by the table (note that time and
-            star_formation_rate should be amuse quantities'
+    By default, `star_formation_rate="infty"`, so all target stars are
+    scheduled as one formation event at time zero. The default `form_stars()`
+    implementation returns the scheduled particles unchanged: their masses,
+    positions, and velocities are taken directly from `target_stars`.
 
-        nstart : int, The number of stars to form initially. The code will
-            advance the necessary time, derived from the star formation rate, in
-            order to reach the required mass to form these initial stars.
+    For a finite star-formation rate, the framework schedules systems in the
+    order they appear in `target_stars`. Stars with the same positive
+    `system_id` are kept together; stars without a positive `system_id` are
+    treated as single objects. The first event contains at least `nstart`
+    stars, without splitting a system. Later systems are scheduled from their
+    cumulative stellar mass divided by the supplied star-formation rate, and
+    events closer than `dt_tolerance` are merged.
 
-        background_gas : a dcaf.backgroundgas.BackgroundPotential inherited
-            class. This class controls how the background gas evolves and react
-            to the formation of the new stars and provide the (additional)
-            acceleration felt by the star particles during the simulation.
+    Args:
+        target_stars: The list of stars that will be added to the simulation.
+            The order of appearance will be the same as this set.
+        star_formation_rate: The star-formation rate at which new stars appear.
+            If it is an AMUSE quantity, for example in `MSun / Myr`, the rate
+            is constant through the simulation. If it is `"infty"`, all stars
+            are added at the beginning of the simulation.
+        nstart: The number of stars to form initially. The code advances the
+            necessary time, derived from the star-formation rate, to reach the
+            required mass for these initial stars.
+        background_gas: A `dcaf.backgroundgas.BackgroundPotential` subclass.
+            This class controls how the background gas evolves and reacts to
+            newly formed stars, and provides the additional acceleration felt
+            by stellar particles during the simulation.
+        dt_tolerance: Formation events separated by less than this time are
+            merged into one event.
 
+    Notes:
+        A typical user extension overrides `form_stars(active_stars)`. This
+        method provides the new AMUSE particles to add at each scheduled
+        formation event. An external star generator can be used here to tune
+        coordinates based on the existing stars.
 
-    The typical workflow will be by the User creating an inherited class using
-    StarFormationFramework as parent class and overwriting the appropiate
-    functions.
+        The `background-gas` model is passed to Bridge to handle gas-star
+        interactions. It must provide the appropriate `get_gravity_at_point()`
+        method. Custom formation models can also use
+        `get_1d_velocity_dispersion_at_point()` or `get_mass_inside_radius()`
+        from the background potential to make decisions.
 
-    Stars will be added to the N-body simulation provided a star_formation_rate
-    value (function or table) and the form_stars method will be called at the
-    specific times where a new star is scheduled.
+        Tabulated star-formation histories are not implemented yet.
 
-    The typical method an User may want to redefine is:
+    Attributes:
 
-    StarFormationFramework.form_stars : Whenever new stars are shceduled to form
-        this is the function that will provide the new amuse.Particles to be
-        added. An external generator of stars can be placed here for finer
-        tuning on the coordinates of the new stas (for instance, based on the
-        positions of existing stars).
-
-
-    The background gas model should be defined by an inherited class from the
-    dcaf.bakgroundgas.BackgroundPotential that contain the necessary methods to
-    provide the potential and acceleration required by the bridge scheme.
-
-    This class can also be used for decision making at the generation of stars,
-    for instance, any BackgroundPotential inherited class should have defined
-    methods like: 
-        get_1d_velocity_dispersion_at_point : to obtain the velocity
-            dispersion at the position of the new star if we want the new star
-            to inherit the kinematics of the parent cloud. 
-    Or,
-        get_mass_inside_radius : to obtain the enclosed mass at the new particle
-            position in case we want that information instead.
-
-    Note that background_gas will be passed to the Bridge scheme to handle the
-        gas to stars interactionn, therefore must have defined the appropriate
-        get_gravity_at_point
     """
-
-    def __init__( self, target_stars, star_formation_rate = 'infty',
-                 nstart = 2, background_gas = None ,
-                 dt_tolerance = 1e-3 | units.Myr):
+    # TODO: implement tabulated star formation rates in StarFormationFramework
+    def __init__(
+        self,
+        target_stars: Particles,
+        star_formation_rate: Quantity | str  = "infty",
+        nstart: int = 2,
+        background_gas: BackgroundPotential | None = None,
+        dt_tolerance: Quantity = 1e-3 | units.Myr,
+    ):
         self.target_stars = target_stars
         self.star_formation_rate = star_formation_rate
         self.nstart = nstart
@@ -87,11 +99,26 @@ class StarFormationFramework :
 
         self.schedule_formation()
 
-    def get_next_formation_time(self):
+    def get_next_formation_time(self) -> Quantity | None:
+        """Return the time of the next scheduled formation event.
+
+        Returns:
+            (Quantity): The next formation time as an AMUSE quantity
+            (None): no formation events remain.
+        """
         return self.__next_formation_time
 
-    def get_last_formation_time(self):
-        ## useful for restart
+    def get_last_formation_time(self) -> Quantity | None:
+        """Return the final time in the current formation schedule.
+        
+        Notes:
+            This function is used for restarting purposes. Restart is only
+            implemented if all `target_stars` were already formed.
+
+        Returns:
+            (Quantity): The final scheduled formation time.
+            (None): No formation events remain.
+        """
         next_t = self.get_next_formation_time()
 
         if next_t is None:
@@ -103,34 +130,45 @@ class StarFormationFramework :
         return self.formation_times[-1]
 
 
-    def extract_next_event(self):
+    def extract_next_event(self) -> Particles:
+        """Retrieve the next scheduled formation event and advance the schedule.
+
+        This method updates the framework clock and prepares the following
+        formation event. Custom `form_stars()` implementations should call it
+        exactly once for each event they handle.
+
+        Returns:
+            (Particles): The particle set scheduled for the current formation
+                event.
         """
-        Retrieve next scheduled stars and setup the next formation event.
-        This function should be called by form_stars to obtain new stars to
-        form.
-        """
-        #retrieve the new stars and forward framework time to current time
         new_stars = self.__next_stars
         self.model_time = self.__next_formation_time
         self.__setup_next_event()
 
         return new_stars
 
-    def schedule_formation(self, t0=0 | units.Myr):
-        """
-        Build a schedule of star formation in batches.
+    def schedule_formation(self, t0: Quantity = 0 | units.Myr) -> None:
+        """Build the internal star-formation schedule.
 
-        Rules
-        -----
-        - If `system_id` exists, stars sharing the same positive `system_id`
-          are always added together.
-        - If `system_id` is missing, or `system_id <= 0`, the star is treated
-          as a singleton.
-        - Order is the order of first appearance in `target_stars`.
-        - `nstart` is a soft lower bound in number of stars: whole systems are
-          added until the first batch reaches or exceeds `nstart`.
-        - Systems whose formation times differ by less than `dt_tolerance`
-          are merged into the same formation event.
+        Instantaneous formation creates one event containing all target stars
+        at `t0`. For a finite rate, the formation time of each system is its
+        cumulative stellar mass divided by the rate, offset by `t0`.
+
+        Args:
+            t0: Time assigned to the first instantaneous event, or the time
+                offset applied to a finite-rate formation schedule.
+
+        Raises:
+            ValueError: The star-formation rate is not a positive, finite AMUSE
+                quantity in mass per time.
+            Exception: The target catalogue contains fewer stars than `nstart`
+                for a finite-rate schedule.
+
+        Notes:
+            Stars sharing a positive `system_id` are scheduled together.
+            Missing or non-positive `system_id` values identify single stars.
+            The first event reaches or exceeds `nstart` without splitting a
+            system. Events separated by less than `dt_tolerance` are merged.
         """
         sfr = self.star_formation_rate
         stars = self.target_stars
@@ -219,8 +257,8 @@ class StarFormationFramework :
 
         self.__setup_next_event()
 
-    def __setup_next_event(self):
-        print('settingup',len(self.formation_sequence) )
+    def __setup_next_event(self) -> None:
+        """Promote the next queued formation event to the active event."""
         if len(self.formation_sequence) > 0:
             newstars = self.formation_sequence.popleft()
             formation_time = self.formation_times.popleft()
@@ -230,7 +268,28 @@ class StarFormationFramework :
             self.__next_formation_time = None
             self.__next_stars = None
 
-    def get_velocity_dispersion_at_point(self,x,y,z):
+    def get_velocity_dispersion_at_point(
+        self,
+        x: Quantity,
+        y: Quantity,
+        z: Quantity,
+    ) -> Quantity:
+        """Return the one-dimensional velocity dispersion at a position.
+
+        This is for phase-space decisions. 
+        If the `background_gas` object is present it returns this same function
+        but called on `backgroundgas.get_1d_velocity_dispersion_at_point`.
+
+        If its not present it returns the 1d velocity dispersion of the stars.
+
+        Args:
+            x: Position along the x-axis.
+            y: Position along the y-axis.
+            z: Position along the z-axis.
+
+        Returns:
+            (Quantity): 1d velocity dispersion of the environment at `x`,`y`,`z`
+        """
         if self.background_gas:
             return self.background_gas.get_1d_velocity_dispersion_at_point(x,y,z)
         else:
@@ -240,81 +299,27 @@ class StarFormationFramework :
             vz = self.target_stars.vz.std()
             return np.mean([vx,vy,vz])
 
-    def form_stars(self,active_stars=Particles()):
-        """
-        Retrieve the new stars applying the formation rules and schedule
-        the next formation event.
+    def form_stars(self, active_stars: Particles = Particles()) -> Particles:
+        """Return the stars for the next formation event.
 
-        By default the new stars are passed directly from the scheduled stars,
-        i.e. with the positions and velocities from the original particle list.
+        The base implementation returns the scheduled particle set unchanged.
+        It is intended for target lists that already contain the desired
+        masses, positions, and velocities.
 
-        If a more complex formation scenario is needed, for instance using the
-        formation rules from dcaf.factory.distance_based, then this function
-        should be overwritten.
 
-        Note that the first call of this function will be done with an empty set
-        of active_stars, then it should handle such case.
+        Args:
+            active_stars: Stars currently active in the N-body simulation. The
+                base implementation does not use this value.
 
-        Example:
+        Returns:
+            (Particles): The particle set to add for the next formation event.
 
-        Here is a basic example using the function generate_stars from
-        dcaf.factory.distance_based (see doc).
-        It generate new positions [and velocities?] for the number of requested
-        stars based on the position of the existing set and a predefined PDF of
-        closest neighbours (see REFERENCE).
+        Notes:
+            Subclasses can override this method to generate positions or
+            velocities from `active_stars`. 
 
-        Note that the function MUST handle EMPTY active_stars and the
-        generate_stars function MUST handle n_new == 0
-
-        In this example, if active_stars is empty will just return the schedule
-        stars with their original coordinates on a gradual formation simulation
-        with NO GAS background.
-        If n_new== 0 new_stars is an empty set of Particles
-
-        from dcaf.factory import distance_based 
-        from dcaf.dcaf import DcafSystem
-
-        class MyFormationFramework(StarFormationFramework):
-
-            def form_stars(self,active_stars):
-                # Get the next scheduled stars to form. This method also prepare
-                # the next event for the next extract_next_event call.
-
-                next_stars = self.extract_next_event()
-                n_new = len(next_stars)
-                
-                # Obtain new positions based on the existing stars
-                # Note that generate_stars should handle n_new == 0
-                 The first call will be done with an empty
-                # active_stars and such case must be handled here.
-
-                if len(active_stars) ==  0:
-                    new_stars = next_stars # first time, keep original
-                    coordinates
-                else:
-                    new_stars = distance_based.generate_stars( active_stars, n_new )
-                
-                if len(new_stars) > 0 :
-                    new_stars.mass = next_stars.mass
-
-                return new_stars
-
-        # Setup the final stars
-        ntot = 1000
-        Rpl = 10 |units.pc
-        masses = new_kroupa_mass_distribution(ntot)
-        target_stars =  new_plummer_model(ntot)
-        target_stars.mass = masses
-
-        # Setup the final time and the star formation rate as constant
-        tend = 10 | units.Myr
-        star_formation_rate = masses.sum() / tend
-
-        framework = MyFormationFramework(target_stars,star_formation_rate = star_formation_rate)
-        
-        # run with default code configuration 
-        system = DcafSystem( framework )
-
+            An override **must** call `extract_next_event()` to advance the
+            formation schedule.
         """
 
         new_stars = self.extract_next_event()
