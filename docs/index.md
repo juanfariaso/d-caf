@@ -3,16 +3,16 @@
 
 Welcome to D-CAF
 
-D-CAF is a framework for performing N-Body simulations of star cluster formation. The code is build in top of [AMUSE](https://www.amusecode.org/), and is designed to perform arbitrarly complex N-body simulations.
+D-CAF is a framework for performing N-Body simulations of star cluster formation. The code is built on top of [AMUSE](https://www.amusecode.org/), and is designed to perform arbitrarily complex N-body simulations.
 
 
-The idea behind D-CAF is that you can test your star formation model conditions under efficient N-body simulations.
+The idea behind D-CAF is that you can test star-formation models using efficient N-body simulations.
 
 ## Getting Started
 
 To run D-CAF you need to install AMUSE and at a minimum PeTar to run N-body simulations.
 
-Follow the [Installation](install.md) for detailed instructions.
+Follow the [install guide](install.md) for detailed instructions.
 
 After that, there are some examples on the github repository and a ready to use script that was used on the publication of the D-CAF paper.
 
