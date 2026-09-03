@@ -9,10 +9,10 @@
       
       
       
-        <link rel="prev" href="..">
+        <link rel="prev" href="../install/">
       
       
-        <link rel="next" href="../test/">
+        <link rel="next" href="../reference/dcaf/">
       
       
         
@@ -23,7 +23,7 @@
     
     
       
-        <title>Installation - Dynamic Cluster Assembly Framework (D-CAF)</title>
+        <title>Testing - Dynamic Cluster Assembly Framework (D-CAF)</title>
       
     
     
@@ -66,7 +66,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#install" class="md-skip">
+        <a href="#star-formation-framework" class="md-skip">
           Skip to content
         </a>
       
@@ -102,7 +102,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Installation
+              Testing
             
           </span>
         </div>
@@ -222,6 +222,33 @@
       
   
   
+  
+  
+    <li class="md-nav__item">
+      <a href="../install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Installation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
     
   
   
@@ -241,7 +268,7 @@
   <span class="md-ellipsis">
     
   
-    Installation
+    Testing
   
 
     
@@ -259,7 +286,7 @@
   <span class="md-ellipsis">
     
   
-    Installation
+    Testing
   
 
     
@@ -285,32 +312,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#about-performance" class="md-nav__link">
+  <a href="#dcaf.framework.starformation.StarFormationFramework" class="md-nav__link">
     <span class="md-ellipsis">
       
-        About performance
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#installation-steps" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Installation steps
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#petar-with-gpu-enabled-in-amuse" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        PeTar with GPU enabled in AMUSE
+        StarFormationFramework
       
     </span>
   </a>
@@ -321,33 +326,6 @@
   
 </nav>
       
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../test/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Testing
-  
-
-    
-  </span>
-  
-  
-
-      </a>
     </li>
   
 
@@ -1740,32 +1718,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#about-performance" class="md-nav__link">
+  <a href="#dcaf.framework.starformation.StarFormationFramework" class="md-nav__link">
     <span class="md-ellipsis">
       
-        About performance
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#installation-steps" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Installation steps
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#petar-with-gpu-enabled-in-amuse" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        PeTar with GPU enabled in AMUSE
+        StarFormationFramework
       
     </span>
   </a>
@@ -1789,171 +1745,188 @@
 
 
 
-<h1 id="install">Install</h1>
-<h2 id="about-performance">About performance</h2>
-<p>I tested D-CAF on a specific version of AMUSE that allowed me to patch it in order to install PeTar with GPU.
-A GPU is not mandatory but it considerably improves performance of the gradual formation of stars so simulations can grow naturally to large number of particles.</p>
-<p>On the CPU side the best performance is still using a single CPU. I have tried increasing the number of workers as the number of stars increase, e.g.: stopping PeTar, and reinitialize it again with more workers. However that has not been faster than letting a single worker to do the job.</p>
-<p>On small enough systems (N&lt;5000) it works fine. But larger systems are more efficient using GPU instead with only 1 worker (no more). I already tested it and gives the best performance.</p>
-<p>If you are using only CPU, then the GPU part below can be skipped and in principle a newer version of AMUSE should not be a problem as far as PeTar works.</p>
-<p><strong>NOTE:</strong>  Once compiled, in the current implementation, PeTar will run with or without GPU depending on the build. We can not switch back and forth. If you need both, you will need two separate installations of AMUSE.
-This is because PeTar GPU is not implemented in AMUSE naturally.</p>
-<h2 id="installation-steps">Installation steps</h2>
-<p>Create a python environment and activate it:</p>
-<pre><code class="language-shell">python -m venv ~/.venv/dcaf
-source ~/.venv/dcaf/bin/activate
-</code></pre>
-<p>Add the AMUSE environment variables to <code>~/.bashrc</code> </p>
-<pre><code class="language-shell">export AMUSE_DIR=$HOME/codes/amuse
-export PYTHONPATH=$AMUSE_DIR/src:$PYTHONPATH
-</code></pre>
-<p>Clone <a href="https://github.com/amusecode/amuse">AMUSE</a> to your <code>$AMUSE_DIR</code> and install it.
-I have tested dcaf on a specific checkpoint of amuse, mainly for the PeTar GPU installation. 
- After cloning do:</p>
-<pre><code>cd $AMUSE_DIR
-git checkout aea5b55
-</code></pre>
-<p>we add features such as stellar evolution.</p>
-<p>Install dependencies if you don't have then:</p>
-<pre><code>pip install -r requirements.txt --upgrade
-pip install docutils
-./configure
-</code></pre>
-<p>Should finish with Configuration done.</p>
-<p>For now, we only require the framework.</p>
-<pre><code>make framework
-</code></pre>
-<p>If you don't need GPU for PeTar you can just do</p>
-<pre><code>make stopcond.code petar.code
-</code></pre>
-<p>But even if you will use the GPU version, make it anyway to make sure you have the correct configuration to make it work.</p>
-<p>This may be just enough if you want to use DCAF without GPU.
-However, the framework will work much more efficiently with GPU enabled. This is because we intend to grow the system gradually. Running a few stars with many processors is quite inefficient, and using one processor only works well for small systems (&lt;2000 stars).
-The best performance is achieved if we manage to build PeTar with activated GPU since the GPU optimization can smoothly transition from a small system into a large one. The alternative would be to stop the code and add more workers on the go, but the initialization of PeTar in amuse several times is very inefficient and ended up being worse when I tested it.</p>
-<p>For this however, we need to modify the installation instructions for PeTar in AMUSE. Unfortunately, after this, we will not be able to switch back to cpu case unless we build again.</p>
-<h2 id="petar-with-gpu-enabled-in-amuse">PeTar with GPU enabled in AMUSE</h2>
-<p>Below has been tested with CUDA 12.6.9</p>
-<p>First make sure PeTar can compile normally with amuse</p>
-<p>make sure these environment variables are set:</p>
-<pre><code>export CUDA_TK=/path_to_cuda
-</code></pre>
-<p>We need to link the CUDA libraries to PeTar and back up the Makefile:</p>
-<pre><code>cd $AMUSE_DIR/src/amuse/community/petar
-cp Makefile Makefile.cpu_backup
-</code></pre>
-<p>Now let's modify this block on the Makefile, add the GPU support block at this point (around line 38)
-And remember to add the helpers on the INCLUDE at the beginning.</p>
-<p>(Actually better to just provide the makefile)</p>
-<pre><code class="language-make">INCLUDE  += -I src/PeTar/src -I src/SDAR/src -I src/FDPS/src -I src/PeTar/cuda_helper
+<h1 id="star-formation-framework">Star Formation Framework</h1>
 
-CXXFLAGS = ${INCLUDE} -fPIC -O2 -Wall -std=c++17 -fopenmp
-CXXFLAGS += -D PARTICLE_SIMULATOR_THREAD_PARALLEL
-CXXFLAGS += -D PARTICLE_SIMULATOR_MPI_PARALLEL
-CXXFLAGS += -D MPICH_IGNORE_CXX_SEEKC
-CXXFLAGS += -D SOFT_PERT -D AR_TTL -D AR_SLOWDOWN_TREE -D AR_SLOWDOWN_TIMESCALE -D CLUSTER_VELOCITY
-CXXFLAGS += -D USE_QUAD
-CXXFLAGS += -D STELLAR_EVOLUTION
-CXXFLAGS += -D PROFILE
-CXXFLAGS += -D HARD_CHECK_ENERGY
-CXXFLAGS += -D TIDAL_TENSOR_3RD
-CXXFLAGS += -D INTERFACE_DEBUG_PRINT
-CXXFLAGS += -D INTERFACE_DEBUG
 
-# ---------------- GPU support ----------------
-CUDA_PREFIX ?= $(CUDA_TK)
-NVCC        ?= nvcc
+<div class="doc doc-object doc-class">
 
-CXXFLAGS += -DUSE_GPU
-CXXFLAGS += -D GPU_PROFILE
-INCLUDE  += -I $(CUDA_PREFIX)/include
 
-CUDALIBS = -L$(CUDA_PREFIX)/lib64 -L$(CUDA_PREFIX)/targets/x86_64-linux/lib -lcudart
 
-LDFLAGS  += $(CUDALIBS)
-# ---------------------------------------------
+<h2 id="dcaf.framework.starformation.StarFormationFramework" class="doc doc-heading">
+              <code class="highlight language-python"><span class="n">StarFormationFramework</span><span class="p">(</span><span class="n">target_stars</span><span class="p">:</span> <span class="n">Particles</span><span class="p">,</span> <span class="n">star_formation_rate</span><span class="p">:</span> <span class="n">Quantity</span> <span class="o">|</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;infty&#39;</span><span class="p">,</span> <span class="n">nstart</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">background_gas</span><span class="p">:</span> <span class="n">BackgroundPotential</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">dt_tolerance</span><span class="p">:</span> <span class="n">Quantity</span> <span class="o">=</span> <span class="mf">0.001</span> <span class="o">|</span> <span class="n">units</span><span class="o">.</span><span class="n">Myr</span><span class="p">)</span></code>
 
-LDFLAGS  += -lm $(MUSE_LD_FLAGS)
-</code></pre>
-<p>Then we add the object we want and the rule to compile them at the end of the file (around line 55 if you added above)</p>
-<pre><code>OBJS = interface.o force_gpu_cuda.o
+</h2>
 
-force_gpu_cuda.o: src/PeTar/src/force_gpu_cuda.cu
-    $(NVCC) -c $&lt; -o $@ -Xcompiler &quot;$(CXXFLAGS)&quot;
-</code></pre>
-<h1 id="make-sure-the-cuda-headers-exists">Make sure the CUDA headers exists</h1>
-<p>We now need to create the <code>cuda_helper</code> folder that contains the CUDA headers.</p>
-<p>The folder <code>amuse/src/amuse/community/petar/src/PeTar/cuda_helper</code> must exist and contain the following files:</p>
-<p>helper_cuda.h</p>
-<pre><code class="language-c++">#pragma once
-#include &lt;stdio.h&gt;
-#include &lt;cuda_runtime.h&gt;
 
-inline void __checkCudaErr(cudaError_t err, const char *file, int line)
-{
-    if (err != cudaSuccess) {
-        fprintf(stderr, &quot;CUDA error: %s (%s:%d)\n&quot;,
-                cudaGetErrorString(err), file, line);
-        exit(1);
-    }
-}
+    <div class="doc doc-contents first">
 
-#define checkCudaErrors(val) __checkCudaErr((val), __FILE__, __LINE__)
-</code></pre>
-<p>helper_math.h</p>
-<pre><code class="language-c++">#pragma once
 
-// minimal float3 helpers
-inline __host__ __device__ float3 make_float3(float x, float y, float z) {
-    float3 f; f.x=x; f.y=y; f.z=z; return f;
-}
 
-inline __host__ __device__ float3 operator+(const float3 &amp;a, const float3 &amp;b){
-    return make_float3(a.x+b.x, a.y+b.y, a.z+b.z);
-}
+        <p>Base star-formation framework class.</p>
+<p>The user should rewrite some functions of this class. The default behaviour
+is as follows:</p>
+<p>By default, <code>star_formation_rate="infty"</code>, so all target stars are
+scheduled as one formation event at time zero. The default <code>form_stars()</code>
+implementation returns the scheduled particles unchanged: their masses,
+positions, and velocities are taken directly from <code>target_stars</code>.</p>
+<p>For a finite star-formation rate, the framework schedules systems in the
+order they appear in <code>target_stars</code>. Stars with the same positive
+<code>system_id</code> are kept together; stars without a positive <code>system_id</code> are
+treated as single objects. The first event contains at least <code>nstart</code>
+stars, without splitting a system. Later systems are scheduled from their
+cumulative stellar mass divided by the supplied star-formation rate, and
+events closer than <code>dt_tolerance</code> are merged.</p>
 
-inline __host__ __device__ float3 operator-(const float3 &amp;a, const float3 &amp;b){
-    return make_float3(a.x-b.x, a.y-b.y, a.z-b.z);
-}
 
-inline __host__ __device__ float3 operator*(const float3 &amp;a, float s){
-    return make_float3(a.x*s, a.y*s, a.z*s);
-}
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>target_stars</code>
+            </td>
+            <td>
+                  <code><span title="amuse.datamodel.particles.Particles">Particles</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The list of stars that will be added to the simulation.
+The order of appearance will be the same as this set.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>star_formation_rate</code>
+            </td>
+            <td>
+                  <code><span title="amuse.units.quantities.Quantity">Quantity</span> | <span title="str">str</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The star-formation rate at which new stars appear.
+If it is an AMUSE quantity, for example in <code>MSun / Myr</code>, the rate
+is constant through the simulation. If it is <code>"infty"</code>, all stars
+are added at the beginning of the simulation.</p>
+              </div>
+            </td>
+            <td>
+                  <code>&#39;infty&#39;</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>nstart</code>
+            </td>
+            <td>
+                  <code><span title="int">int</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The number of stars to form initially. The code advances the
+necessary time, derived from the star-formation rate, to reach the
+required mass for these initial stars.</p>
+              </div>
+            </td>
+            <td>
+                  <code>2</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>background_gas</code>
+            </td>
+            <td>
+                  <code><a class="autorefs autorefs-internal" title="BackgroundPotential (dcaf.backgroundgas.base.BackgroundPotential)" href="../reference/dcaf/backgroundgas/base/#dcaf.backgroundgas.base.BackgroundPotential">BackgroundPotential</a> | None</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>A <code>dcaf.backgroundgas.BackgroundPotential</code> subclass.
+This class controls how the background gas evolves and reacts to
+newly formed stars, and provides the additional acceleration felt
+by stellar particles during the simulation.</p>
+              </div>
+            </td>
+            <td>
+                  <code>None</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>dt_tolerance</code>
+            </td>
+            <td>
+                  <code><span title="amuse.units.quantities.Quantity">Quantity</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Formation events separated by less than this time are
+merged into one event.</p>
+              </div>
+            </td>
+            <td>
+                  <code>0.001 | <span title="amuse.units.units.Myr">Myr</span></code>
+            </td>
+          </tr>
+      </tbody>
+    </table>
 
-inline __host__ __device__ float3 operator/(const float3 &amp;a, float s){
-    return make_float3(a.x/s, a.y/s, a.z/s);
-}
-</code></pre>
-<h1 id="compile-petar">Compile PeTar</h1>
-<p>With all this, we should be able to compile PeTar. The AMUSE <code>stopcond</code> code to be built first, so from the amuse root directory we do:</p>
-<pre><code>cd $AMUSE_DIR
-make stopcond.code
-</code></pre>
-<p>Then we try enable cuda on the amuse directory:</p>
-<pre><code>cd $AMUSE_DIR
-./configure --enable-cuda
-</code></pre>
-<p>Since we are using an old checkpoint of AMUSE the format it guesses for CUDA directiories is outdated. If this is the case for you, make the configuration without the cuda and modify config.mk manually.</p>
-<p>For this first we must make sure cuda libraries are working and properly linked on the system. Mainly, make sure this works with no errors:</p>
-<pre><code>echo 'int main(){return 0;}' &gt; conftest.c &amp;&amp; gcc conftest.c -L$CUDA_TK/targets/x86_64-linux/lib -lcudart 
-</code></pre>
-<p>if this fails, CUDA runtime libraries are not visible to the linker. <strong>Fix that before continuing.</strong></p>
-<p>Then if config.mk still has CUDA_ENABLED=no and CUDA_TK=/NOCUDACONFIGURED, edit config.mk manually:</p>
-<pre><code>CUDA_ENABLED=yes
-NVCC=/path/to/nvcc
-CUDA_TK=/path/to/cuda 
-CUDA_LIBS= -lcuda -lcudart
 
-</code></pre>
-<p>If nvcc fails with <code>mpi.h: No such file or directory</code>, make sure the OpenMPI include directory is available through CPATH.</p>
-<pre><code>export CPATH=&quot;/path_to_openmpi/include:$CPATH&quot;
-</code></pre>
-<p>then, finally</p>
-<pre><code>cd $AMUSE_DIR/src/amuse/community/petar
-make clean
-cd $AMUSE_DIR
-make petar.code
-</code></pre>
-<p>and if all goes well, PeTar should be ready</p>
+<details class="notes" open>
+  <summary>Notes</summary>
+  <p>A typical user extension overrides <code>form_stars(active_stars)</code>. This
+method provides the new AMUSE particles to add at each scheduled
+formation event. An external star generator can be used here to tune
+coordinates based on the existing stars.</p>
+<p>The <code>background-gas</code> model is passed to Bridge to handle gas-star
+interactions. It must provide the appropriate <code>get_gravity_at_point()</code>
+method. Custom formation models can also use
+<code>get_1d_velocity_dispersion_at_point()</code> or <code>get_mass_inside_radius()</code>
+from the background potential to make decisions.</p>
+<p>Tabulated star-formation histories are not implemented yet.</p>
+</details>        <p>Attributes:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+</div>
 
 
 
