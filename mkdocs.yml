@@ -1,0 +1,39 @@
+site_name: Dynamic Cluster Assembly Framework (D-CAF)
+
+theme:
+  name: material
+
+plugins:
+  - search
+
+  - mkdocstrings:
+      handlers:
+        python:
+          paths:
+            - .
+          options:
+            members: null
+            docstring_style: google
+            members_order: source
+            show_source: true
+            show_submodules: false
+            show_if_no_docstring: false
+            filters: 
+              - public
+              - "!^__version__$"
+              - "!^__all__$"
+              - "!^__"
+            summary:
+              modules: true
+              functions: true
+
+  - api-autonav:
+      modules:
+        - dcaf
+      nav_section_title: API Reference
+      api_root_uri: reference
+      nav_item_prefix : ""
+
+nav:
+  - Home: index.md
+  - Installation: install.md
