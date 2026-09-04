@@ -223,10 +223,11 @@ def main(
         framework,
         converter=converter,
         config=cfg,
-        gas_code=cloud,
         track_background_gas_energy=track_background_gas_energy,
         stars_per_worker=stars_per_worker,
-        resume=resume
+        resume=resume,
+        log_level = 'debug'
+
     )
 
     dt_out_nbody = 2**round(np.log2(dt_out / converter.to_si(1.0 | nbody_system.time))) | nbody_system.time

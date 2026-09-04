@@ -5,7 +5,7 @@ theme:
 
 plugins:
   - search
-
+  - autorefs
   - mkdocstrings:
       handlers:
         python:
@@ -20,11 +20,7 @@ plugins:
             show_if_no_docstring: false
             show_root_heading: true
             show_symbol_type_heading: true
-            filters: 
-              - public
-              - "!^__version__$"
-              - "!^__all__$"
-              - "!^__"
+            filters: public
             summary:
               modules: true
               functions: true

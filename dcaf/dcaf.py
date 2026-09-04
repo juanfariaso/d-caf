@@ -9,6 +9,7 @@ import numpy as np
 from amuse.datamodel import Particles
 from amuse.units.constants import G
 from amuse.units import units, nbody_system
+from amuse.units.quantities import Quantity
 from amuse.couple.bridge import Bridge
 try: 
     from amuse.community.petar.interface import Petar
@@ -24,23 +25,64 @@ from dcaf.utilities.logger import setup_logger
 
 from dcaf.io.restart import get_resume_state
 from dcaf.io.output import get_output_folders, find_snapshot_files
-
-# from dcaf.framework import StarFormationFramework  
+from dcaf.framework import StarFormationFramework
 
 class DcafSystem:
+    """Main D-CAF orchestrator.
+
+    This is the main class that takes care of all decision making, logs and
+    outputs.
+
+    `DcafSystem` owns the PeTar solver and optional AMUSE Bridge coupling. It
+    initializes a formation framework, injects scheduled stars, evolves the
+    active system, writes snapshots and energy diagnostics, and can resume a
+    completed formation run from the latest saved snapshot.
+
+    Args:
+        framework: Star-formation framework providing `target_stars`,
+            `background_gas`, `get_next_formation_time()`, and
+            `form_stars(active_stars)`.
+        config: dictionary containing `petar`, `bridge`, and `gas` configuration
+            objects. Defaults are set by 
+            [get_default_configuration()][dcaf.utilities.parameters.get_default_configuration].
+        converter: AMUSE N-body to SI converter. If omitted, it is derived from
+            the target stellar mass and virial radius.
+        track_background_gas_energy: Whether to accumulate work from an
+            evolving background-gas potential in the energy diagnostics.
+            Turn to False could marginally improve performance.
+        output_folder: Base directory for snapshots, logs, and `energy.dat`.
+        log_level: Logging level passed to D-CAF's logger setup. Verbosity
+            written to `dcaf.log`. Choose `debug` to include timing diagnostics,
+            `info` for normal run progress, `warning` for warnings and errors
+            only, `error` for errors only, or `critical` for critical errors
+            only. Defaults to `info`.
+        stars_per_worker: Particle threshold used to trigger PeTar worker
+            scaling. Set to `None` to disable scaling.
+        workers_step: Number of workers added at each scaling event.
+        resume: Restore the latest valid snapshot after star formation has
+            finished.
+
+    Attributes:
+        framework (StarFormationFramework): Formation framework controlling
+            the star-formation schedule (contains the target stars).
+        petar_code (Petar): Active PeTar stellar-dynamics solver.
+        bridge_code (Bridge): Bridge coupling solver, when background gas is used.
+        model_time (Quantity): Current simulation time.
+        formed_stars (Particles): Cached particles that have already formed.
+        output_folder (str): Directory containing snapshots and `dcaf.log`.
+    """
     def __init__(
         self,
-        framework,# requires: target_stars, next_formation_time(), form_stars()
-        config = None,
-        converter = None,
-        gas_code = None,
-        track_background_gas_energy = True, 
-        output_folder = "./dcaf_output/",
-        log_level = 'debug',
-        stars_per_worker = None,
-        workers_step = 5,
-        resume = False
-    ):
+        framework: StarFormationFramework,
+        config: dict = None,
+        converter: nbody_system.nbody_to_si = None,
+        track_background_gas_energy: bool = True,
+        output_folder: str = "./dcaf_output/",
+        log_level: str = "info",
+        stars_per_worker: int = None,
+        workers_step: int = 5,
+        resume: bool = False,
+    ) -> None:
         base_output_folder = output_folder.rstrip("/")
         if base_output_folder == "":
             base_output_folder = "."
@@ -156,10 +198,11 @@ class DcafSystem:
         self.track_background_gas_energy = track_background_gas_energy
 
     @property
-    def formed_stars(self):
+    def formed_stars(self) -> Particles:
         """
-        Return already formed stars updated. Only update the particles if model
-        time has drifted or more stars has been added. Otherwise, the stored copy is provided.
+        Return already formed stars updated. It only update the particles if
+        model time has drifted or more stars has been added. Otherwise, the
+        stored copy is provided.
         """
         if self.petar_code is None:
             return self._formed_stars
@@ -171,11 +214,13 @@ class DcafSystem:
             self.update_formed_stars()
         return self._formed_stars
 
-    def update_formed_stars(self):
+    def update_formed_stars(self) -> None:
+        """Refresh the cached formed-star particle set from PeTar."""
         with self.logger.timing('[UPDATING STARS] ********************'):
             self._formed_stars = self.petar_code.particles.copy()
             self._formed_stars.collection_attributes.code_time = self.petar_code.model_time
-    def initialize_system(self):
+
+    def initialize_system(self) -> None:
         """Instantiate PeTar and, if present, Bridge. Also add initial stars,
         or resume from the latest saved snapshot if self.resume is True.
         """
@@ -323,9 +368,13 @@ class DcafSystem:
             self.write_output()
 
     # --- setup helpers -----------------------------------------------------
-    def _setup_petar(self,nworkers = None):
+    def _setup_petar(self, nworkers: int | None = None) -> None:
         """Initialize PeTar. No particles are added here.
             nworkers: if not given, is retrieved from config
+
+        Args:
+            nworkers: Number of PeTar workers. Uses the PeTar configuration when
+                omitted.
         """
         cfg = self.config["petar"]
         if nworkers is None:
@@ -340,7 +389,8 @@ class DcafSystem:
         self.petar_code.parameters.r_out = cfg.r_out 
         self.petar_code.parameters.dt_soft = cfg.dt_soft
 
-    def _setup_bridge(self):
+    def _setup_bridge(self) -> None:
+        """Initialize Bridge using the configured coupling timestep."""
         cfg = self.config["bridge"]
         if cfg.timestep is None:
             timestep = self.dt_soft_eff
@@ -352,7 +402,11 @@ class DcafSystem:
                                   use_threading=cfg.use_threading,
                                   verbose=cfg.verbose)
 
-    def setup_gas(self):
+    def _setup_gas(self) -> None:
+        """Placeholder for a future gas-setup routine.
+
+        For possible future implementation.
+        """
         # TODO: add setup gas routine to StarFormationFramework
         #   I think we dont need this with the current implementation
         pass
@@ -360,10 +414,13 @@ class DcafSystem:
 
     # -- helpers for the restart --------------------------------------------
 
-    def _rebuild_system(self, nworkers):
+    def _rebuild_system(self, nworkers: int) -> None:
         """
         Stop current PeTar, create a new instance with nworkers, and re-attach
         it (and Bridge if present) with the existing particles and model_time.
+
+        Args:
+            nworkers:  Number of workers for the replacement PeTar instance.
         """
         # grab current state
         old_petar = self.petar_code
@@ -405,9 +462,13 @@ class DcafSystem:
 
     # --- main loop ---------------------------------------------------------
 
-    def evolve_model(self, t_end):
-        """Advance the coupled system to t_end, interleaving outputs and
-        formation events."""
+    def evolve_model(self, t_end: Quantity) -> None:
+        """Advance the coupled system to `t_end`, interleaving outputs and
+        formation events.
+
+        Args:
+            t_end: Target time to evolve the system.
+        """
         if self.model_time is None:
             raise RuntimeError("Call initialize_system() before evolve_model().")
 
@@ -474,7 +535,8 @@ class DcafSystem:
 
     # --- I/O ---------------------------------------------------------------
 
-    def write_output(self):
+    def write_output(self) -> None:
+        """Write a stellar snapshot, gas output, and energy row."""
         with self.logger.timing('[WRITING OUTPUT]', False):
             self.logger.info(
                 f"[DCAF] [WRITING OUTPUT] Snap: {self.__current_snapshot}, "
@@ -494,7 +556,12 @@ class DcafSystem:
 
     # --- internals ---------------------------------------------------------
 
-    def _add_new_stars(self, stars):
+    def _add_new_stars(self, stars: Particles) -> None:
+        """Add a formation batch to PeTar and record its energy.
+
+        Args:
+            stars: Newly formed stellar particles to add to the active solver.
+        """
         with self.logger.timing('[ADDING STARS]', False):
             nactive = len(self.petar_code.particles)
             self.logger.info(f'[ADDING STARS]  Time: {self.model_time.value_in(units.Myr)}  '
@@ -535,9 +602,21 @@ class DcafSystem:
                     f"{s.vz.value_in(units.kms):.6f}"
                 )
 
-    def __inject_new_stars_energy(self, new_stars, U0 = 0 | units.J):
+    def __inject_new_stars_energy(
+        self,
+        new_stars: Particles,
+        U0: Quantity = 0 | units.J,
+    ) -> Quantity:
         """
         Add the injected energy of `new_stars` to the budget
+
+        Args:
+            new_stars: Stellar particles being added to PeTar.
+            U0: PeTar potential energy before adding the stars.
+
+        Returns:
+            (Quantity): Energy contributed by the injected
+                stars.
         """
         # --- kinetic of new stars
         v2 = new_stars.vx**2 + new_stars.vy**2 + new_stars.vz**2
@@ -571,10 +650,16 @@ class DcafSystem:
         return dE
 
 
-    def _ceil_to_block(self,t_si):
+    def _ceil_to_block(self, t_si: Quantity) -> Quantity:
         """
         Get the closest time to a dt_soft multiple.
         We will perform operations only on those times for better performance
+
+        Args:
+            t_si: Time to round up to the next integration block.
+
+        Returns:
+            (Quantity): Time at the selected integration block.
         """
         if self.dt_soft_eff is None:
             raise Exception( 'dt_soft_eff must be updated' )
@@ -584,7 +669,8 @@ class DcafSystem:
         return self.converter.to_si( ( k * dtnb)  | nbody_system.time )
 
 
-    def _energy_check(self):
+    def _energy_check(self) -> None:
+        """Update the current stellar and gas energy diagnostics."""
         first_check = False
         if self._last_energy_check is None:
             self._last_energy_check = self.model_time
@@ -650,7 +736,7 @@ class DcafSystem:
 
         self._last_energy_check = self.model_time 
 
-    def _write_energy_row(self):
+    def _write_energy_row(self) -> None:
         """
         Append to energy file
         """
@@ -688,7 +774,7 @@ class DcafSystem:
             line += '\n'
             f.write(line)
 
-    def _validate_formation_schedule(self,dt_soft_nb):
+    def _validate_formation_schedule(self, dt_soft_nb: Quantity) -> None:
         """
         Validate that the intended formation schedule do not violate a set of
         rules designed to avoid adding stars twice during the same dt_soft
@@ -705,6 +791,9 @@ class DcafSystem:
         The scheduled times should follow these rules:
           - First formation time t0 may be < dt_soft (we will place the first add at >= dt_soft).
           - From the first forming block onward, no two formation times may fall in the same dt_soft block.
+
+        Args:
+            dt_soft_nb: PeTar global timestep block in N-body units.
         """
         dt_soft = self.converter.to_si(dt_soft_nb)
         ftimes = getattr(self.framework, "formation_times", None)
@@ -740,7 +829,12 @@ class DcafSystem:
                 "setting the dt_tolerance > dt_soft "
             )
 
-    def _disable_future_formation(self):
+    def _disable_future_formation(self) -> None:
+        """Clear pending formation events after a resumed run.
+
+        Implementation: currently resume is only implemented after stars forms.
+        this should not be needed. But to be safe.
+        """
         self.framework.formation_sequence = []
         self.framework.formation_times = []
         self.framework._StarFormationFramework__next_formation_time = None
@@ -751,23 +845,57 @@ class GasEnergyTracker:
     This is a helper class to pass into Bridge in order to keep track of the
     work done by the gas at Bridge timestep level for energy conservation check.
 
+    This helper is added to Bridge alongside the stellar dynamics and background
+    gas systems when `track_background_gas_energy` is enabled. It does not exert
+    forces: its gravity and potential methods return zero so it acts only as an
+    energy observer.
+
+    At every Bridge substep, `evolve_model()` evaluates `dPhi/dt` from the
+    background-gas model at the current stellar positions. It computes
+    `sum(m_i * dPhi/dt)` and integrates this quantity over the Bridge timestep
+    with the trapezoidal rule. The accumulated work is retrieved by
+    `DcafSystem._energy_check()` and included in the energy diagnostics.
+
+    Args:
+        dcaf: D-CAF system whose gas potential is tracked.
+
     """
-    def __init__(self, dcaf):
+    def __init__(self, dcaf: DcafSystem) -> None:
         self.dcaf = dcaf
         self.model_time = 0 | units.s   # Bridge reads this
         self.W_gas = 0 | units.J
         self._last_sum = None
         self._logfile = open('gas_energy_dbg.log','a')
-    def get_gravity_at_point(self, *args, **kwargs):
+    def get_gravity_at_point(
+        self,
+        *args: object,
+        **kwargs: object,
+    ) -> tuple[Quantity, Quantity, Quantity]:
+        """Return zero acceleration for Bridge compatibility.
+
+        Returns:
+            (tuple[Quantity, Quantity, Quantity]): Zero acceleration components.
+        """
         zero = 0 | units.ms**2
         return zero, zero, zero
-    def get_potential_at_point(self, *args, **kwargs):
+    def get_potential_at_point(self, *args: object, **kwargs: object) -> Quantity:
+        """Return an inert potential for Bridge compatibility.
+
+        Returns:
+            (Quantity): Zero gravitational potential.
+        """
         return 0 | (units.kms**2)       # inert potential
-    def stop(self, *args, **kwargs):
+    def stop(self, *args: object, **kwargs: object) -> None:
+        """Implement Bridge's stop hook without extra cleanup."""
         pass
         return 
     # Called each Bridge substep
-    def evolve_model(self, t_next):
+    def evolve_model(self, t_next: Quantity) -> None:
+        """Integrate the work done by the evolving gas potential.
+
+        Args:
+            t_next: Bridge time at the end of the current coupling step.
+        """
         t_prev = self.model_time
         dt = t_next - t_prev
         stars = self.dcaf.petar_code.particles
@@ -787,7 +915,13 @@ class GasEnergyTracker:
         self.model_time = t_next
         self._logfile.write(f'{t_next}   {self.W_gas}')
 
-    def retrieve_stored_energy(self):
+    def retrieve_stored_energy(self) -> Quantity:
+        """Return accumulated gas work and reset the accumulator.
+
+        Returns:
+            (Quantity): Work done by the background-gas potential since the
+                previous retrieval.
+        """
         wout = self.W_gas
         self.W_gas = 0 | units.J
         return wout

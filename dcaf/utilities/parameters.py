@@ -41,5 +41,9 @@ class GasConfig:
 
 
 def get_default_configuration():
+    """Returns the default configuration for petar bridge and a placeholder for
+    background gas.
+    Users can start from here and modify accordingly.
+    """
     return dict( petar = PetarConfig() , bridge = BridgeConfig(), 
                 gas = GasConfig()  )

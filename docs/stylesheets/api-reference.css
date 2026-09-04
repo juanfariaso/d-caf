@@ -19,3 +19,12 @@
   background: var(--md-default-bg-color);
   padding: 0.5rem 0;
 }
+
+@media screen and (min-width: 76.25em) {
+  /* Let the article use the space between Material's two sidebars. */
+  .md-grid {
+    max-width: none;
+    margin-left: 1.2rem;
+    margin-right: 1.2rem;
+  }
+}
