@@ -1841,6 +1841,7 @@ https://ui.adsabs.harvard.edu/abs/2024ApJ...977..203C/abstract</p>
 
 
 
+
 <p><span class="doc-section-title">Functions:</span></p>
     <table>
       <thead>
@@ -2482,7 +2483,8 @@ returns:
 <span class="normal">334</span>
 <span class="normal">335</span>
 <span class="normal">336</span>
-<span class="normal">337</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">get_mass_ratios</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">qdist</span><span class="o">=</span><span class="s1">&#39;field&#39;</span><span class="p">,</span> <span class="n">mmin</span><span class="o">=</span><span class="mf">0.08</span><span class="p">):</span>
+<span class="normal">337</span>
+<span class="normal">338</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">get_mass_ratios</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">qdist</span><span class="o">=</span><span class="s1">&#39;field&#39;</span><span class="p">,</span> <span class="n">mmin</span><span class="o">=</span><span class="mf">0.08</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Sample the mass ratio based on the distributions reported by Moe &amp; di Stefano (2017),</span>
 <span class="sd">    for the specified mass range, for a given period. For M dwarfs, slopes are from</span>
@@ -2625,7 +2627,8 @@ returns:
     <span class="c1"># Verify that all mass ratios and companion masses are within bounds</span>
     <span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">q</span><span class="p">)</span> <span class="o">&gt;=</span>	<span class="mf">0.1</span>
     <span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">q</span><span class="p">)</span> <span class="o">&lt;=</span>	<span class="mi">1</span>
-    <span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">m</span><span class="o">*</span><span class="n">q</span><span class="p">),</span> <span class="n">mmin</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">m</span> <span class="o">*</span> <span class="n">q</span> <span class="o">&gt;=</span> <span class="n">mmin</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;Sampled a companion below the minimum mass.&quot;</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">q</span>
 </code></pre></div></td></tr></table></div>
@@ -2657,8 +2660,7 @@ returns:
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>dcaf/factory/field_binary_population.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">340</span>
-<span class="normal">341</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">341</span>
 <span class="normal">342</span>
 <span class="normal">343</span>
 <span class="normal">344</span>
@@ -2800,7 +2802,8 @@ returns:
 <span class="normal">480</span>
 <span class="normal">481</span>
 <span class="normal">482</span>
-<span class="normal">483</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">get_eccentricities</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">edist</span><span class="o">=</span><span class="s1">&#39;field&#39;</span><span class="p">):</span>
+<span class="normal">483</span>
+<span class="normal">484</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">get_eccentricities</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">edist</span><span class="o">=</span><span class="s1">&#39;field&#39;</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Sample the eccentricity based on the distributions reported by Moe &amp; di Stefano (2017),</span>
 <span class="sd">    for the specified mass range, for a given period. </span>
@@ -2978,8 +2981,7 @@ returns:
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>dcaf/factory/field_binary_population.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">487</span>
-<span class="normal">488</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">488</span>
 <span class="normal">489</span>
 <span class="normal">490</span>
 <span class="normal">491</span>
@@ -3051,7 +3053,8 @@ returns:
 <span class="normal">557</span>
 <span class="normal">558</span>
 <span class="normal">559</span>
-<span class="normal">560</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">orbits</span><span class="p">(</span><span class="n">mass_array</span><span class="p">,</span> <span class="n">mult_frac</span><span class="o">=</span><span class="s1">&#39;field&#39;</span><span class="p">,</span> <span class="n">pdist</span><span class="o">=</span><span class="s1">&#39;inner&#39;</span><span class="p">,</span> <span class="n">qdist</span><span class="o">=</span><span class="s1">&#39;field&#39;</span><span class="p">,</span> <span class="n">edist</span><span class="o">=</span><span class="s1">&#39;field&#39;</span><span class="p">,</span> <span class="n">min_mass</span><span class="o">=</span><span class="mf">0.08</span><span class="p">):</span>
+<span class="normal">560</span>
+<span class="normal">561</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">orbits</span><span class="p">(</span><span class="n">mass_array</span><span class="p">,</span> <span class="n">mult_frac</span><span class="o">=</span><span class="s1">&#39;field&#39;</span><span class="p">,</span> <span class="n">pdist</span><span class="o">=</span><span class="s1">&#39;inner&#39;</span><span class="p">,</span> <span class="n">qdist</span><span class="o">=</span><span class="s1">&#39;field&#39;</span><span class="p">,</span> <span class="n">edist</span><span class="o">=</span><span class="s1">&#39;field&#39;</span><span class="p">,</span> <span class="n">min_mass</span><span class="o">=</span><span class="mf">0.08</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Generate binaries from array of stellar masses.</span>
 <span class="sd">    args:</span>

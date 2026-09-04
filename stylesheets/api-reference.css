@@ -20,6 +20,11 @@
   padding: 0.5rem 0;
 }
 
+/* Module-level functions are h2 headings; match their size to class methods. */
+.doc-function > h2.doc-heading {
+  font-size: var(--md-typeset-h3-font-size);
+}
+
 @media screen and (min-width: 76.25em) {
   /* Let the article use the space between Material's two sidebars. */
   .md-grid {
