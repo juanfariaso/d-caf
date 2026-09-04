@@ -1,17 +1,72 @@
 """
 This module should help introducing multiplicity into an existent star list.
 
-The default method idea is to keep the distribution mostly fixed but group stars
+The default method idea is to keep the distribution fixed but group stars
 together around a primary. No change to the IMF and only change the positions
 and velocity of the companions.
+
 Then, we proceed as follows:
 
-1. we choose which stars become primordial binaries
-2. pick companions by adjusting to a predefined mass ratio distribution
-3. calculate the orbits of the systems based on binary populations, probably a
+1. We choose which stars become primordial binaries
+2. Rick companions by adjusting to a predefined mass ratio distribution
+3. Calculate the orbits of the systems based on binary populations, probably a\
 user defined function could also work.
-4. Put all stars together at the location of the primary, using its coordinates
+4. Put all stars together at the location of the primary, using its coordinates\
 as center of mass.
+
+## Hierarchy Format
+
+In the implementation, we refeer to `hierarchy` to store binaries and triples
+and work with them. `hierarchy` is just a list of dictionaries. Each entry
+corresponds to the particle at the same index in `unresolved_stars`; `members`
+contains the indices of that system's component particles in `resolved_stars`.
+The entries in `periods`, `semi_major_axes`, `eccentricities`, and `lhat` at a
+common index describe the same orbit. In the standard triple workflow, those
+lists are ordered from the inner orbit to the newly added outer orbit.
+
+| Key | Value |
+| --- | --- |
+| `members` | `list[int]` of indices into `resolved_stars`. |
+| `periods` | `list[Quantity]` of orbital periods with time dimensions. |
+| `semi_major_axes` | `list[Quantity]` of semimajor axes with length dimensions. |
+| `eccentricities` | `list[float]` of dimensionless eccentricities. |
+| `lhat` | `list[numpy.ndarray]` of dimensionless, three-component unit angular-momentum vectors. |
+| `_resolved_particles` | Internal `Particles` retained for recursive pairing; do not modify it. |
+
+Example:
+    A hierarchy containing a triple, a binary, and a single system:
+
+    ```python
+    hierarchy = [
+        {
+            # Triple: inner orbit (0, 1), then outer orbit ((0, 1), 2).
+            "members": [0, 1, 2],
+            "periods": [10 | units.day, 1e4 | units.day],
+            "semi_major_axes": [0.1 | units.AU, 10 | units.AU],
+            "eccentricities": [0.1, 0.3],
+            "lhat": [
+                np.array([0.0, 0.0, 1.0]),
+                np.array([0.0, 1.0, 0.0]),
+            ],
+        },
+        {
+            # Binary: orbit (3, 4).
+            "members": [3, 4],
+            "periods": [100 | units.day],
+            "semi_major_axes": [1 | units.AU],
+            "eccentricities": [0.2],
+            "lhat": [np.array([1.0, 0.0, 0.0])],
+        },
+        {
+            # Single: no orbital entries.
+            "members": [5],
+            "periods": [],
+            "semi_major_axes": [],
+            "eccentricities": [],
+            "lhat": [],
+        },
+    ]
+    ```
 
 """
 
@@ -19,120 +74,62 @@ import numpy
 
 from amuse.lab import Particles, units
 from amuse.units.constants import G
+from amuse.units.quantities import Quantity
 import numpy as np
 from dcaf.factory import field_binary_population as fbp
 
 
-def synchronize_resolved_with_unresolved(unresolved_stars, resolved_stars):
-    """
-    Move resolved components so each system matches the given unresolved COM.
-    """
-    if not hasattr(unresolved_stars, "system_id"):
-        raise AttributeError("unresolved_stars must have a system_id attribute.")
-    if not hasattr(resolved_stars, "system_id"):
-        raise AttributeError("resolved_stars must have a system_id attribute.")
-
-    updated = resolved_stars.copy()
-
-    unresolved_ids = list(unresolved_stars.system_id)
-    resolved_ids = list(updated.system_id)
-
-    for system_id in unresolved_ids:
-        unresolved_mask = [sid == system_id for sid in unresolved_ids]
-        resolved_mask = [sid == system_id for sid in resolved_ids]
-
-        unresolved_system = unresolved_stars[unresolved_mask]
-        resolved_system = updated[resolved_mask]
-
-        if len(unresolved_system) != 1:
-            raise ValueError(
-                "Each system_id must appear exactly once in unresolved_stars."
-            )
-        if len(resolved_system) == 0:
-            raise ValueError(
-                f"system_id {system_id} is present in unresolved_stars but missing in resolved_stars."
-            )
-
-        target = unresolved_system[0]
-
-        if len(resolved_system) == 1:
-            resolved_system.position = target.position
-            resolved_system.velocity = target.velocity
-            continue
-
-        old_com = resolved_system.center_of_mass()
-        old_com_velocity = resolved_system.center_of_mass_velocity()
-
-        dx = resolved_system.x - old_com.x
-        dy = resolved_system.y - old_com.y
-        dz = resolved_system.z - old_com.z
-        dvx = resolved_system.vx - old_com_velocity.x
-        dvy = resolved_system.vy - old_com_velocity.y
-        dvz = resolved_system.vz - old_com_velocity.z
-
-        resolved_system.x = target.x + dx
-        resolved_system.y = target.y + dy
-        resolved_system.z = target.z + dz
-        resolved_system.vx = target.vx + dvx
-        resolved_system.vy = target.vy + dvy
-        resolved_system.vz = target.vz + dvz
-
-    return updated
-
-
 class BinaryPopulation:
-    """
-    Build binary and hierarchical multiple initial conditions from an existing
-    stellar catalog.
+    r"""
+    Build binary and hierarchical multiple initial conditions from AMUSE
+    `Particles`.
 
-    Users can subclass this object and override selected methods to customize
-    the population model:
+    Args:
+        nbinaries:  Number of binaries to create. Provide this or
+            `population_fraction`, but not both.
+        population_fraction:  Fractions of single, binary, and optionally triple
+            systems.
+        gamma:  Exponent of the mass-ratio weighting $p(q) \propto q^\gamma$.
+        q_min:  Minimum allowed companion-to-primary mass ratio.
+        mean_period: Mean period of the log-normal period model.
+        sigma_logP: Standard deviation of $\log_{10}(P/\mathrm{day})$.
+        eccentricities: Eccentricity model: `circular`, `thermal`, or `flat`.
+        max_semi_major_axis: Maximum allowed binary semimajor axis. If omitted,
+            the stellar half-mass radius is used.
+        higher_order_mode: Placement mode for higher-order companions.
+            `hierarchical` uses subsystem centres of mass; `primary_centered` places
+            companions relative to the primary star.
+        companion_mode: Companion source mode: `pool`, pair binaries form the
+            exiting stellar list; `create`, select primaries from the list and
+            creates their secondaries discarding stars that will not be used
+            based on the original total mass. 
 
-    - `choose_companion(...)`: choose the companion mass for first-level binary
-      pairing. The default uses the configured mass-ratio distribution.
-    - `get_periods(...)`: sample first-level binary periods. The default draws
-      from the configured log-normal distribution with the current period cap.
-    - `get_eccentricities(...)`: sample first-level binary eccentricities. The
-      default uses the configured eccentricity model.
-    - `get_normalized_angular_momentum(...)`: provide first-level orbit-plane
-      orientations. The default returns `None`, meaning random orientations.
-    - `select_higher_order_companion(...)`: choose a companion for recursive
-      hierarchical pairing. The default only supports `multiple + single ->
-      triple`.
-    - `get_higher_order_periods(...)`: sample outer periods for recursive
-      hierarchical pairings. The default reuses `get_periods(...)` and enforces
-      a minimum outer-to-inner semimajor-axis ratio.
-    - `get_higher_order_eccentricities(...)`: sample outer eccentricities for
-      recursive hierarchical pairings. The default reuses
-      `get_eccentricities(...)`.
-    - `get_higher_order_normalized_angular_momentum(...)`: provide outer orbit
-      orientations for recursive hierarchical pairings. The default reuses
-      `get_normalized_angular_momentum(...)`.
-    - `apply_population(...)`: high-level convenience wrapper that matches the
-      configured `[single, binary, triple]` population internally, while
-      leaving `apply(...)` available for manual staged construction.
-    - `apply(..., force_n_binaries=...)`: run one pairing pass while
-      explicitly overriding the configured binary count for that call only.
-    - `higher_order_mode`: controls how recursive companions are placed. The
-      default `"hierarchical"` uses subsystem centres of mass. The
-      `"primary_centered"` mode keeps the same stored hierarchy arrays but
-      places new companions relative to the primary star of the existing
-      system.
+    Attributes:
+        nbinaries (int): Configured number of binaries.
+        population_fraction (list[float]): Configured system-order fractions.
+        gamma (float): Mass-ratio weighting exponent.
+        q_min (float): Minimum allowed mass ratio.
+        mean_period (Quantity): Mean binary period.
+        sigma_logP (float): Log-period dispersion.
+        eccentricities (str): Eccentricity population model.
+        max_semi_major_axis (Quantity): Maximum allowed binary semimajor axis.
+        higher_order_mode (str): Higher-order placement mode.
+        companion_mode (str): Companion source mode.
     """
 
     def __init__(
         self,
-        nbinaries=None,
-        population_fraction=None,
-        gamma=0.0,
-        q_min=0.0,
-        mean_period=10.0 ** 4.8 | units.day,
-        sigma_logP=2.3,
-        eccentricities="circular",
-        max_radius=None,
-        higher_order_mode="hierarchical",
-        companion_mode = 'pool'
-    ):
+        nbinaries: int = None,
+        population_fraction: list[float] = None,
+        gamma: float = 0.0,
+        q_min: float = 0.0,
+        mean_period: Quantity = 10.0 ** 4.8 | units.day,
+        sigma_logP: float = 2.3,
+        eccentricities: str = "circular",
+        max_semi_major_axis: Quantity = None,
+        higher_order_mode: str = "hierarchical",
+        companion_mode: str = "pool",
+    ) -> None:
         self.nbinaries = nbinaries
         self.population_fraction = population_fraction
         self.gamma = gamma
@@ -140,7 +137,7 @@ class BinaryPopulation:
         self.mean_period = mean_period
         self.sigma_logP = sigma_logP
         self.eccentricities = eccentricities
-        self.max_radius = max_radius
+        self.max_semi_major_axis = max_semi_major_axis
         self.higher_order_mode = higher_order_mode
 
         self.companion_mode = companion_mode
@@ -171,10 +168,16 @@ class BinaryPopulation:
                 "higher_order_mode must be 'hierarchical' or 'primary_centered'."
             )
 
-    def get_number_of_binaries(self, stars):
+    def get_number_of_binaries(self, stars: Particles) -> int:
         """
         Determine how many binary systems to construct from the configured
         population parameters.
+
+        Args:
+            stars: Input stellar particles.
+
+        Returns:
+            (int): Number of first-level binaries to construct.
         """
         if self.nbinaries is not None:
             nbinaries = self.nbinaries
@@ -194,32 +197,59 @@ class BinaryPopulation:
 
         return nbinaries
 
-    def preprocess_stars(self, stars):
+    def preprocess_stars(self, stars: Particles) -> Particles:
         """
         This function is meant to be overwritten by inherited classes.
         This function is called inside apply before performing the pairing.
         It purpose is to give flexibility, in case we need to modify
         stars that will go into the binary population. 
 
-        One example application:
-        Currently the code pair stars from the pool of existing stars. However,
-        another option is to create the companions inplace based on a given mass
-        ratio. So the preprocess_stars function does:
-        1) for each primary, assign a mass ratio and create the companion
-        2) at each primary, link its companion adding it index as a new property.
 
-        3) then the choose_companion function (rewritten by the user) can read
-        this index and return it so the rest of the class do the rest.
+        Example case:
+            Currently the code pair stars from the pool of existing stars
+            (`companion_mode = pool`). 
+            However, another option is to create the companions inplace based on a
+            given mass ratio, this is what `companion_mode = create` does. 
+
+            In this case, the preprocess_stars function do:
+
+            1) for each primary, assign a mass ratio and create the companion
+                
+            2) at each primary, link its companion adding it index as a new property.
+                
+            3) then the choose_companion function (rewritten by the user) can read
+            this index and return it so the rest of the class do the rest.
+
+        Args:
+            stars: Input stellar particles.
+
+        Returns:
+            (Particles): Prepared stellar particles.
 
         """
 
         return stars
 
 
-    def choose_companion(self, m1, mass, equal_mass=False):
-        """
-        Select one companion mass from the available pool using the configured
-        mass-ratio distribution p(q) ∝ q^gamma, where q = m2/m1 <= 1.
+    def choose_companion(
+        self,
+        m1: Quantity,
+        mass: Quantity,
+        equal_mass: bool = False,
+    ) -> Quantity:
+        r"""
+        Select one companion mass for `m1` from the available pool `mass`  using
+        the configured mass-ratio distribution $p(q) \propto q^{\gamma}$, where
+        $q = m_2/m_1 <= 1$.
+
+        Args:
+            m1: Primary-star mass.
+            mass: Available companion masses.
+            equal_mass: Whether to sample uniformly rather than apply mass-ratio
+                weighting (for testing purposes).
+
+        Returns:
+            (Quantity): Selected companion mass.
         """
         if len(mass) == 0:
             raise ValueError("No companion masses available.")
@@ -250,22 +280,64 @@ class BinaryPopulation:
         choice = numpy.random.choice(valid_index, p=weights)
         return mass[choice]
 
-    def get_periods(self, stars, primary_index, companion_index, **kwargs):
+    def _resolve_max_semi_major_axis(
+        self,
+        stars: Particles,
+        max_semi_major_axis: Quantity = None,
+    ) -> Quantity:
+        """Return the configured semimajor-axis cap or the half-mass radius."""
+        if max_semi_major_axis is None:
+            max_semi_major_axis = self.max_semi_major_axis
+        if max_semi_major_axis is None:
+            max_semi_major_axis = stars.LagrangianRadii(
+                mf=[0.5], cm=stars.center_of_mass()
+            )[0][0]
+        if max_semi_major_axis <= 0 | max_semi_major_axis.unit:
+            raise ValueError("max_semi_major_axis must be positive.")
+        return max_semi_major_axis
+
+    def get_periods(
+        self,
+        stars: Particles,
+        primary_index: list[int],
+        companion_index: list[int],
+        max_semi_major_axis: Quantity = None,
+        **kwargs: Quantity,
+    ) -> Quantity:
         """
         Sample binary periods for the selected systems.
 
-        Extra context can be passed through ``kwargs``. The default
-        implementation uses ``Rc`` when provided, otherwise it falls back to
-        ``self.max_radius``.
+        It draws from the configured log-normal period distribution and rejects
+        samples whose Keplerian semimajor axes exceed the configured cap.
+
+        Args:
+            stars: Stellar particles being paired.
+            primary_index: Indices of primary stars.
+            companion_index: Indices of companion stars.
+            max_semi_major_axis: Optional semimajor-axis cap. If omitted, uses
+                `self.max_semi_major_axis` or the stellar half-mass radius.
+
+        Returns:
+            (Quantity): Sampled orbital periods.
+
+        Raises:
+            ValueError: If the cap is non-positive or smaller than the orbit
+                allowed by the minimum one-day period.
         """
         nbinaries = len(primary_index)
-        Rc = kwargs.get("Rc", self.max_radius)
-
-        if Rc is None:
-            Rc = stars.LagrangianRadii(mf=[0.5], cm=stars.center_of_mass())[0][0]
-
-        Pmax = ((Rc.value_in(units.AU) ** 3) / 2.0 / 0.01) ** 0.5 | units.day
+        max_semi_major_axis = self._resolve_max_semi_major_axis(
+            stars, max_semi_major_axis
+        )
+        binary_mass = stars.mass[primary_index] + stars.mass[companion_index]
         Pmin = 1.0 | units.day
+        minimum_semi_major_axes = (
+            (Pmin.value_in(units.yr) ** 2) * binary_mass.value_in(units.MSun)
+        ) ** (1.0 / 3.0) | units.AU
+        if numpy.any(minimum_semi_major_axes > max_semi_major_axis):
+            raise ValueError(
+                "max_semi_major_axis is smaller than the minimum orbit allowed "
+                "by Pmin."
+            )
 
         periods = numpy.zeros(nbinaries) | units.day
         pending = list(range(nbinaries))
@@ -276,14 +348,35 @@ class BinaryPopulation:
                 size=len(pending),
             )
             periods[pending] = 10.0 ** logP | units.day
-            pending = list(numpy.where((periods > Pmax) | (periods < Pmin))[0])
+            semi_major_axes = (
+                (periods[pending].value_in(units.yr) ** 2)
+                * binary_mass[pending].value_in(units.MSun)
+            ) ** (1.0 / 3.0) | units.AU
+            invalid = (periods[pending] < Pmin) | (
+                semi_major_axes > max_semi_major_axis
+            )
+            pending = [pending[i] for i in numpy.where(invalid)[0]]
 
         return periods
 
-    def get_eccentricities(self, stars, primary_index, companion_index, **kwargs):
+    def get_eccentricities(
+        self,
+        stars: Particles,
+        primary_index: list[int],
+        companion_index: list[int],
+        **kwargs: Quantity,
+    ) -> numpy.ndarray:
         """
         Sample binary eccentricities according to the configured eccentricity
         population model.
+
+        Args:
+            stars: Stellar particles being paired.
+            primary_index: Indices of primary stars.
+            companion_index: Indices of companion stars.
+
+        Returns:
+            (numpy.ndarray): One eccentricity per binary.
         """
         nbinaries = len(primary_index)
 
@@ -298,8 +391,12 @@ class BinaryPopulation:
         )
 
     def get_normalized_angular_momentum(
-        self, stars, primary_index, companion_index, **kwargs
-    ):
+        self,
+        stars: Particles,
+        primary_index: list[int],
+        companion_index: list[int],
+        **kwargs: Quantity,
+    ) -> numpy.ndarray | None:
         """
         Return per-binary normalized angular-momentum directions.
 
@@ -309,19 +406,47 @@ class BinaryPopulation:
         When provided, the return value must be a NumPy-like array with shape
         ``(nbinaries, 3)``, one row per binary. Rows with non-finite values or
         zero norm are ignored and fall back to random orientation.
+
+        Note:
+            The resulting angular momentum orientations do not need to be
+            normalized, the code only used it directions.
+
+        Args:
+            stars: Stellar particles being paired.
+            primary_index: Indices of primary stars.
+            companion_index: Indices of companion stars.
+
+        Returns:
+            (numpy.ndarray | None):  Unit angular-momentum
+                vectors, or `None` for random orientations.
         """
         return None
 
     def select_higher_order_companion(
-        self, primary_index, stars, hierarchy, available_indexes, **kwargs
-    ):
+        self,
+        primary_index: int,
+        stars: Particles,
+        hierarchy: list[dict],
+        available_indexes: list[int],
+        **kwargs: Quantity,
+    ) -> int | None:
         """
         Select one higher-order companion for the given primary system.
 
         The default implementation only supports the minimal hierarchical
         channel `multiple + single -> triple`. The primary system must already
         contain exactly two members, and the chosen companion must be a single
-        unresolved object.
+        unresolved object. However, subclasses may want to do more complex
+        implementations.
+
+        Args:
+            primary_index: Index of the existing multiple system.
+            stars: Unresolved stellar or system particles.
+            hierarchy: Current <a href="#dcaf.factory.multiplicity--hierarchy-format">hierarchy dictionaries</a>.
+            available_indexes: Candidate unresolved-system indices.
+
+        Returns:
+            (int | None): Selected companion index, if available.
         """
         if len(hierarchy[primary_index]["members"]) != 2:
             return None
@@ -345,33 +470,49 @@ class BinaryPopulation:
 
     def get_higher_order_periods(
         self,
-        stars,
-        primary_index,
-        companion_index,
-        hierarchy,
-        min_semimajor_ratio=10.0,
-        **kwargs,
-    ):
+        stars: Particles,
+        primary_index: list[int],
+        companion_index: list[int],
+        hierarchy: list[dict],
+        min_semimajor_ratio: float = 10.0,
+        max_semi_major_axis: Quantity = None,
+        **kwargs: Quantity,
+    ) -> Quantity:
         """
         Sample outer periods for hierarchical pairings.
 
         By default this reuses `get_periods(...)` and rejects samples until the
-        resulting outer semimajor axis is at least ten times the last stored
-        semimajor axis of the primary hierarchy branch.
+        resulting outer semimajor axis is at least `min_semimajor_ratio` times
+        the last stored semimajor axis of the primary hierarchy branch, while
+        remaining below `max_semi_major_axis`.
+
+        Args:
+            stars: Unresolved stellar or system particles.
+            primary_index: Indices of existing multiple systems.
+            companion_index: Indices of selected companions.
+            hierarchy: Current <a href="#dcaf.factory.multiplicity--hierarchy-format">hierarchy dictionaries</a>.
+            min_semimajor_ratio: Required outer-to-inner semimajor-axis ratio.
+            max_semi_major_axis: Maximum allowed outer semimajor axis. If
+                omitted, uses the configured cap or stellar half-mass radius.
+
+        Returns:
+            (Quantity): Sampled outer orbital periods.
+
+        Raises:
+            ValueError: If no outer orbit can satisfy the semimajor-axis-ratio
+                constraint.
         """
-        periods = self.get_periods(
-            stars, primary_index, companion_index, **kwargs
-        ).copy()
-
         total_mass = stars.mass[primary_index] + stars.mass[companion_index]
-        Rc = kwargs.get("Rc", self.max_radius)
-        if Rc is None:
-            Rc = stars.LagrangianRadii(mf=[0.5], cm=stars.center_of_mass())[0][0]
-
-        Pmax = ((Rc.value_in(units.AU) ** 3) / 2.0 / 0.01) ** 0.5 | units.day
-        amax = (
-            (Pmax.value_in(units.yr) ** 2) * total_mass.value_in(units.MSun)
-        ) ** (1.0 / 3.0) | units.AU
+        max_semi_major_axis = self._resolve_max_semi_major_axis(
+            stars, max_semi_major_axis
+        )
+        periods = self.get_periods(
+            stars,
+            primary_index,
+            companion_index,
+            max_semi_major_axis=max_semi_major_axis,
+            **kwargs,
+        ).copy()
 
         pending = list(range(len(primary_index)))
         while len(pending) > 0:
@@ -386,10 +527,10 @@ class BinaryPopulation:
                 if len(primary_hierarchy["semi_major_axes"]) == 0:
                     continue
                 inner_a = primary_hierarchy["semi_major_axes"][-1]
-                if min_semimajor_ratio * inner_a > amax[system_i]:
+                if min_semimajor_ratio * inner_a > max_semi_major_axis:
                     raise ValueError(
                         "No valid higher-order outer orbit fits within the current "
-                        "maximum period cap."
+                        "maximum semimajor-axis cap."
                     )
                 if semi_major_axes[local_i] < min_semimajor_ratio * inner_a:
                     keep_pending.append(system_i)
@@ -401,6 +542,7 @@ class BinaryPopulation:
                 stars,
                 [primary_index[i] for i in keep_pending],
                 [companion_index[i] for i in keep_pending],
+                max_semi_major_axis=max_semi_major_axis,
                 **kwargs,
             )
             pending = keep_pending
@@ -408,31 +550,73 @@ class BinaryPopulation:
         return periods
 
     def get_higher_order_eccentricities(
-        self, stars, primary_index, companion_index, hierarchy, **kwargs
-    ):
+        self,
+        stars: Particles,
+        primary_index: list[int],
+        companion_index: list[int],
+        hierarchy: list[dict],
+        **kwargs: Quantity,
+    ) -> numpy.ndarray:
         """
         Sample eccentricities for hierarchical pairings.
 
         The default implementation reuses `get_eccentricities(...)`.
+
+        Args:
+            stars: Unresolved stellar or system particles.
+            primary_index: Indices of existing multiple systems.
+            companion_index: Indices of selected companions.
+            hierarchy: Current <a href="#dcaf.factory.multiplicity--hierarchy-format">hierarchy dictionaries</a>.
+
+        Returns:
+            (numpy.ndarray): One outer eccentricity per pairing.
         """
         return self.get_eccentricities(
             stars, primary_index, companion_index, **kwargs
         )
 
     def get_higher_order_normalized_angular_momentum(
-        self, stars, primary_index, companion_index, hierarchy, **kwargs
-    ):
+        self,
+        stars: Particles,
+        primary_index: list[int],
+        companion_index: list[int],
+        hierarchy: list[dict],
+        **kwargs: Quantity,
+    ) -> numpy.ndarray | None:
         """
         Return normalized angular-momentum directions for hierarchical pairings.
 
         The default implementation reuses
         `get_normalized_angular_momentum(...)`.
+
+        Args:
+            stars:  Unresolved stellar or system particles.
+            primary_index: Indices of existing multiple systems.
+            companion_index: Indices of selected companions.
+            hierarchy: Current <a href="#dcaf.factory.multiplicity--hierarchy-format">hierarchy dictionaries</a>.
+
+        Returns:
+            (numpy.ndarray | None): Outer-orbit unit angular-
+                momentum vectors, or `None` for random orientations.
         """
         return self.get_normalized_angular_momentum(
             stars, primary_index, companion_index, **kwargs
         )
 
-    def select_binaries(self, stars, nbinaries):
+    def select_binaries(
+        self,
+        stars: Particles,
+        nbinaries: int,
+    ) -> tuple[list[int], list[int]]:
+        """Select primary and companion indices from `stars`.
+
+        Args:
+            stars: Input stellar particles.
+            nbinaries: Number of binary pairs to select.
+
+        Returns:
+            (tuple[list[int], list[int]]): Primary and companion index lists.
+        """
         equal_mass = numpy.std(stars.mass.value_in(units.MSun)) == 0.0
         mass = stars.mass 
 
@@ -483,15 +667,33 @@ class BinaryPopulation:
 
         return primary_index, companion_index
 
-    def apply_population(self, stars):
+    def apply_population(self, stars: Particles) -> dict:
         """
         Build the configured multiplicity population internally from a clean
-        stellar catalog.
+        `Particles`.
 
         This is a convenience wrapper for the standard staged workflow. The
         current default implementation supports `[single, binary, triple]`
         population fractions and constructs triples by reprocessing the
         unresolved systems after the first binary pass.
+
+        The returned `hierarchy` is a list of dictionaries that follows the
+        <a href="#dcaf.factory.multiplicity--hierarchy-format">hierarchy format</a>
+        described above.
+        Each entry corresponds to the particle at the same index in
+        `unresolved_stars`.
+
+        Args:
+            stars: Input stellar particles.
+
+        Returns:
+            (dict): Resolved and unresolved particles, hierarchy,
+                orbital properties, and achieved population fractions.
+
+        Raises:
+            ValueError: If `population_fraction` is not configured.
+            NotImplementedError: If a nonzero population above triples is
+                requested.
         """
         if self.population_fraction is None:
             raise ValueError(
@@ -540,13 +742,23 @@ class BinaryPopulation:
 
     def make_binaries(
         self,
-        stars,
-        hierarchy=None,
-        force_n_binaries=None,
-    ):
+        stars: Particles,
+        hierarchy: list[dict] = None,
+        force_n_binaries: int = None,
+    ) -> tuple[dict, dict]:
         """
         Resolve binary components around the centre-of-mass phase-space points
         of the selected primary stars, using the current class configuration.
+
+        Args:
+            stars: Stellar or unresolved-system particles to pair.
+            hierarchy: Existing <a href="#dcaf.factory.multiplicity--hierarchy-format">hierarchy dictionaries</a> for
+                recursive higher-order pairing.
+            force_n_binaries: Binary count for this pairing pass.
+
+        Returns:
+            (tuple[dict, dict]): Orbital and hierarchy data, plus internal
+                resolved-component and index data.
         """
         mass = stars.mass
         if force_n_binaries is None:
@@ -585,9 +797,7 @@ class BinaryPopulation:
         used = set(primary_index) | set(companion_index)
         single_index = [i for i in range(len(stars)) if i not in used]
 
-        Rc = self.max_radius
-        if Rc is None:
-            Rc = stars.LagrangianRadii(mf=[0.5], cm=stars.center_of_mass())[0][0]
+        max_semi_major_axis = self._resolve_max_semi_major_axis(stars)
 
         nbinaries = len(primary_index)
 
@@ -634,20 +844,40 @@ class BinaryPopulation:
 
         binary_mass = mass[primary_index] + mass[companion_index]
         if hierarchy is None:
-            periods = self.get_periods(stars, primary_index, companion_index, Rc=Rc)
+            periods = self.get_periods(
+                stars,
+                primary_index,
+                companion_index,
+                max_semi_major_axis=max_semi_major_axis,
+            )
             ecc = self.get_eccentricities(stars, primary_index, companion_index)
             lhat = self.get_normalized_angular_momentum(
-                stars, primary_index, companion_index, Rc=Rc
+                stars,
+                primary_index,
+                companion_index,
+                max_semi_major_axis=max_semi_major_axis,
             )
         else:
             periods = self.get_higher_order_periods(
-                stars, primary_index, companion_index, hierarchy, Rc=Rc
+                stars,
+                primary_index,
+                companion_index,
+                hierarchy,
+                max_semi_major_axis=max_semi_major_axis,
             )
             ecc = self.get_higher_order_eccentricities(
-                stars, primary_index, companion_index, hierarchy, Rc=Rc
+                stars,
+                primary_index,
+                companion_index,
+                hierarchy,
+                max_semi_major_axis=max_semi_major_axis,
             )
             lhat = self.get_higher_order_normalized_angular_momentum(
-                stars, primary_index, companion_index, hierarchy, Rc=Rc
+                stars,
+                primary_index,
+                companion_index,
+                hierarchy,
+                max_semi_major_axis=max_semi_major_axis,
             )
 
         semi_major_axes = (
@@ -783,16 +1013,36 @@ class BinaryPopulation:
             },
         )
 
-    def apply(self, stars, hierarchy=None, force_n_binaries=None):
+    def apply(
+        self,
+        stars: Particles,
+        hierarchy: list[dict] = None,
+        force_n_binaries: int = None,
+    ) -> dict:
         """
         Build the configured primordial-binary population on top of an existing
-        stellar catalog and return both the resolved stars and the unresolved
+        `Particles` and return both the resolved stars and the unresolved
         system-level particle set.
 
         If `force_n_binaries` is provided, it overrides the currently
         configured binary count for this call only. This is mainly intended for
         manual staged construction and for internal orchestration from
         `apply_population(...)`.
+
+
+        Args:
+            stars: Input stellar or unresolved-system particles.
+            hierarchy: Existing <a href="#dcaf.factory.multiplicity--hierarchy-format">hierarchy dictionaries</a> for
+                a recursive pairing pass.
+            force_n_binaries: Binary count for this call.
+
+        Returns:
+            (dict): `resolved_stars`, `unresolved_stars`, hierarchy, orbital
+                properties, and achieved population fractions.
+
+        Raises:
+            NotImplementedError: If triples are requested through `apply` rather
+                than `apply_population`.
         """
         if (
             hierarchy is None
@@ -1150,45 +1400,87 @@ class BinaryPopulation:
 
 class FieldBinaryPopulation(BinaryPopulation):
     """
-    This class implements Cournoyer-Cloutier et al. (2024), ApJ 977, Issue 2,
-    id. 203 Binary population generation, which aims to reproduce observational
-    statistics obtained by Moe & Di Stefano (2017), Winters et al. (2019) and
+    This class implements \
+    [Cournoyer-Cloutier et al. (2024)](https://iopscience.iop.org/article/10.3847/1538-4357/ad90b3) \
+    binary population generation, which aims to reproduce observational\
+    statistics obtained by Moe & Di Stefano (2017), Winters et al. (2019) and\
     Offner et al. (2022).
+
+    This is an example of how we can implement a more complex population using
+    the `BinaryPopulation` class.
 
     Notes: 
     - The apply function here works differently than the standard D-CAF. The
       provided stars will not be paired between them. Rather, companions will be
       created for primaries the algorithm decides to become a binary.
-      However, the total mass will be respected (within small variatons caused
+      However, the total mass will be respected (within small variations caused
       by sampling) by trimming the excess of stars. This trimming is random, and
       by system.
     - This class do not requires binary fraction. The binary fraction is
       dependent on mass and is decided by the algorithm.
+
+    Args:
+        mult_frac:  Multiplicity-fraction prescription passed to
+            `field_binary_population.get_multiplicity`.
+        pdist: Period-distribution prescription.
+        qdist: Mass-ratio-distribution prescription.
+        edist: Eccentricity-distribution prescription.
+        min_mass: Minimum companion mass in solar masses.
+        max_semi_major_axis: Optional maximum binary semimajor axis. Unlike
+            `BinaryPopulation`, this cap is enforced only when explicitly set
+            during population preprocessing.
+
+    Attributes:
+        mult_frac (str): Multiplicity-fraction prescription.
+        pdist (str): Period-distribution prescription.
+        qdist (str): Mass-ratio-distribution prescription.
+        edist (str): Eccentricity-distribution prescription.
+        min_mass (float): Minimum companion mass in solar masses.
+        max_semi_major_axis (Quantity): Optional maximum binary semimajor axis.
     """
 
     def __init__(
         self,
-        mult_frac='field',
-        pdist='inner',
-        qdist='field',
-        edist='field',
-        min_mass=0.08,
-        **kwargs,
-    ):
+        mult_frac: str = "field",
+        pdist: str = "inner",
+        qdist: str = "field",
+        edist: str = "field",
+        min_mass: float = 0.08,
+        max_semi_major_axis: Quantity = None,
+        **kwargs: object,
+    ) -> None:
         self.mult_frac = mult_frac
         self.pdist = pdist
         self.qdist = qdist
         self.edist = edist
         self.min_mass = min_mass
+        self._enforce_max_semi_major_axis = max_semi_major_axis is not None
 
-        super().__init__(nbinaries=0,**kwargs)
+        super().__init__(
+            nbinaries=0,
+            max_semi_major_axis=max_semi_major_axis,
+            **kwargs,
+        )
 
-    def preprocess_stars(self, stars):
+    def preprocess_stars(self, stars: Particles) -> Particles:
         """
         On this version of the class. This function assign companions and binary
         properties to each star. It create the companion stars and append the
         necessary binary properties. 
         functions called later will just read what we decide here.
+
+        Args:
+            stars: Input stellar particles.
+
+        Returns:
+            (Particles): Copied and augmented particles, with
+                created companions and binary bookkeeping attributes.
+
+        Raises:
+            ValueError: If no whole system fits within the input mass budget.
+            ValueError: If `max_semi_major_axis` is non-positive, cannot admit
+                an orbit from the field distributions, or cannot be sampled
+                within 10000 attempts.
         """
         stars = stars.copy()
         target_mass = stars.mass.sum()
@@ -1226,6 +1518,64 @@ class FieldBinaryPopulation(BinaryPopulation):
             mmin=self.min_mass,
         )
 
+        if self._enforce_max_semi_major_axis:
+            max_semi_major_axis = self.max_semi_major_axis
+            if max_semi_major_axis <= 0 | max_semi_major_axis.unit:
+                raise ValueError("max_semi_major_axis must be positive.")
+
+            minimum_period = 10.0 ** 0.2 | units.day
+            minimum_companion_mass = np.maximum(
+                0.1 * primary_masses,
+                self.min_mass,
+            )
+            minimum_semi_major_axis = (
+                (minimum_period.value_in(units.yr) ** 2)
+                * (primary_masses + minimum_companion_mass)
+            ) ** (1.0 / 3.0) | units.AU
+            if np.any(minimum_semi_major_axis > max_semi_major_axis):
+                raise ValueError(
+                    "max_semi_major_axis is smaller than an orbit allowed by "
+                    "the field period and mass-ratio distributions."
+                )
+
+            semi_major_axes = (
+                (periods.value_in(units.yr) ** 2)
+                * (primary_masses + primary_masses * q)
+            ) ** (1.0 / 3.0) | units.AU
+            pending = np.where(semi_major_axes > max_semi_major_axis)[0]
+            attempts = 0
+            while len(pending) > 0:
+                attempts += 1
+                if attempts > 10000:
+                    raise ValueError(
+                        "Unable to sample field binaries within "
+                        "max_semi_major_axis after 10000 attempts."
+                    )
+
+                candidate_periods = (
+                    fbp.get_periods(primary_masses[pending], pdist=self.pdist)
+                    | units.day
+                )
+                candidate_q = fbp.get_mass_ratios(
+                    primary_masses[pending],
+                    candidate_periods.value_in(units.day),
+                    qdist=self.qdist,
+                    mmin=self.min_mass,
+                )
+                candidate_semi_major_axes = (
+                    (candidate_periods.value_in(units.yr) ** 2)
+                    * (
+                        primary_masses[pending]
+                        + primary_masses[pending] * candidate_q
+                    )
+                ) ** (1.0 / 3.0) | units.AU
+                accepted = candidate_semi_major_axes <= max_semi_major_axis
+
+                accepted_indices = pending[accepted]
+                periods[accepted_indices] = candidate_periods[accepted]
+                q[accepted_indices] = candidate_q[accepted]
+                pending = pending[~accepted]
+
         companion_masses = primary_masses * q
         secondaries = Particles(len(primary_index))
         secondaries.mass = companion_masses | units.MSun
@@ -1252,9 +1602,8 @@ class FieldBinaryPopulation(BinaryPopulation):
 
         if stars.mass.sum() > target_mass:
             systems = []
-            cumulative_mass = 0 | target_mass.unit
 
-            # Reconstruct ordered systems from the resolved star list.
+            # Keep complete systems, so binaries are never split by trimming.
             for i in range(len(stars)):
                 if stars.is_secondary[i]:
                     continue
@@ -1262,19 +1611,27 @@ class FieldBinaryPopulation(BinaryPopulation):
                 j = int(stars.secondary_id[i])
                 members = [i] if j < 0 else [i, j]
                 system_mass = stars[members].mass.sum()
+                systems.append((members, system_mass))
 
+            selected_systems = []
+            cumulative_mass = 0 | target_mass.unit
+            for i in np.random.permutation(len(systems)):
+                members, system_mass = systems[i]
                 if cumulative_mass + system_mass > target_mass:
-                    break
+                    continue
 
-                systems.append(members)
+                selected_systems.append(members)
                 cumulative_mass += system_mass
 
-            if len(systems) == 0:
+            if len(selected_systems) == 0:
                 raise ValueError(
-                    "The first system already exceeds the target mass budget; "
+                    "No system fits within the target mass budget; "
                     "cannot trim with a <= whole-system rule."
                 )
 
+            # Preserve a stable particle order after random system selection.
+            selected_systems.sort(key=lambda members: members[0])
+            systems = selected_systems
             kept_indices = [idx for members in systems for idx in members]
             trimmed = stars[kept_indices].copy()
 
@@ -1304,11 +1661,27 @@ class FieldBinaryPopulation(BinaryPopulation):
 
         return stars
 
-    def select_binaries(self, stars, nbinaries):
+    def select_binaries(
+        self,
+        stars: Particles,
+        nbinaries: int,
+    ) -> tuple[list[int], list[int]]:
         """
         Return the indexes of primaries and secondaries.
         On this FieldBinaryPopulation class, that was decided in the
         preproecess_stars function. Here we just hand it over.
+
+        Args:
+            stars: Prepared stellar particles with `secondary_id`.
+            nbinaries: Expected number of binary systems.
+
+        Returns:
+            (tuple[list[int], list[int]]): Primary and companion
+                index lists.
+
+        Raises:
+            ValueError: If prepared binary count differs from the
+                requested count.
         """
         primary_index = np.where(stars.secondary_id >= 0)[0].tolist()
         companion_index = stars.secondary_id[primary_index].astype(int).tolist()
@@ -1321,19 +1694,128 @@ class FieldBinaryPopulation(BinaryPopulation):
 
         return primary_index, companion_index
 
-    def get_periods(self, stars, primary_index, companion_index,sample=False, **kwargs):
-            pdist = self.pdist
-            m = stars.mass[primary_index].value_in(units.MSun)
-            if not sample : 
-                return stars[primary_index].binary_period 
+    def get_periods(
+        self,
+        stars: Particles,
+        primary_index: list[int],
+        companion_index: list[int],
+        sample: bool = False,
+        **kwargs: Quantity,
+    ) -> Quantity:
+        """Return stored or newly sampled field-binary periods.
 
-            p = fbp.get_periods(m,pdist=self.pdist) | units.day
-            return p
+        Note:
+            With `sample=True`, this method draws directly from the field
+            period distribution and does not apply `max_semi_major_axis`.
+            That cap is applied only while `preprocess_stars(...)` constructs
+            a population.
 
-    def get_eccentricities(self, stars, primary_index, companion_index, **kwargs):
+        Args:
+            stars: Prepared stellar particles.
+            primary_index: Indices of primary stars.
+            companion_index: Indices of companion stars.
+            sample: Whether to resample periods instead of using
+                `binary_period`.
+
+        Returns:
+            (Quantity): Orbital periods in days.
+        """
+        m = stars.mass[primary_index].value_in(units.MSun)
+        if not sample:
+            return stars[primary_index].binary_period
+
+        return fbp.get_periods(m, pdist=self.pdist) | units.day
+
+    def get_eccentricities(
+        self,
+        stars: Particles,
+        primary_index: list[int],
+        companion_index: list[int],
+        **kwargs: Quantity,
+    ) -> numpy.ndarray:
+        """Sample eccentricities from the field prescription.
+
+        Args:
+            stars: Prepared stellar particles.
+            primary_index: Indices of primary stars.
+            companion_index: Indices of companion stars.
+            **kwargs: Additional ignored pairing context.
+
+        Returns:
+            (numpy.ndarray): One eccentricity per binary.
+        """
         m = stars.mass[primary_index].value_in(units.MSun)
         p = stars.binary_period[primary_index].value_in(units.day)
 
         ecc = fbp.get_eccentricities(m,p, edist = self.edist )
 
         return ecc
+
+def synchronize_resolved_with_unresolved(
+    unresolved_stars: Particles,
+    resolved_stars: Particles,
+) -> Particles:
+    """
+    Move resolved components so each system matches the given unresolved COM.
+
+    Args:
+        unresolved_stars: System centre-of-mass particles with `system_id`
+            values.
+        resolved_stars: Resolved components with matching
+            `system_id` values.
+
+    Returns:
+        (Particles): Copy of `resolved_stars` translated to the corresponding
+            unresolved-system centres of mass.
+    """
+    if not hasattr(unresolved_stars, "system_id"):
+        raise AttributeError("unresolved_stars must have a system_id attribute.")
+    if not hasattr(resolved_stars, "system_id"):
+        raise AttributeError("resolved_stars must have a system_id attribute.")
+
+    updated = resolved_stars.copy()
+
+    unresolved_ids = list(unresolved_stars.system_id)
+    resolved_ids = list(updated.system_id)
+
+    for system_id in unresolved_ids:
+        unresolved_mask = [sid == system_id for sid in unresolved_ids]
+        resolved_mask = [sid == system_id for sid in resolved_ids]
+
+        unresolved_system = unresolved_stars[unresolved_mask]
+        resolved_system = updated[resolved_mask]
+
+        if len(unresolved_system) != 1:
+            raise ValueError(
+                "Each system_id must appear exactly once in unresolved_stars."
+            )
+        if len(resolved_system) == 0:
+            raise ValueError(
+                f"system_id {system_id} is present in unresolved_stars but missing in resolved_stars."
+            )
+
+        target = unresolved_system[0]
+
+        if len(resolved_system) == 1:
+            resolved_system.position = target.position
+            resolved_system.velocity = target.velocity
+            continue
+
+        old_com = resolved_system.center_of_mass()
+        old_com_velocity = resolved_system.center_of_mass_velocity()
+
+        dx = resolved_system.x - old_com.x
+        dy = resolved_system.y - old_com.y
+        dz = resolved_system.z - old_com.z
+        dvx = resolved_system.vx - old_com_velocity.x
+        dvy = resolved_system.vy - old_com_velocity.y
+        dvz = resolved_system.vz - old_com_velocity.z
+
+        resolved_system.x = target.x + dx
+        resolved_system.y = target.y + dy
+        resolved_system.z = target.z + dz
+        resolved_system.vx = target.vx + dvx
+        resolved_system.vy = target.vy + dvy
+        resolved_system.vz = target.vz + dvz
+
+    return updated

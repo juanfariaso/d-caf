@@ -21,6 +21,7 @@ plugins:
             show_symbol_type_heading: true
             filters: public
             summary:
+              classes: true
               modules: true
               functions: true
 

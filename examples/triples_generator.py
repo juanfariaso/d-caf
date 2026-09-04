@@ -179,7 +179,7 @@ stars.radius = 0.0 | units.RSun
 # 2) Instantiate the user-defined population model.
 population = CustomTriplePopulation(
     nbinaries=24,
-    max_radius=radius,
+    max_semi_major_axis=radius,
 )
 
 # 3) First pass: resolve binaries from the original star catalog.
