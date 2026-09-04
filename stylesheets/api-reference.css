@@ -1,0 +1,21 @@
+.doc-class {
+  border: 1px solid var(--md-default-fg-color--lighter);
+  border-radius: 0.4rem;
+  padding: 1rem;
+  margin: 1.5rem 0;
+}
+
+.doc-class > .doc-children {
+  border-left: 2px solid var(--md-primary-fg-color--lighter);
+  margin-left: 0.5rem;
+  padding-left: 1rem;
+}
+
+.doc-class > h2,
+.doc-class > h3 {
+  position: sticky;
+  top: 2rem;
+  z-index: 1;
+  background: var(--md-default-bg-color);
+  padding: 0.5rem 0;
+}
