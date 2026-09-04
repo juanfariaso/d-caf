@@ -23,7 +23,7 @@
     
     
       
-        <title>backgroundgas - Dynamic Cluster Assembly Framework (D-CAF)</title>
+        <title>dcaf.backgroundgas - Dynamic Cluster Assembly Framework (D-CAF)</title>
       
     
     
@@ -47,6 +47,8 @@
     
     
       <link rel="stylesheet" href="../../../assets/_mkdocstrings.css">
+    
+      <link rel="stylesheet" href="../../../stylesheets/api-reference.css">
     
     <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
@@ -102,7 +104,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              backgroundgas
+              dcaf.backgroundgas
             
           </span>
         </div>
@@ -396,7 +398,7 @@
   <span class="md-ellipsis">
     
   
-    analysis
+    dcaf.analysis
   
 
     
@@ -412,7 +414,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    analysis
+    dcaf.analysis
   
 
           </label>
@@ -432,7 +434,7 @@
   <span class="md-ellipsis">
     
   
-    analysis
+    dcaf.analysis
   
 
     
@@ -460,7 +462,7 @@
   <span class="md-ellipsis">
     
   
-    formation
+    dcaf.analysis.formation
   
 
     
@@ -488,7 +490,7 @@
   <span class="md-ellipsis">
     
   
-    multiples
+    dcaf.analysis.multiples
   
 
     
@@ -537,7 +539,7 @@
   <span class="md-ellipsis">
     
   
-    backgroundgas
+    dcaf.backgroundgas
   
 
     
@@ -553,7 +555,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    backgroundgas
+    dcaf.backgroundgas
   
 
           </label>
@@ -582,7 +584,7 @@
   <span class="md-ellipsis">
     
   
-    backgroundgas
+    dcaf.backgroundgas
   
 
     
@@ -600,7 +602,7 @@
   <span class="md-ellipsis">
     
   
-    backgroundgas
+    dcaf.backgroundgas
   
 
     
@@ -638,17 +640,6 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#dcaf.backgroundgas.BackgroundPotential--parameters" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Parameters
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#dcaf.backgroundgas.BackgroundPotential.get_potential_at_point" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -682,10 +673,109 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#dcaf.backgroundgas.BackgroundPotential.get_1d_velocity_dispersion_at_point" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        get_1d_velocity_dispersion_at_point
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dcaf.backgroundgas.BackgroundPotential.is_gas_relevant" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        is_gas_relevant
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#dcaf.backgroundgas.BackgroundPotential.get_mass_inside_radius" class="md-nav__link">
     <span class="md-ellipsis">
       
         get_mass_inside_radius
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dcaf.backgroundgas.BackgroundPotential.initialize_code" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        initialize_code
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dcaf.backgroundgas.BackgroundPotential.commit_parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        commit_parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dcaf.backgroundgas.BackgroundPotential.commit_particles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        commit_particles
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dcaf.backgroundgas.BackgroundPotential.cleanup_code" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        cleanup_code
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dcaf.backgroundgas.BackgroundPotential.evolve_model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        evolve_model
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dcaf.backgroundgas.BackgroundPotential.write_output" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        write_output
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dcaf.backgroundgas.BackgroundPotential.stop" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        stop
       
     </span>
   </a>
@@ -720,7 +810,7 @@
   <span class="md-ellipsis">
     
   
-    base
+    dcaf.backgroundgas.base
   
 
     
@@ -748,7 +838,7 @@
   <span class="md-ellipsis">
     
   
-    plummer
+    dcaf.backgroundgas.plummer
   
 
     
@@ -784,7 +874,7 @@
   <span class="md-ellipsis">
     
   
-    dcaf
+    dcaf.dcaf
   
 
     
@@ -823,7 +913,7 @@
   <span class="md-ellipsis">
     
   
-    factory
+    dcaf.factory
   
 
     
@@ -839,7 +929,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    factory
+    dcaf.factory
   
 
           </label>
@@ -859,7 +949,7 @@
   <span class="md-ellipsis">
     
   
-    factory
+    dcaf.factory
   
 
     
@@ -887,7 +977,7 @@
   <span class="md-ellipsis">
     
   
-    distance_based
+    dcaf.factory.distance_based
   
 
     
@@ -915,7 +1005,7 @@
   <span class="md-ellipsis">
     
   
-    field_binary_population
+    dcaf.factory.field_binary_population
   
 
     
@@ -943,7 +1033,7 @@
   <span class="md-ellipsis">
     
   
-    fractal
+    dcaf.factory.fractal
   
 
     
@@ -971,7 +1061,7 @@
   <span class="md-ellipsis">
     
   
-    multiplicity
+    dcaf.factory.multiplicity
   
 
     
@@ -1018,7 +1108,7 @@
   <span class="md-ellipsis">
     
   
-    framework
+    dcaf.framework
   
 
     
@@ -1034,7 +1124,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    framework
+    dcaf.framework
   
 
           </label>
@@ -1054,7 +1144,7 @@
   <span class="md-ellipsis">
     
   
-    framework
+    dcaf.framework
   
 
     
@@ -1082,7 +1172,7 @@
   <span class="md-ellipsis">
     
   
-    starformation
+    dcaf.framework.starformation
   
 
     
@@ -1129,7 +1219,7 @@
   <span class="md-ellipsis">
     
   
-    io
+    dcaf.io
   
 
     
@@ -1145,7 +1235,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    io
+    dcaf.io
   
 
           </label>
@@ -1165,7 +1255,7 @@
   <span class="md-ellipsis">
     
   
-    io
+    dcaf.io
   
 
     
@@ -1193,7 +1283,7 @@
   <span class="md-ellipsis">
     
   
-    output
+    dcaf.io.output
   
 
     
@@ -1221,7 +1311,7 @@
   <span class="md-ellipsis">
     
   
-    restart
+    dcaf.io.restart
   
 
     
@@ -1268,7 +1358,7 @@
   <span class="md-ellipsis">
     
   
-    models
+    dcaf.models
   
 
     
@@ -1284,7 +1374,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    models
+    dcaf.models
   
 
           </label>
@@ -1304,7 +1394,7 @@
   <span class="md-ellipsis">
     
   
-    models
+    dcaf.models
   
 
     
@@ -1332,7 +1422,7 @@
   <span class="md-ellipsis">
     
   
-    turbulentclumpmodel
+    dcaf.models.turbulentclumpmodel
   
 
     
@@ -1379,7 +1469,7 @@
   <span class="md-ellipsis">
     
   
-    tests
+    dcaf.tests
   
 
     
@@ -1395,7 +1485,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    tests
+    dcaf.tests
   
 
           </label>
@@ -1415,7 +1505,7 @@
   <span class="md-ellipsis">
     
   
-    tests
+    dcaf.tests
   
 
     
@@ -1443,7 +1533,7 @@
   <span class="md-ellipsis">
     
   
-    test_generate_stars
+    dcaf.tests.test_generate_stars
   
 
     
@@ -1471,7 +1561,7 @@
   <span class="md-ellipsis">
     
   
-    test_resume_restore
+    dcaf.tests.test_resume_restore
   
 
     
@@ -1518,7 +1608,7 @@
   <span class="md-ellipsis">
     
   
-    utilities
+    dcaf.utilities
   
 
     
@@ -1534,7 +1624,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    utilities
+    dcaf.utilities
   
 
           </label>
@@ -1554,7 +1644,7 @@
   <span class="md-ellipsis">
     
   
-    utilities
+    dcaf.utilities
   
 
     
@@ -1582,7 +1672,7 @@
   <span class="md-ellipsis">
     
   
-    config
+    dcaf.utilities.config
   
 
     
@@ -1610,7 +1700,7 @@
   <span class="md-ellipsis">
     
   
-    helpers
+    dcaf.utilities.helpers
   
 
     
@@ -1638,7 +1728,7 @@
   <span class="md-ellipsis">
     
   
-    logger
+    dcaf.utilities.logger
   
 
     
@@ -1666,7 +1756,7 @@
   <span class="md-ellipsis">
     
   
-    parameters
+    dcaf.utilities.parameters
   
 
     
@@ -1694,7 +1784,7 @@
   <span class="md-ellipsis">
     
   
-    sampler
+    dcaf.utilities.sampler
   
 
     
@@ -1770,17 +1860,6 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#dcaf.backgroundgas.BackgroundPotential--parameters" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Parameters
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#dcaf.backgroundgas.BackgroundPotential.get_potential_at_point" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1814,10 +1893,109 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#dcaf.backgroundgas.BackgroundPotential.get_1d_velocity_dispersion_at_point" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        get_1d_velocity_dispersion_at_point
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dcaf.backgroundgas.BackgroundPotential.is_gas_relevant" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        is_gas_relevant
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#dcaf.backgroundgas.BackgroundPotential.get_mass_inside_radius" class="md-nav__link">
     <span class="md-ellipsis">
       
         get_mass_inside_radius
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dcaf.backgroundgas.BackgroundPotential.initialize_code" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        initialize_code
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dcaf.backgroundgas.BackgroundPotential.commit_parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        commit_parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dcaf.backgroundgas.BackgroundPotential.commit_particles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        commit_particles
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dcaf.backgroundgas.BackgroundPotential.cleanup_code" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        cleanup_code
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dcaf.backgroundgas.BackgroundPotential.evolve_model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        evolve_model
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dcaf.backgroundgas.BackgroundPotential.write_output" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        write_output
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dcaf.backgroundgas.BackgroundPotential.stop" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        stop
       
     </span>
   </a>
@@ -1851,7 +2029,7 @@
 
 
 <h1 id="dcaf.backgroundgas" class="doc doc-heading">
-            <code>dcaf.backgroundgas</code>
+<code class="doc-symbol doc-symbol-heading doc-symbol-module"></code>            <code>dcaf.backgroundgas</code>
 
 
 </h1>
@@ -1873,18 +2051,18 @@
       </thead>
       <tbody>
           <tr class="doc-section-item">
-            <td><code><a class="autorefs autorefs-internal" title="dcaf.backgroundgas.base" href="base/#dcaf.backgroundgas.base">base</a></code></td>
+            <td><code><a class="autorefs autorefs-internal" title="            dcaf.backgroundgas.base" href="base/#dcaf.backgroundgas.base">base</a></code></td>
             <td>
               <div class="doc-md-description">
-                
+                <p>Base classes helpers to define background gas models.</p>
               </div>
             </td>
           </tr>
           <tr class="doc-section-item">
-            <td><code><a class="autorefs autorefs-internal" title="dcaf.backgroundgas.plummer" href="plummer/#dcaf.backgroundgas.plummer">plummer</a></code></td>
+            <td><code><a class="autorefs autorefs-internal" title="            dcaf.backgroundgas.plummer" href="plummer/#dcaf.backgroundgas.plummer">plummer</a></code></td>
             <td>
               <div class="doc-md-description">
-                
+                <p>Implementation of an evolving Plummer sphere</p>
               </div>
             </td>
           </tr>
@@ -1913,7 +2091,7 @@
 
 
 <h2 id="dcaf.backgroundgas.BackgroundPotential" class="doc doc-heading">
-            <code>BackgroundPotential</code>
+<code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>            <code>BackgroundPotential</code>
 
 
 </h2>
@@ -1924,11 +2102,112 @@
 
 
         <p>Base class for Background Gas potentials used in D-CAF</p>
-<h4 id="dcaf.backgroundgas.BackgroundPotential--parameters">Parameters</h4>
-<p>mtot : quantity
-    Total mass of the potential (e.g., 1e5 | units.MSun).
-rscale : quantity
-    Scale radius (interpretation depends on subclass).</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>mtot</code>
+            </td>
+            <td>
+                  <code><span title="amuse.units.quantities.Quantity">Quantity</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Total mass of the potential (interpretation depends on subclass).</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>rscale</code>
+            </td>
+            <td>
+                  <code><span title="amuse.units.quantities.Quantity">Quantity</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Scale radius (interpretation depends on subclass).</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+<p><span class="doc-section-title">Attributes:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td><code><span title="dcaf.backgroundgas.BackgroundPotential.mtot">mtot</span></code></td>
+            <td>
+                  <code><span title="amuse.units.quantities.Quantity">Quantity</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Current total mass of the gas potential.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="dcaf.backgroundgas.BackgroundPotential.rscale">rscale</span></code></td>
+            <td>
+                  <code><span title="amuse.units.quantities.Quantity">Quantity</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Current scale radius of the gas potential.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="dcaf.backgroundgas.BackgroundPotential.logfilename">logfilename</span></code></td>
+            <td>
+                  <code><span title="str">str</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>File written by
+<a class="autorefs autorefs-internal" title="            write_output()" href="base/#dcaf.backgroundgas.base.BackgroundPotential.write_output">write_output()</a>.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="dcaf.backgroundgas.BackgroundPotential.model_time">model_time</span></code></td>
+            <td>
+                  <code><span title="amuse.units.quantities.Quantity">Quantity</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Current gas-model time.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
 
 
 
@@ -1949,7 +2228,7 @@ rscale : quantity
       </thead>
       <tbody>
             <tr class="doc-section-item">
-              <td><code><a class="autorefs autorefs-internal" title="get_potential_at_point(eps, x, y, z) (dcaf.backgroundgas.BackgroundPotential.get_potential_at_point)" href="#dcaf.backgroundgas.BackgroundPotential.get_potential_at_point">get_potential_at_point</a></code></td>
+              <td><code><a class="autorefs autorefs-internal" title="            get_potential_at_point(eps, x, y, z) (dcaf.backgroundgas.BackgroundPotential.get_potential_at_point)" href="#dcaf.backgroundgas.BackgroundPotential.get_potential_at_point">get_potential_at_point</a></code></td>
               <td>
                 <div class="doc-md-description">
                   <p>Return the gravitational potential at (x, y, z).</p>
@@ -1957,7 +2236,7 @@ rscale : quantity
               </td>
             </tr>
             <tr class="doc-section-item">
-              <td><code><a class="autorefs autorefs-internal" title="get_gravity_at_point(eps, x, y, z) (dcaf.backgroundgas.BackgroundPotential.get_gravity_at_point)" href="#dcaf.backgroundgas.BackgroundPotential.get_gravity_at_point">get_gravity_at_point</a></code></td>
+              <td><code><a class="autorefs autorefs-internal" title="            get_gravity_at_point(eps, x, y, z) (dcaf.backgroundgas.BackgroundPotential.get_gravity_at_point)" href="#dcaf.backgroundgas.BackgroundPotential.get_gravity_at_point">get_gravity_at_point</a></code></td>
               <td>
                 <div class="doc-md-description">
                   <p>Return the gravitational acceleration vector at (x, y, z).</p>
@@ -1965,18 +2244,90 @@ rscale : quantity
               </td>
             </tr>
             <tr class="doc-section-item">
-              <td><code><a class="autorefs autorefs-internal" title="get_potential_derivative_at_point(x, y, z) (dcaf.backgroundgas.BackgroundPotential.get_potential_derivative_at_point)" href="#dcaf.backgroundgas.BackgroundPotential.get_potential_derivative_at_point">get_potential_derivative_at_point</a></code></td>
+              <td><code><a class="autorefs autorefs-internal" title="            get_potential_derivative_at_point(x, y, z) (dcaf.backgroundgas.BackgroundPotential.get_potential_derivative_at_point)" href="#dcaf.backgroundgas.BackgroundPotential.get_potential_derivative_at_point">get_potential_derivative_at_point</a></code></td>
               <td>
                 <div class="doc-md-description">
-                  <p>Return dPhi/dt at (x, y, z).</p>
+                  <p>Return dPhi/dt at (x, y, z). Optional, used mainly for energy checks.</p>
                 </div>
               </td>
             </tr>
             <tr class="doc-section-item">
-              <td><code><a class="autorefs autorefs-internal" title="get_mass_inside_radius(r) (dcaf.backgroundgas.BackgroundPotential.get_mass_inside_radius)" href="#dcaf.backgroundgas.BackgroundPotential.get_mass_inside_radius">get_mass_inside_radius</a></code></td>
+              <td><code><a class="autorefs autorefs-internal" title="            get_1d_velocity_dispersion_at_point(x, y, z) (dcaf.backgroundgas.BackgroundPotential.get_1d_velocity_dispersion_at_point)" href="#dcaf.backgroundgas.BackgroundPotential.get_1d_velocity_dispersion_at_point">get_1d_velocity_dispersion_at_point</a></code></td>
               <td>
                 <div class="doc-md-description">
-                  <p>Return the mass enclosed within radius r.</p>
+                  <p>Return the local one-dimensional velocity dispersion.</p>
+                </div>
+              </td>
+            </tr>
+            <tr class="doc-section-item">
+              <td><code><a class="autorefs autorefs-internal" title="            is_gas_relevant(stars, **kwargs) (dcaf.backgroundgas.BackgroundPotential.is_gas_relevant)" href="#dcaf.backgroundgas.BackgroundPotential.is_gas_relevant">is_gas_relevant</a></code></td>
+              <td>
+                <div class="doc-md-description">
+                  <p>Return whether the gas remains dynamically relevant.</p>
+                </div>
+              </td>
+            </tr>
+            <tr class="doc-section-item">
+              <td><code><a class="autorefs autorefs-internal" title="            get_mass_inside_radius(r) (dcaf.backgroundgas.BackgroundPotential.get_mass_inside_radius)" href="#dcaf.backgroundgas.BackgroundPotential.get_mass_inside_radius">get_mass_inside_radius</a></code></td>
+              <td>
+                <div class="doc-md-description">
+                  <p>Return the mass enclosed within radius <code>r</code>.</p>
+                </div>
+              </td>
+            </tr>
+            <tr class="doc-section-item">
+              <td><code><a class="autorefs autorefs-internal" title="            initialize_code() (dcaf.backgroundgas.BackgroundPotential.initialize_code)" href="#dcaf.backgroundgas.BackgroundPotential.initialize_code">initialize_code</a></code></td>
+              <td>
+                <div class="doc-md-description">
+                  <p>Initialize the AMUSE-compatible gas model time.</p>
+                </div>
+              </td>
+            </tr>
+            <tr class="doc-section-item">
+              <td><code><a class="autorefs autorefs-internal" title="            commit_parameters() (dcaf.backgroundgas.BackgroundPotential.commit_parameters)" href="#dcaf.backgroundgas.BackgroundPotential.commit_parameters">commit_parameters</a></code></td>
+              <td>
+                <div class="doc-md-description">
+                  <p>Implement AMUSE's parameter-commit hook.</p>
+                </div>
+              </td>
+            </tr>
+            <tr class="doc-section-item">
+              <td><code><a class="autorefs autorefs-internal" title="            commit_particles() (dcaf.backgroundgas.BackgroundPotential.commit_particles)" href="#dcaf.backgroundgas.BackgroundPotential.commit_particles">commit_particles</a></code></td>
+              <td>
+                <div class="doc-md-description">
+                  <p>Implement AMUSE's particle-commit hook.</p>
+                </div>
+              </td>
+            </tr>
+            <tr class="doc-section-item">
+              <td><code><a class="autorefs autorefs-internal" title="            cleanup_code() (dcaf.backgroundgas.BackgroundPotential.cleanup_code)" href="#dcaf.backgroundgas.BackgroundPotential.cleanup_code">cleanup_code</a></code></td>
+              <td>
+                <div class="doc-md-description">
+                  <p>Close the background-gas output file.</p>
+                </div>
+              </td>
+            </tr>
+            <tr class="doc-section-item">
+              <td><code><a class="autorefs autorefs-internal" title="            evolve_model(tend) (dcaf.backgroundgas.BackgroundPotential.evolve_model)" href="#dcaf.backgroundgas.BackgroundPotential.evolve_model">evolve_model</a></code></td>
+              <td>
+                <div class="doc-md-description">
+                  <p>Advance the gas model to the requested time.</p>
+                </div>
+              </td>
+            </tr>
+            <tr class="doc-section-item">
+              <td><code><a class="autorefs autorefs-internal" title="            write_output() (dcaf.backgroundgas.BackgroundPotential.write_output)" href="#dcaf.backgroundgas.BackgroundPotential.write_output">write_output</a></code></td>
+              <td>
+                <div class="doc-md-description">
+                  <p>Append the configured gas attributes to the output file.</p>
+                </div>
+              </td>
+            </tr>
+            <tr class="doc-section-item">
+              <td><code><a class="autorefs autorefs-internal" title="            stop() (dcaf.backgroundgas.BackgroundPotential.stop)" href="#dcaf.backgroundgas.BackgroundPotential.stop">stop</a></code></td>
+              <td>
+                <div class="doc-md-description">
+                  <p>Stop the gas model and close its output file.</p>
                 </div>
               </td>
             </tr>
@@ -1986,9 +2337,7 @@ rscale : quantity
 
               <details class="mkdocstrings-source">
                 <summary>Source code in <code>dcaf/backgroundgas/base.py</code></summary>
-                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">  6</span>
-<span class="normal">  7</span>
-<span class="normal">  8</span>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">  8</span>
 <span class="normal">  9</span>
 <span class="normal"> 10</span>
 <span class="normal"> 11</span>
@@ -2094,19 +2443,153 @@ rscale : quantity
 <span class="normal">111</span>
 <span class="normal">112</span>
 <span class="normal">113</span>
-<span class="normal">114</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">BackgroundPotential</span><span class="p">:</span>
+<span class="normal">114</span>
+<span class="normal">115</span>
+<span class="normal">116</span>
+<span class="normal">117</span>
+<span class="normal">118</span>
+<span class="normal">119</span>
+<span class="normal">120</span>
+<span class="normal">121</span>
+<span class="normal">122</span>
+<span class="normal">123</span>
+<span class="normal">124</span>
+<span class="normal">125</span>
+<span class="normal">126</span>
+<span class="normal">127</span>
+<span class="normal">128</span>
+<span class="normal">129</span>
+<span class="normal">130</span>
+<span class="normal">131</span>
+<span class="normal">132</span>
+<span class="normal">133</span>
+<span class="normal">134</span>
+<span class="normal">135</span>
+<span class="normal">136</span>
+<span class="normal">137</span>
+<span class="normal">138</span>
+<span class="normal">139</span>
+<span class="normal">140</span>
+<span class="normal">141</span>
+<span class="normal">142</span>
+<span class="normal">143</span>
+<span class="normal">144</span>
+<span class="normal">145</span>
+<span class="normal">146</span>
+<span class="normal">147</span>
+<span class="normal">148</span>
+<span class="normal">149</span>
+<span class="normal">150</span>
+<span class="normal">151</span>
+<span class="normal">152</span>
+<span class="normal">153</span>
+<span class="normal">154</span>
+<span class="normal">155</span>
+<span class="normal">156</span>
+<span class="normal">157</span>
+<span class="normal">158</span>
+<span class="normal">159</span>
+<span class="normal">160</span>
+<span class="normal">161</span>
+<span class="normal">162</span>
+<span class="normal">163</span>
+<span class="normal">164</span>
+<span class="normal">165</span>
+<span class="normal">166</span>
+<span class="normal">167</span>
+<span class="normal">168</span>
+<span class="normal">169</span>
+<span class="normal">170</span>
+<span class="normal">171</span>
+<span class="normal">172</span>
+<span class="normal">173</span>
+<span class="normal">174</span>
+<span class="normal">175</span>
+<span class="normal">176</span>
+<span class="normal">177</span>
+<span class="normal">178</span>
+<span class="normal">179</span>
+<span class="normal">180</span>
+<span class="normal">181</span>
+<span class="normal">182</span>
+<span class="normal">183</span>
+<span class="normal">184</span>
+<span class="normal">185</span>
+<span class="normal">186</span>
+<span class="normal">187</span>
+<span class="normal">188</span>
+<span class="normal">189</span>
+<span class="normal">190</span>
+<span class="normal">191</span>
+<span class="normal">192</span>
+<span class="normal">193</span>
+<span class="normal">194</span>
+<span class="normal">195</span>
+<span class="normal">196</span>
+<span class="normal">197</span>
+<span class="normal">198</span>
+<span class="normal">199</span>
+<span class="normal">200</span>
+<span class="normal">201</span>
+<span class="normal">202</span>
+<span class="normal">203</span>
+<span class="normal">204</span>
+<span class="normal">205</span>
+<span class="normal">206</span>
+<span class="normal">207</span>
+<span class="normal">208</span>
+<span class="normal">209</span>
+<span class="normal">210</span>
+<span class="normal">211</span>
+<span class="normal">212</span>
+<span class="normal">213</span>
+<span class="normal">214</span>
+<span class="normal">215</span>
+<span class="normal">216</span>
+<span class="normal">217</span>
+<span class="normal">218</span>
+<span class="normal">219</span>
+<span class="normal">220</span>
+<span class="normal">221</span>
+<span class="normal">222</span>
+<span class="normal">223</span>
+<span class="normal">224</span>
+<span class="normal">225</span>
+<span class="normal">226</span>
+<span class="normal">227</span>
+<span class="normal">228</span>
+<span class="normal">229</span>
+<span class="normal">230</span>
+<span class="normal">231</span>
+<span class="normal">232</span>
+<span class="normal">233</span>
+<span class="normal">234</span>
+<span class="normal">235</span>
+<span class="normal">236</span>
+<span class="normal">237</span>
+<span class="normal">238</span>
+<span class="normal">239</span>
+<span class="normal">240</span>
+<span class="normal">241</span>
+<span class="normal">242</span>
+<span class="normal">243</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">BackgroundPotential</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Base class for Background Gas potentials used in D-CAF</span>
 
-<span class="sd">    Parameters</span>
-<span class="sd">    ----------</span>
-<span class="sd">    mtot : quantity</span>
-<span class="sd">        Total mass of the potential (e.g., 1e5 | units.MSun).</span>
-<span class="sd">    rscale : quantity</span>
-<span class="sd">        Scale radius (interpretation depends on subclass).</span>
+<span class="sd">    Args:</span>
+<span class="sd">        mtot: Total mass of the potential (interpretation depends on subclass).</span>
+<span class="sd">        rscale: Scale radius (interpretation depends on subclass).</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        mtot (Quantity): Current total mass of the gas potential.</span>
+<span class="sd">        rscale (Quantity): Current scale radius of the gas potential.</span>
+<span class="sd">        logfilename (str): File written by</span>
+<span class="sd">            [write_output()][dcaf.backgroundgas.base.BackgroundPotential.write_output].</span>
+<span class="sd">        model_time (Quantity): Current gas-model time.</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mtot</span><span class="p">,</span> <span class="n">rscale</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mtot</span><span class="p">:</span> <span class="n">Quantity</span><span class="p">,</span> <span class="n">rscale</span><span class="p">:</span> <span class="n">Quantity</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">mtot</span> <span class="o">=</span> <span class="n">mtot</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">rscale</span> <span class="o">=</span> <span class="n">rscale</span>
 
@@ -2118,26 +2601,127 @@ rscale : quantity
         <span class="bp">self</span><span class="o">.</span><span class="n">__first_output</span> <span class="o">=</span> <span class="kc">True</span>
 
     <span class="c1"># --- Bridge-facing API ---</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">get_potential_at_point</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">eps</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_potential_at_point</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">eps</span><span class="p">:</span> <span class="n">Quantity</span><span class="p">,</span>
+        <span class="n">x</span><span class="p">:</span> <span class="n">Quantity</span><span class="p">,</span>
+        <span class="n">y</span><span class="p">:</span> <span class="n">Quantity</span><span class="p">,</span>
+        <span class="n">z</span><span class="p">:</span> <span class="n">Quantity</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Quantity</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Return the gravitational potential at (x, y, z).</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            eps: Gravitational softening length.</span>
+<span class="sd">            x: X coordinates at which to evaluate the potential.</span>
+<span class="sd">            y: Y coordinates at which to evaluate the potential.</span>
+<span class="sd">            z: Z coordinates at which to evaluate the potential.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            (Quantity): Gravitational potential at each point.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            NotImplementedError: Always, unless implemented by a subclass.</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="nf">get_gravity_at_point</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">eps</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_gravity_at_point</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">eps</span><span class="p">:</span> <span class="n">Quantity</span><span class="p">,</span>
+        <span class="n">x</span><span class="p">:</span> <span class="n">Quantity</span><span class="p">,</span>
+        <span class="n">y</span><span class="p">:</span> <span class="n">Quantity</span><span class="p">,</span>
+        <span class="n">z</span><span class="p">:</span> <span class="n">Quantity</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">Quantity</span><span class="p">,</span> <span class="n">Quantity</span><span class="p">,</span> <span class="n">Quantity</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Return the gravitational acceleration vector at (x, y, z).</span>
 <span class="sd">        Should return (ax, ay, az).</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            eps: Gravitational softening length.</span>
+<span class="sd">            x: X coordinates at which to evaluate acceleration.</span>
+<span class="sd">            y: Y coordinates at which to evaluate acceleration.</span>
+<span class="sd">            z: Z coordinates at which to evaluate acceleration.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            (tuple[Quantity, Quantity, Quantity]):  X, Y, and Z acceleration</span>
+<span class="sd">            components.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            NotImplementedError: Always, unless implemented by a subclass.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="nf">get_potential_derivative_at_point</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_potential_derivative_at_point</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">x</span><span class="p">:</span> <span class="n">Quantity</span><span class="p">,</span>
+        <span class="n">y</span><span class="p">:</span> <span class="n">Quantity</span><span class="p">,</span>
+        <span class="n">z</span><span class="p">:</span> <span class="n">Quantity</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Quantity</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Return dPhi/dt at (x, y, z).</span>
+<span class="sd">        Return dPhi/dt at (x, y, z). Optional, used mainly for energy checks.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            x: X coordinates at which to evaluate the derivative.</span>
+<span class="sd">            y: Y coordinates at which to evaluate the derivative.</span>
+<span class="sd">            z: Z coordinates at which to evaluate the derivative.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            (Quantity): Time derivative of gravitational potential at each point.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            NotImplementedError: Always, unless implemented by a subclass.</span>
+
+<span class="sd">        Note:</span>
+<span class="sd">            If not defined, then [DcafSystem][dcaf.dcaf.DcafSystem] should have</span>
+<span class="sd">            `track_background_gas_energy = False` to skip this function.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="nf">_ensure_logfile</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_1d_velocity_dispersion_at_point</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">x</span><span class="p">:</span> <span class="n">Quantity</span><span class="p">,</span>
+        <span class="n">y</span><span class="p">:</span> <span class="n">Quantity</span><span class="p">,</span>
+        <span class="n">z</span><span class="p">:</span> <span class="n">Quantity</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Quantity</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the local one-dimensional velocity dispersion.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            x: X coordinates at which to evaluate the dispersion.</span>
+<span class="sd">            y: Y coordinates at which to evaluate the dispersion.</span>
+<span class="sd">            z: Z coordinates at which to evaluate the dispersion.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            (Quantity): One-dimensional velocity dispersion at each point.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            NotImplementedError: Always, unless implemented by a subclass.</span>
+
+<span class="sd">        Note:</span>
+<span class="sd">            This method is required only when the gas model is used with</span>
+<span class="sd">            [StarFormationFramework][dcaf.framework.starformation.StarFormationFramework].</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">is_gas_relevant</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">stars</span><span class="p">:</span> <span class="n">Particles</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return whether the gas remains dynamically relevant.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            stars: [DOCS-REVIEW] Current stellar particles used by the</span>
+<span class="sd">                model-specific relevance criterion.</span>
+<span class="sd">            **kwargs: [DOCS-REVIEW] Model-specific relevance-criterion options.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            (bool): [DOCS-REVIEW] Whether the gas should remain active in the</span>
+<span class="sd">                simulation.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            NotImplementedError: Always, unless implemented by a subclass.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_ensure_logfile</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Open the output file and initialize its header state.&quot;&quot;&quot;</span>
         <span class="c1">#Open logfile if needed. If the file already exists, assume the header</span>
         <span class="c1">#was written in a previous session and keep __first_output = False.</span>
         <span class="c1">#This is needed when rebuilding dcaf system, because closing bridge</span>
@@ -2155,31 +2739,51 @@ rscale : quantity
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">__first_output</span> <span class="o">=</span> <span class="kc">True</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="nf">get_mass_inside_radius</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">r</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_mass_inside_radius</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">r</span><span class="p">:</span> <span class="n">Quantity</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Quantity</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Return the mass enclosed within radius r.</span>
+<span class="sd">        Return the mass enclosed within radius `r`.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            r: Radius or radii at which to evaluate enclosed mass.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            (Quantity): Enclosed gas mass.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            NotImplementedError: Always, unless implemented by a subclass.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="nf">initialize_code</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">initialize_code</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize the AMUSE-compatible gas model time.&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">model_time</span> <span class="o">=</span> <span class="n">zero</span>
         <span class="k">pass</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="nf">commit_parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">commit_parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Implement AMUSE&#39;s parameter-commit hook.&quot;&quot;&quot;</span>
         <span class="k">pass</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="nf">commit_particles</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">commit_particles</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Implement AMUSE&#39;s particle-commit hook.&quot;&quot;&quot;</span>
         <span class="k">pass</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="nf">cleanup_code</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">logfile</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">cleanup_code</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Close the background-gas output file.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">logfile</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">logfile</span><span class="o">.</span><span class="n">closed</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">logfile</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
         <span class="k">pass</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="nf">evolve_model</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">tend</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">evolve_model</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tend</span><span class="p">:</span> <span class="n">Quantity</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Advance the gas model to the requested time.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            tend: Target gas-model time.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">model_time</span> <span class="o">=</span> <span class="n">tend</span>
         <span class="k">pass</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="nf">write_output</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">write_output</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Append the configured gas attributes to the output file.&quot;&quot;&quot;</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">_ensure_logfile</span><span class="p">()</span>
 
@@ -2201,7 +2805,8 @@ rscale : quantity
         <span class="bp">self</span><span class="o">.</span><span class="n">logfile</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
 
 
-    <span class="k">def</span><span class="w"> </span><span class="nf">stop</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">stop</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Stop the gas model and close its output file.&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">cleanup_code</span><span class="p">()</span>
 </code></pre></div></td></tr></table></div>
               </details>
@@ -2223,7 +2828,7 @@ rscale : quantity
 
 
 <h3 id="dcaf.backgroundgas.BackgroundPotential.get_potential_at_point" class="doc doc-heading">
-            <code class="highlight language-python"><span class="n">get_potential_at_point</span><span class="p">(</span><span class="n">eps</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span></code>
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>            <code class="highlight language-python"><span class="n">get_potential_at_point</span><span class="p">(</span><span class="n">eps</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span></code>
 
 </h3>
 
@@ -2233,15 +2838,178 @@ rscale : quantity
         <p>Return the gravitational potential at (x, y, z).</p>
 
 
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>eps</code>
+            </td>
+            <td>
+                  <code><span title="amuse.units.quantities.Quantity">Quantity</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Gravitational softening length.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>x</code>
+            </td>
+            <td>
+                  <code><span title="amuse.units.quantities.Quantity">Quantity</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>X coordinates at which to evaluate the potential.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>y</code>
+            </td>
+            <td>
+                  <code><span title="amuse.units.quantities.Quantity">Quantity</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Y coordinates at which to evaluate the potential.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>z</code>
+            </td>
+            <td>
+                  <code><span title="amuse.units.quantities.Quantity">Quantity</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Z coordinates at which to evaluate the potential.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><span title="amuse.units.quantities.Quantity">Quantity</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Gravitational potential at each point.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+<p><span class="doc-section-title">Raises:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><span title="NotImplementedError">NotImplementedError</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Always, unless implemented by a subclass.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
             <details class="mkdocstrings-source">
               <summary>Source code in <code>dcaf/backgroundgas/base.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">30</span>
-<span class="normal">31</span>
-<span class="normal">32</span>
-<span class="normal">33</span>
-<span class="normal">34</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">get_potential_at_point</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">eps</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">):</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span>
+<span class="normal">56</span>
+<span class="normal">57</span>
+<span class="normal">58</span>
+<span class="normal">59</span>
+<span class="normal">60</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">get_potential_at_point</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">eps</span><span class="p">:</span> <span class="n">Quantity</span><span class="p">,</span>
+    <span class="n">x</span><span class="p">:</span> <span class="n">Quantity</span><span class="p">,</span>
+    <span class="n">y</span><span class="p">:</span> <span class="n">Quantity</span><span class="p">,</span>
+    <span class="n">z</span><span class="p">:</span> <span class="n">Quantity</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Quantity</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Return the gravitational potential at (x, y, z).</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        eps: Gravitational softening length.</span>
+<span class="sd">        x: X coordinates at which to evaluate the potential.</span>
+<span class="sd">        y: Y coordinates at which to evaluate the potential.</span>
+<span class="sd">        z: Z coordinates at which to evaluate the potential.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        (Quantity): Gravitational potential at each point.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        NotImplementedError: Always, unless implemented by a subclass.</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">raise</span> <span class="ne">NotImplementedError</span>
 </code></pre></div></td></tr></table></div>
@@ -2254,7 +3022,7 @@ rscale : quantity
 
 
 <h3 id="dcaf.backgroundgas.BackgroundPotential.get_gravity_at_point" class="doc doc-heading">
-            <code class="highlight language-python"><span class="n">get_gravity_at_point</span><span class="p">(</span><span class="n">eps</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span></code>
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>            <code class="highlight language-python"><span class="n">get_gravity_at_point</span><span class="p">(</span><span class="n">eps</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span></code>
 
 </h3>
 
@@ -2265,17 +3033,190 @@ rscale : quantity
 Should return (ax, ay, az).</p>
 
 
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>eps</code>
+            </td>
+            <td>
+                  <code><span title="amuse.units.quantities.Quantity">Quantity</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Gravitational softening length.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>x</code>
+            </td>
+            <td>
+                  <code><span title="amuse.units.quantities.Quantity">Quantity</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>X coordinates at which to evaluate acceleration.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>y</code>
+            </td>
+            <td>
+                  <code><span title="amuse.units.quantities.Quantity">Quantity</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Y coordinates at which to evaluate acceleration.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>z</code>
+            </td>
+            <td>
+                  <code><span title="amuse.units.quantities.Quantity">Quantity</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Z coordinates at which to evaluate acceleration.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><span title="tuple">tuple</span>[<span title="amuse.units.quantities.Quantity">Quantity</span>, <span title="amuse.units.quantities.Quantity">Quantity</span>, <span title="amuse.units.quantities.Quantity">Quantity</span>]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>X, Y, and Z acceleration</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                  <code><span title="amuse.units.quantities.Quantity">Quantity</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>components.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+<p><span class="doc-section-title">Raises:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><span title="NotImplementedError">NotImplementedError</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Always, unless implemented by a subclass.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
             <details class="mkdocstrings-source">
               <summary>Source code in <code>dcaf/backgroundgas/base.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">36</span>
-<span class="normal">37</span>
-<span class="normal">38</span>
-<span class="normal">39</span>
-<span class="normal">40</span>
-<span class="normal">41</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">get_gravity_at_point</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">eps</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">):</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">62</span>
+<span class="normal">63</span>
+<span class="normal">64</span>
+<span class="normal">65</span>
+<span class="normal">66</span>
+<span class="normal">67</span>
+<span class="normal">68</span>
+<span class="normal">69</span>
+<span class="normal">70</span>
+<span class="normal">71</span>
+<span class="normal">72</span>
+<span class="normal">73</span>
+<span class="normal">74</span>
+<span class="normal">75</span>
+<span class="normal">76</span>
+<span class="normal">77</span>
+<span class="normal">78</span>
+<span class="normal">79</span>
+<span class="normal">80</span>
+<span class="normal">81</span>
+<span class="normal">82</span>
+<span class="normal">83</span>
+<span class="normal">84</span>
+<span class="normal">85</span>
+<span class="normal">86</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">get_gravity_at_point</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">eps</span><span class="p">:</span> <span class="n">Quantity</span><span class="p">,</span>
+    <span class="n">x</span><span class="p">:</span> <span class="n">Quantity</span><span class="p">,</span>
+    <span class="n">y</span><span class="p">:</span> <span class="n">Quantity</span><span class="p">,</span>
+    <span class="n">z</span><span class="p">:</span> <span class="n">Quantity</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">Quantity</span><span class="p">,</span> <span class="n">Quantity</span><span class="p">,</span> <span class="n">Quantity</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Return the gravitational acceleration vector at (x, y, z).</span>
 <span class="sd">    Should return (ax, ay, az).</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        eps: Gravitational softening length.</span>
+<span class="sd">        x: X coordinates at which to evaluate acceleration.</span>
+<span class="sd">        y: Y coordinates at which to evaluate acceleration.</span>
+<span class="sd">        z: Z coordinates at which to evaluate acceleration.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        (tuple[Quantity, Quantity, Quantity]):  X, Y, and Z acceleration</span>
+<span class="sd">        components.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        NotImplementedError: Always, unless implemented by a subclass.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">raise</span> <span class="ne">NotImplementedError</span>
 </code></pre></div></td></tr></table></div>
@@ -2288,25 +3229,512 @@ Should return (ax, ay, az).</p>
 
 
 <h3 id="dcaf.backgroundgas.BackgroundPotential.get_potential_derivative_at_point" class="doc doc-heading">
-            <code class="highlight language-python"><span class="n">get_potential_derivative_at_point</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span></code>
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>            <code class="highlight language-python"><span class="n">get_potential_derivative_at_point</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span></code>
 
 </h3>
 
 
     <div class="doc doc-contents ">
 
-        <p>Return dPhi/dt at (x, y, z).</p>
+        <p>Return dPhi/dt at (x, y, z). Optional, used mainly for energy checks.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>x</code>
+            </td>
+            <td>
+                  <code><span title="amuse.units.quantities.Quantity">Quantity</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>X coordinates at which to evaluate the derivative.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>y</code>
+            </td>
+            <td>
+                  <code><span title="amuse.units.quantities.Quantity">Quantity</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Y coordinates at which to evaluate the derivative.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>z</code>
+            </td>
+            <td>
+                  <code><span title="amuse.units.quantities.Quantity">Quantity</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Z coordinates at which to evaluate the derivative.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><span title="amuse.units.quantities.Quantity">Quantity</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Time derivative of gravitational potential at each point.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+<p><span class="doc-section-title">Raises:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><span title="NotImplementedError">NotImplementedError</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Always, unless implemented by a subclass.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+<details class="note" open>
+  <summary>Note</summary>
+  <p>If not defined, then <a class="autorefs autorefs-internal" title="            DcafSystem" href="../dcaf/#dcaf.dcaf.DcafSystem">DcafSystem</a> should have
+<code>track_background_gas_energy = False</code> to skip this function.</p>
+</details>
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>dcaf/backgroundgas/base.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 88</span>
+<span class="normal"> 89</span>
+<span class="normal"> 90</span>
+<span class="normal"> 91</span>
+<span class="normal"> 92</span>
+<span class="normal"> 93</span>
+<span class="normal"> 94</span>
+<span class="normal"> 95</span>
+<span class="normal"> 96</span>
+<span class="normal"> 97</span>
+<span class="normal"> 98</span>
+<span class="normal"> 99</span>
+<span class="normal">100</span>
+<span class="normal">101</span>
+<span class="normal">102</span>
+<span class="normal">103</span>
+<span class="normal">104</span>
+<span class="normal">105</span>
+<span class="normal">106</span>
+<span class="normal">107</span>
+<span class="normal">108</span>
+<span class="normal">109</span>
+<span class="normal">110</span>
+<span class="normal">111</span>
+<span class="normal">112</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">get_potential_derivative_at_point</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">x</span><span class="p">:</span> <span class="n">Quantity</span><span class="p">,</span>
+    <span class="n">y</span><span class="p">:</span> <span class="n">Quantity</span><span class="p">,</span>
+    <span class="n">z</span><span class="p">:</span> <span class="n">Quantity</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Quantity</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Return dPhi/dt at (x, y, z). Optional, used mainly for energy checks.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        x: X coordinates at which to evaluate the derivative.</span>
+<span class="sd">        y: Y coordinates at which to evaluate the derivative.</span>
+<span class="sd">        z: Z coordinates at which to evaluate the derivative.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        (Quantity): Time derivative of gravitational potential at each point.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        NotImplementedError: Always, unless implemented by a subclass.</span>
+
+<span class="sd">    Note:</span>
+<span class="sd">        If not defined, then [DcafSystem][dcaf.dcaf.DcafSystem] should have</span>
+<span class="sd">        `track_background_gas_energy = False` to skip this function.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="dcaf.backgroundgas.BackgroundPotential.get_1d_velocity_dispersion_at_point" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>            <code class="highlight language-python"><span class="n">get_1d_velocity_dispersion_at_point</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span></code>
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Return the local one-dimensional velocity dispersion.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>x</code>
+            </td>
+            <td>
+                  <code><span title="amuse.units.quantities.Quantity">Quantity</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>X coordinates at which to evaluate the dispersion.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>y</code>
+            </td>
+            <td>
+                  <code><span title="amuse.units.quantities.Quantity">Quantity</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Y coordinates at which to evaluate the dispersion.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>z</code>
+            </td>
+            <td>
+                  <code><span title="amuse.units.quantities.Quantity">Quantity</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Z coordinates at which to evaluate the dispersion.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><span title="amuse.units.quantities.Quantity">Quantity</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>One-dimensional velocity dispersion at each point.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+<p><span class="doc-section-title">Raises:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><span title="NotImplementedError">NotImplementedError</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Always, unless implemented by a subclass.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+<details class="note" open>
+  <summary>Note</summary>
+  <p>This method is required only when the gas model is used with
+<a class="autorefs autorefs-internal" title="            StarFormationFramework" href="../framework/starformation/#dcaf.framework.starformation.StarFormationFramework">StarFormationFramework</a>.</p>
+</details>
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>dcaf/backgroundgas/base.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">114</span>
+<span class="normal">115</span>
+<span class="normal">116</span>
+<span class="normal">117</span>
+<span class="normal">118</span>
+<span class="normal">119</span>
+<span class="normal">120</span>
+<span class="normal">121</span>
+<span class="normal">122</span>
+<span class="normal">123</span>
+<span class="normal">124</span>
+<span class="normal">125</span>
+<span class="normal">126</span>
+<span class="normal">127</span>
+<span class="normal">128</span>
+<span class="normal">129</span>
+<span class="normal">130</span>
+<span class="normal">131</span>
+<span class="normal">132</span>
+<span class="normal">133</span>
+<span class="normal">134</span>
+<span class="normal">135</span>
+<span class="normal">136</span>
+<span class="normal">137</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">get_1d_velocity_dispersion_at_point</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">x</span><span class="p">:</span> <span class="n">Quantity</span><span class="p">,</span>
+    <span class="n">y</span><span class="p">:</span> <span class="n">Quantity</span><span class="p">,</span>
+    <span class="n">z</span><span class="p">:</span> <span class="n">Quantity</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Quantity</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return the local one-dimensional velocity dispersion.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        x: X coordinates at which to evaluate the dispersion.</span>
+<span class="sd">        y: Y coordinates at which to evaluate the dispersion.</span>
+<span class="sd">        z: Z coordinates at which to evaluate the dispersion.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        (Quantity): One-dimensional velocity dispersion at each point.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        NotImplementedError: Always, unless implemented by a subclass.</span>
+
+<span class="sd">    Note:</span>
+<span class="sd">        This method is required only when the gas model is used with</span>
+<span class="sd">        [StarFormationFramework][dcaf.framework.starformation.StarFormationFramework].</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="dcaf.backgroundgas.BackgroundPotential.is_gas_relevant" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>            <code class="highlight language-python"><span class="n">is_gas_relevant</span><span class="p">(</span><span class="n">stars</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></code>
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Return whether the gas remains dynamically relevant.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>stars</code>
+            </td>
+            <td>
+                  <code><span title="amuse.datamodel.Particles">Particles</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>[DOCS-REVIEW] Current stellar particles used by the
+model-specific relevance criterion.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>**kwargs</code>
+            </td>
+            <td>
+                  <code><span title="float">float</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>[DOCS-REVIEW] Model-specific relevance-criterion options.</p>
+              </div>
+            </td>
+            <td>
+                  <code>{}</code>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><span title="bool">bool</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>[DOCS-REVIEW] Whether the gas should remain active in the
+simulation.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+<p><span class="doc-section-title">Raises:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><span title="NotImplementedError">NotImplementedError</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Always, unless implemented by a subclass.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
 
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>dcaf/backgroundgas/base.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">43</span>
-<span class="normal">44</span>
-<span class="normal">45</span>
-<span class="normal">46</span>
-<span class="normal">47</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">get_potential_derivative_at_point</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Return dPhi/dt at (x, y, z).</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">139</span>
+<span class="normal">140</span>
+<span class="normal">141</span>
+<span class="normal">142</span>
+<span class="normal">143</span>
+<span class="normal">144</span>
+<span class="normal">145</span>
+<span class="normal">146</span>
+<span class="normal">147</span>
+<span class="normal">148</span>
+<span class="normal">149</span>
+<span class="normal">150</span>
+<span class="normal">151</span>
+<span class="normal">152</span>
+<span class="normal">153</span>
+<span class="normal">154</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">is_gas_relevant</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">stars</span><span class="p">:</span> <span class="n">Particles</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return whether the gas remains dynamically relevant.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        stars: [DOCS-REVIEW] Current stellar particles used by the</span>
+<span class="sd">            model-specific relevance criterion.</span>
+<span class="sd">        **kwargs: [DOCS-REVIEW] Model-specific relevance-criterion options.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        (bool): [DOCS-REVIEW] Whether the gas should remain active in the</span>
+<span class="sd">            simulation.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        NotImplementedError: Always, unless implemented by a subclass.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">raise</span> <span class="ne">NotImplementedError</span>
 </code></pre></div></td></tr></table></div>
@@ -2319,27 +3747,394 @@ Should return (ax, ay, az).</p>
 
 
 <h3 id="dcaf.backgroundgas.BackgroundPotential.get_mass_inside_radius" class="doc doc-heading">
-            <code class="highlight language-python"><span class="n">get_mass_inside_radius</span><span class="p">(</span><span class="n">r</span><span class="p">)</span></code>
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>            <code class="highlight language-python"><span class="n">get_mass_inside_radius</span><span class="p">(</span><span class="n">r</span><span class="p">)</span></code>
 
 </h3>
 
 
     <div class="doc doc-contents ">
 
-        <p>Return the mass enclosed within radius r.</p>
+        <p>Return the mass enclosed within radius <code>r</code>.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>r</code>
+            </td>
+            <td>
+                  <code><span title="amuse.units.quantities.Quantity">Quantity</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Radius or radii at which to evaluate enclosed mass.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><span title="amuse.units.quantities.Quantity">Quantity</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Enclosed gas mass.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+<p><span class="doc-section-title">Raises:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><span title="NotImplementedError">NotImplementedError</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Always, unless implemented by a subclass.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
 
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>dcaf/backgroundgas/base.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">67</span>
-<span class="normal">68</span>
-<span class="normal">69</span>
-<span class="normal">70</span>
-<span class="normal">71</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">get_mass_inside_radius</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">r</span><span class="p">):</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">175</span>
+<span class="normal">176</span>
+<span class="normal">177</span>
+<span class="normal">178</span>
+<span class="normal">179</span>
+<span class="normal">180</span>
+<span class="normal">181</span>
+<span class="normal">182</span>
+<span class="normal">183</span>
+<span class="normal">184</span>
+<span class="normal">185</span>
+<span class="normal">186</span>
+<span class="normal">187</span>
+<span class="normal">188</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">get_mass_inside_radius</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">r</span><span class="p">:</span> <span class="n">Quantity</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Quantity</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Return the mass enclosed within radius r.</span>
+<span class="sd">    Return the mass enclosed within radius `r`.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        r: Radius or radii at which to evaluate enclosed mass.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        (Quantity): Enclosed gas mass.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        NotImplementedError: Always, unless implemented by a subclass.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="dcaf.backgroundgas.BackgroundPotential.initialize_code" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>            <code class="highlight language-python"><span class="n">initialize_code</span><span class="p">()</span></code>
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Initialize the AMUSE-compatible gas model time.</p>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>dcaf/backgroundgas/base.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">190</span>
+<span class="normal">191</span>
+<span class="normal">192</span>
+<span class="normal">193</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">initialize_code</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Initialize the AMUSE-compatible gas model time.&quot;&quot;&quot;</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">model_time</span> <span class="o">=</span> <span class="n">zero</span>
+    <span class="k">pass</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="dcaf.backgroundgas.BackgroundPotential.commit_parameters" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>            <code class="highlight language-python"><span class="n">commit_parameters</span><span class="p">()</span></code>
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Implement AMUSE's parameter-commit hook.</p>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>dcaf/backgroundgas/base.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">195</span>
+<span class="normal">196</span>
+<span class="normal">197</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">commit_parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Implement AMUSE&#39;s parameter-commit hook.&quot;&quot;&quot;</span>
+    <span class="k">pass</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="dcaf.backgroundgas.BackgroundPotential.commit_particles" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>            <code class="highlight language-python"><span class="n">commit_particles</span><span class="p">()</span></code>
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Implement AMUSE's particle-commit hook.</p>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>dcaf/backgroundgas/base.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">199</span>
+<span class="normal">200</span>
+<span class="normal">201</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">commit_particles</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Implement AMUSE&#39;s particle-commit hook.&quot;&quot;&quot;</span>
+    <span class="k">pass</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="dcaf.backgroundgas.BackgroundPotential.cleanup_code" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>            <code class="highlight language-python"><span class="n">cleanup_code</span><span class="p">()</span></code>
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Close the background-gas output file.</p>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>dcaf/backgroundgas/base.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">203</span>
+<span class="normal">204</span>
+<span class="normal">205</span>
+<span class="normal">206</span>
+<span class="normal">207</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">cleanup_code</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Close the background-gas output file.&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">logfile</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">logfile</span><span class="o">.</span><span class="n">closed</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">logfile</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="k">pass</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="dcaf.backgroundgas.BackgroundPotential.evolve_model" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>            <code class="highlight language-python"><span class="n">evolve_model</span><span class="p">(</span><span class="n">tend</span><span class="p">)</span></code>
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Advance the gas model to the requested time.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>tend</code>
+            </td>
+            <td>
+                  <code><span title="amuse.units.quantities.Quantity">Quantity</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Target gas-model time.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>dcaf/backgroundgas/base.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">209</span>
+<span class="normal">210</span>
+<span class="normal">211</span>
+<span class="normal">212</span>
+<span class="normal">213</span>
+<span class="normal">214</span>
+<span class="normal">215</span>
+<span class="normal">216</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">evolve_model</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tend</span><span class="p">:</span> <span class="n">Quantity</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Advance the gas model to the requested time.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        tend: Target gas-model time.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">model_time</span> <span class="o">=</span> <span class="n">tend</span>
+    <span class="k">pass</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="dcaf.backgroundgas.BackgroundPotential.write_output" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>            <code class="highlight language-python"><span class="n">write_output</span><span class="p">()</span></code>
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Append the configured gas attributes to the output file.</p>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>dcaf/backgroundgas/base.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">218</span>
+<span class="normal">219</span>
+<span class="normal">220</span>
+<span class="normal">221</span>
+<span class="normal">222</span>
+<span class="normal">223</span>
+<span class="normal">224</span>
+<span class="normal">225</span>
+<span class="normal">226</span>
+<span class="normal">227</span>
+<span class="normal">228</span>
+<span class="normal">229</span>
+<span class="normal">230</span>
+<span class="normal">231</span>
+<span class="normal">232</span>
+<span class="normal">233</span>
+<span class="normal">234</span>
+<span class="normal">235</span>
+<span class="normal">236</span>
+<span class="normal">237</span>
+<span class="normal">238</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">write_output</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Append the configured gas attributes to the output file.&quot;&quot;&quot;</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">_ensure_logfile</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__first_output</span><span class="p">:</span>
+        <span class="n">header</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;# Time [Myr]&#39;</span><span class="p">]</span>
+        <span class="n">header</span> <span class="o">+=</span> <span class="p">[</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s1"> [</span><span class="si">{</span><span class="n">u</span><span class="si">}</span><span class="s1">]&#39;</span> <span class="k">if</span> <span class="n">u</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">k</span>
+                   <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">u</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">output_attributes</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">output_units</span><span class="p">)]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">logfile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">header</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__first_output</span> <span class="o">=</span> <span class="kc">False</span>
+
+    <span class="n">vals</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">model_time</span><span class="o">.</span><span class="n">value_in</span><span class="p">(</span><span class="n">units</span><span class="o">.</span><span class="n">Myr</span><span class="p">)]</span>
+    <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">u</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">output_attributes</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">output_units</span><span class="p">):</span>
+        <span class="n">v</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>
+        <span class="k">try</span> <span class="p">:</span>
+            <span class="n">vals</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="n">value_in</span><span class="p">(</span><span class="n">u</span><span class="p">)</span> <span class="k">if</span> <span class="n">u</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="nb">float</span><span class="p">(</span><span class="n">v</span><span class="p">))</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="n">vals</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">Nan</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">logfile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">x</span><span class="si">:</span><span class="s1">.6g</span><span class="si">}</span><span class="s1">&#39;</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">vals</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">logfile</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="dcaf.backgroundgas.BackgroundPotential.stop" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>            <code class="highlight language-python"><span class="n">stop</span><span class="p">()</span></code>
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Stop the gas model and close its output file.</p>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>dcaf/backgroundgas/base.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">241</span>
+<span class="normal">242</span>
+<span class="normal">243</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">stop</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Stop the gas model and close its output file.&quot;&quot;&quot;</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">cleanup_code</span><span class="p">()</span>
 </code></pre></div></td></tr></table></div>
             </details>
     </div>
@@ -2418,6 +4213,10 @@ Should return (ax, ay, az).</p>
     
     
       <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../../javascripts/mathjax.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   </body>

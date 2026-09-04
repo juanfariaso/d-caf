@@ -23,7 +23,7 @@
     
     
       
-        <title>dcaf - Dynamic Cluster Assembly Framework (D-CAF)</title>
+        <title>dcaf.dcaf - Dynamic Cluster Assembly Framework (D-CAF)</title>
       
     
     
@@ -47,6 +47,8 @@
     
     
       <link rel="stylesheet" href="../../../assets/_mkdocstrings.css">
+    
+      <link rel="stylesheet" href="../../../stylesheets/api-reference.css">
     
     <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
@@ -102,7 +104,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              dcaf
+              dcaf.dcaf
             
           </span>
         </div>
@@ -396,7 +398,7 @@
   <span class="md-ellipsis">
     
   
-    analysis
+    dcaf.analysis
   
 
     
@@ -412,7 +414,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    analysis
+    dcaf.analysis
   
 
           </label>
@@ -432,7 +434,7 @@
   <span class="md-ellipsis">
     
   
-    analysis
+    dcaf.analysis
   
 
     
@@ -460,7 +462,7 @@
   <span class="md-ellipsis">
     
   
-    formation
+    dcaf.analysis.formation
   
 
     
@@ -488,7 +490,7 @@
   <span class="md-ellipsis">
     
   
-    multiples
+    dcaf.analysis.multiples
   
 
     
@@ -535,7 +537,7 @@
   <span class="md-ellipsis">
     
   
-    backgroundgas
+    dcaf.backgroundgas
   
 
     
@@ -551,7 +553,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    backgroundgas
+    dcaf.backgroundgas
   
 
           </label>
@@ -571,7 +573,7 @@
   <span class="md-ellipsis">
     
   
-    backgroundgas
+    dcaf.backgroundgas
   
 
     
@@ -599,7 +601,7 @@
   <span class="md-ellipsis">
     
   
-    base
+    dcaf.backgroundgas.base
   
 
     
@@ -627,7 +629,7 @@
   <span class="md-ellipsis">
     
   
-    plummer
+    dcaf.backgroundgas.plummer
   
 
     
@@ -672,7 +674,7 @@
   <span class="md-ellipsis">
     
   
-    dcaf
+    dcaf.dcaf
   
 
     
@@ -690,7 +692,7 @@
   <span class="md-ellipsis">
     
   
-    dcaf
+    dcaf.dcaf
   
 
     
@@ -739,32 +741,21 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#dcaf.dcaf.DcafSystem.update_formed_stars" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        update_formed_stars
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#dcaf.dcaf.DcafSystem.initialize_system" class="md-nav__link">
     <span class="md-ellipsis">
       
         initialize_system
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#dcaf.dcaf.DcafSystem._setup_petar" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        _setup_petar
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#dcaf.dcaf.DcafSystem._rebuild_system" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        _rebuild_system
       
     </span>
   </a>
@@ -783,32 +774,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#dcaf.dcaf.DcafSystem._ceil_to_block" class="md-nav__link">
+  <a href="#dcaf.dcaf.DcafSystem.write_output" class="md-nav__link">
     <span class="md-ellipsis">
       
-        _ceil_to_block
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#dcaf.dcaf.DcafSystem._write_energy_row" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        _write_energy_row
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#dcaf.dcaf.DcafSystem._validate_formation_schedule" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        _validate_formation_schedule
+        write_output
       
     </span>
   </a>
@@ -828,6 +797,67 @@
       
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="GasEnergyTracker">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#dcaf.dcaf.GasEnergyTracker.get_gravity_at_point" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        get_gravity_at_point
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dcaf.dcaf.GasEnergyTracker.get_potential_at_point" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        get_potential_at_point
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dcaf.dcaf.GasEnergyTracker.stop" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        stop
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dcaf.dcaf.GasEnergyTracker.evolve_model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        evolve_model
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dcaf.dcaf.GasEnergyTracker.retrieve_stored_energy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        retrieve_stored_energy
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -865,7 +895,7 @@
   <span class="md-ellipsis">
     
   
-    factory
+    dcaf.factory
   
 
     
@@ -881,7 +911,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    factory
+    dcaf.factory
   
 
           </label>
@@ -901,7 +931,7 @@
   <span class="md-ellipsis">
     
   
-    factory
+    dcaf.factory
   
 
     
@@ -929,7 +959,7 @@
   <span class="md-ellipsis">
     
   
-    distance_based
+    dcaf.factory.distance_based
   
 
     
@@ -957,7 +987,7 @@
   <span class="md-ellipsis">
     
   
-    field_binary_population
+    dcaf.factory.field_binary_population
   
 
     
@@ -985,7 +1015,7 @@
   <span class="md-ellipsis">
     
   
-    fractal
+    dcaf.factory.fractal
   
 
     
@@ -1013,7 +1043,7 @@
   <span class="md-ellipsis">
     
   
-    multiplicity
+    dcaf.factory.multiplicity
   
 
     
@@ -1060,7 +1090,7 @@
   <span class="md-ellipsis">
     
   
-    framework
+    dcaf.framework
   
 
     
@@ -1076,7 +1106,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    framework
+    dcaf.framework
   
 
           </label>
@@ -1096,7 +1126,7 @@
   <span class="md-ellipsis">
     
   
-    framework
+    dcaf.framework
   
 
     
@@ -1124,7 +1154,7 @@
   <span class="md-ellipsis">
     
   
-    starformation
+    dcaf.framework.starformation
   
 
     
@@ -1171,7 +1201,7 @@
   <span class="md-ellipsis">
     
   
-    io
+    dcaf.io
   
 
     
@@ -1187,7 +1217,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    io
+    dcaf.io
   
 
           </label>
@@ -1207,7 +1237,7 @@
   <span class="md-ellipsis">
     
   
-    io
+    dcaf.io
   
 
     
@@ -1235,7 +1265,7 @@
   <span class="md-ellipsis">
     
   
-    output
+    dcaf.io.output
   
 
     
@@ -1263,7 +1293,7 @@
   <span class="md-ellipsis">
     
   
-    restart
+    dcaf.io.restart
   
 
     
@@ -1310,7 +1340,7 @@
   <span class="md-ellipsis">
     
   
-    models
+    dcaf.models
   
 
     
@@ -1326,7 +1356,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    models
+    dcaf.models
   
 
           </label>
@@ -1346,7 +1376,7 @@
   <span class="md-ellipsis">
     
   
-    models
+    dcaf.models
   
 
     
@@ -1374,7 +1404,7 @@
   <span class="md-ellipsis">
     
   
-    turbulentclumpmodel
+    dcaf.models.turbulentclumpmodel
   
 
     
@@ -1421,7 +1451,7 @@
   <span class="md-ellipsis">
     
   
-    tests
+    dcaf.tests
   
 
     
@@ -1437,7 +1467,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    tests
+    dcaf.tests
   
 
           </label>
@@ -1457,7 +1487,7 @@
   <span class="md-ellipsis">
     
   
-    tests
+    dcaf.tests
   
 
     
@@ -1485,7 +1515,7 @@
   <span class="md-ellipsis">
     
   
-    test_generate_stars
+    dcaf.tests.test_generate_stars
   
 
     
@@ -1513,7 +1543,7 @@
   <span class="md-ellipsis">
     
   
-    test_resume_restore
+    dcaf.tests.test_resume_restore
   
 
     
@@ -1560,7 +1590,7 @@
   <span class="md-ellipsis">
     
   
-    utilities
+    dcaf.utilities
   
 
     
@@ -1576,7 +1606,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    utilities
+    dcaf.utilities
   
 
           </label>
@@ -1596,7 +1626,7 @@
   <span class="md-ellipsis">
     
   
-    utilities
+    dcaf.utilities
   
 
     
@@ -1624,7 +1654,7 @@
   <span class="md-ellipsis">
     
   
-    config
+    dcaf.utilities.config
   
 
     
@@ -1652,7 +1682,7 @@
   <span class="md-ellipsis">
     
   
-    helpers
+    dcaf.utilities.helpers
   
 
     
@@ -1680,7 +1710,7 @@
   <span class="md-ellipsis">
     
   
-    logger
+    dcaf.utilities.logger
   
 
     
@@ -1708,7 +1738,7 @@
   <span class="md-ellipsis">
     
   
-    parameters
+    dcaf.utilities.parameters
   
 
     
@@ -1736,7 +1766,7 @@
   <span class="md-ellipsis">
     
   
-    sampler
+    dcaf.utilities.sampler
   
 
     
@@ -1823,32 +1853,21 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#dcaf.dcaf.DcafSystem.update_formed_stars" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        update_formed_stars
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#dcaf.dcaf.DcafSystem.initialize_system" class="md-nav__link">
     <span class="md-ellipsis">
       
         initialize_system
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#dcaf.dcaf.DcafSystem._setup_petar" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        _setup_petar
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#dcaf.dcaf.DcafSystem._rebuild_system" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        _rebuild_system
       
     </span>
   </a>
@@ -1867,32 +1886,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#dcaf.dcaf.DcafSystem._ceil_to_block" class="md-nav__link">
+  <a href="#dcaf.dcaf.DcafSystem.write_output" class="md-nav__link">
     <span class="md-ellipsis">
       
-        _ceil_to_block
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#dcaf.dcaf.DcafSystem._write_energy_row" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        _write_energy_row
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#dcaf.dcaf.DcafSystem._validate_formation_schedule" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        _validate_formation_schedule
+        write_output
       
     </span>
   </a>
@@ -1912,6 +1909,67 @@
       
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="GasEnergyTracker">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#dcaf.dcaf.GasEnergyTracker.get_gravity_at_point" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        get_gravity_at_point
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dcaf.dcaf.GasEnergyTracker.get_potential_at_point" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        get_potential_at_point
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dcaf.dcaf.GasEnergyTracker.stop" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        stop
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dcaf.dcaf.GasEnergyTracker.evolve_model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        evolve_model
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dcaf.dcaf.GasEnergyTracker.retrieve_stored_energy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        retrieve_stored_energy
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1937,7 +1995,7 @@
 
 
 <h1 id="dcaf.dcaf" class="doc doc-heading">
-            <code>dcaf.dcaf</code>
+<code class="doc-symbol doc-symbol-heading doc-symbol-module"></code>            <code>dcaf.dcaf</code>
 
 
 </h1>
@@ -1972,7 +2030,7 @@
 
 
 <h2 id="dcaf.dcaf.DcafSystem" class="doc doc-heading">
-            <code>DcafSystem</code>
+<code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>            <code>DcafSystem</code>
 
 
 </h2>
@@ -1981,6 +2039,271 @@
     <div class="doc doc-contents ">
 
 
+
+        <p>Main D-CAF orchestrator.</p>
+<p>This is the main class that takes care of all decision making, logs and
+outputs.</p>
+<p><code>DcafSystem</code> owns the PeTar solver and optional AMUSE Bridge coupling. It
+initializes a formation framework, injects scheduled stars, evolves the
+active system, writes snapshots and energy diagnostics, and can resume a
+completed formation run from the latest saved snapshot.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>framework</code>
+            </td>
+            <td>
+                  <code><a class="autorefs autorefs-internal" title="            StarFormationFramework (dcaf.framework.StarFormationFramework)" href="../framework/#dcaf.framework.StarFormationFramework">StarFormationFramework</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Star-formation framework providing <code>target_stars</code>,
+<code>background_gas</code>, <code>get_next_formation_time()</code>, and
+<code>form_stars(active_stars)</code>.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>config</code>
+            </td>
+            <td>
+                  <code><span title="dict">dict</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>dictionary containing <code>petar</code>, <code>bridge</code>, and <code>gas</code> configuration
+objects. Defaults are set by 
+<a class="autorefs autorefs-internal" title="            get_default_configuration()" href="../utilities/parameters/#dcaf.utilities.parameters.get_default_configuration">get_default_configuration()</a>.</p>
+              </div>
+            </td>
+            <td>
+                  <code>None</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>converter</code>
+            </td>
+            <td>
+                  <code><span title="amuse.units.nbody_system.nbody_to_si">nbody_to_si</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>AMUSE N-body to SI converter. If omitted, it is derived from
+the target stellar mass and virial radius.</p>
+              </div>
+            </td>
+            <td>
+                  <code>None</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>track_background_gas_energy</code>
+            </td>
+            <td>
+                  <code><span title="bool">bool</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Whether to accumulate work from an
+evolving background-gas potential in the energy diagnostics.
+Turn to False could marginally improve performance.</p>
+              </div>
+            </td>
+            <td>
+                  <code>True</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>output_folder</code>
+            </td>
+            <td>
+                  <code><span title="str">str</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Base directory for snapshots, logs, and <code>energy.dat</code>.</p>
+              </div>
+            </td>
+            <td>
+                  <code>&#39;./dcaf_output/&#39;</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>log_level</code>
+            </td>
+            <td>
+                  <code><span title="str">str</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Logging level passed to D-CAF's logger setup. Verbosity
+written to <code>dcaf.log</code>. Choose <code>debug</code> to include timing diagnostics,
+<code>info</code> for normal run progress, <code>warning</code> for warnings and errors
+only, <code>error</code> for errors only, or <code>critical</code> for critical errors
+only. Defaults to <code>info</code>.</p>
+              </div>
+            </td>
+            <td>
+                  <code>&#39;info&#39;</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>stars_per_worker</code>
+            </td>
+            <td>
+                  <code><span title="int">int</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Particle threshold used to trigger PeTar worker
+scaling. Set to <code>None</code> to disable scaling.</p>
+              </div>
+            </td>
+            <td>
+                  <code>None</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>workers_step</code>
+            </td>
+            <td>
+                  <code><span title="int">int</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Number of workers added at each scaling event.</p>
+              </div>
+            </td>
+            <td>
+                  <code>5</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>resume</code>
+            </td>
+            <td>
+                  <code><span title="bool">bool</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Restore the latest valid snapshot after star formation has
+finished.</p>
+              </div>
+            </td>
+            <td>
+                  <code>False</code>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+<p><span class="doc-section-title">Attributes:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td><code><span title="dcaf.dcaf.DcafSystem.framework">framework</span></code></td>
+            <td>
+                  <code><a class="autorefs autorefs-internal" title="            StarFormationFramework (dcaf.framework.StarFormationFramework)" href="../framework/#dcaf.framework.StarFormationFramework">StarFormationFramework</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Formation framework controlling
+the star-formation schedule (contains the target stars).</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="dcaf.dcaf.DcafSystem.petar_code">petar_code</span></code></td>
+            <td>
+                  <code><span title="amuse.community.petar.interface.Petar">Petar</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Active PeTar stellar-dynamics solver.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="dcaf.dcaf.DcafSystem.bridge_code">bridge_code</span></code></td>
+            <td>
+                  <code><span title="amuse.couple.bridge.Bridge">Bridge</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Bridge coupling solver, when background gas is used.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="dcaf.dcaf.DcafSystem.model_time">model_time</span></code></td>
+            <td>
+                  <code><span title="amuse.units.quantities.Quantity">Quantity</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Current simulation time.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><a class="autorefs autorefs-internal" title="            formed_stars
+
+  
+      property
+   (dcaf.dcaf.DcafSystem.formed_stars)" href="#dcaf.dcaf.DcafSystem.formed_stars">formed_stars</a></code></td>
+            <td>
+                  <code><span title="amuse.datamodel.Particles">Particles</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Cached particles that have already formed.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="dcaf.dcaf.DcafSystem.output_folder">output_folder</span></code></td>
+            <td>
+                  <code><span title="str">str</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Directory containing snapshots and <code>dcaf.log</code>.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
 
 
 
@@ -2001,7 +2324,15 @@
       </thead>
       <tbody>
             <tr class="doc-section-item">
-              <td><code><a class="autorefs autorefs-internal" title="initialize_system() (dcaf.dcaf.DcafSystem.initialize_system)" href="#dcaf.dcaf.DcafSystem.initialize_system">initialize_system</a></code></td>
+              <td><code><a class="autorefs autorefs-internal" title="            update_formed_stars() (dcaf.dcaf.DcafSystem.update_formed_stars)" href="#dcaf.dcaf.DcafSystem.update_formed_stars">update_formed_stars</a></code></td>
+              <td>
+                <div class="doc-md-description">
+                  <p>Refresh the cached formed-star particle set from PeTar.</p>
+                </div>
+              </td>
+            </tr>
+            <tr class="doc-section-item">
+              <td><code><a class="autorefs autorefs-internal" title="            initialize_system() (dcaf.dcaf.DcafSystem.initialize_system)" href="#dcaf.dcaf.DcafSystem.initialize_system">initialize_system</a></code></td>
               <td>
                 <div class="doc-md-description">
                   <p>Instantiate PeTar and, if present, Bridge. Also add initial stars,</p>
@@ -2009,10 +2340,18 @@
               </td>
             </tr>
             <tr class="doc-section-item">
-              <td><code><a class="autorefs autorefs-internal" title="evolve_model(t_end) (dcaf.dcaf.DcafSystem.evolve_model)" href="#dcaf.dcaf.DcafSystem.evolve_model">evolve_model</a></code></td>
+              <td><code><a class="autorefs autorefs-internal" title="            evolve_model(t_end) (dcaf.dcaf.DcafSystem.evolve_model)" href="#dcaf.dcaf.DcafSystem.evolve_model">evolve_model</a></code></td>
               <td>
                 <div class="doc-md-description">
-                  <p>Advance the coupled system to t_end, interleaving outputs and</p>
+                  <p>Advance the coupled system to <code>t_end</code>, interleaving outputs and</p>
+                </div>
+              </td>
+            </tr>
+            <tr class="doc-section-item">
+              <td><code><a class="autorefs autorefs-internal" title="            write_output() (dcaf.dcaf.DcafSystem.write_output)" href="#dcaf.dcaf.DcafSystem.write_output">write_output</a></code></td>
+              <td>
+                <div class="doc-md-description">
+                  <p>Write a stellar snapshot, gas output, and energy row.</p>
                 </div>
               </td>
             </tr>
@@ -2739,20 +3078,156 @@
 <span class="normal">744</span>
 <span class="normal">745</span>
 <span class="normal">746</span>
-<span class="normal">747</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">DcafSystem</span><span class="p">:</span>
+<span class="normal">747</span>
+<span class="normal">748</span>
+<span class="normal">749</span>
+<span class="normal">750</span>
+<span class="normal">751</span>
+<span class="normal">752</span>
+<span class="normal">753</span>
+<span class="normal">754</span>
+<span class="normal">755</span>
+<span class="normal">756</span>
+<span class="normal">757</span>
+<span class="normal">758</span>
+<span class="normal">759</span>
+<span class="normal">760</span>
+<span class="normal">761</span>
+<span class="normal">762</span>
+<span class="normal">763</span>
+<span class="normal">764</span>
+<span class="normal">765</span>
+<span class="normal">766</span>
+<span class="normal">767</span>
+<span class="normal">768</span>
+<span class="normal">769</span>
+<span class="normal">770</span>
+<span class="normal">771</span>
+<span class="normal">772</span>
+<span class="normal">773</span>
+<span class="normal">774</span>
+<span class="normal">775</span>
+<span class="normal">776</span>
+<span class="normal">777</span>
+<span class="normal">778</span>
+<span class="normal">779</span>
+<span class="normal">780</span>
+<span class="normal">781</span>
+<span class="normal">782</span>
+<span class="normal">783</span>
+<span class="normal">784</span>
+<span class="normal">785</span>
+<span class="normal">786</span>
+<span class="normal">787</span>
+<span class="normal">788</span>
+<span class="normal">789</span>
+<span class="normal">790</span>
+<span class="normal">791</span>
+<span class="normal">792</span>
+<span class="normal">793</span>
+<span class="normal">794</span>
+<span class="normal">795</span>
+<span class="normal">796</span>
+<span class="normal">797</span>
+<span class="normal">798</span>
+<span class="normal">799</span>
+<span class="normal">800</span>
+<span class="normal">801</span>
+<span class="normal">802</span>
+<span class="normal">803</span>
+<span class="normal">804</span>
+<span class="normal">805</span>
+<span class="normal">806</span>
+<span class="normal">807</span>
+<span class="normal">808</span>
+<span class="normal">809</span>
+<span class="normal">810</span>
+<span class="normal">811</span>
+<span class="normal">812</span>
+<span class="normal">813</span>
+<span class="normal">814</span>
+<span class="normal">815</span>
+<span class="normal">816</span>
+<span class="normal">817</span>
+<span class="normal">818</span>
+<span class="normal">819</span>
+<span class="normal">820</span>
+<span class="normal">821</span>
+<span class="normal">822</span>
+<span class="normal">823</span>
+<span class="normal">824</span>
+<span class="normal">825</span>
+<span class="normal">826</span>
+<span class="normal">827</span>
+<span class="normal">828</span>
+<span class="normal">829</span>
+<span class="normal">830</span>
+<span class="normal">831</span>
+<span class="normal">832</span>
+<span class="normal">833</span>
+<span class="normal">834</span>
+<span class="normal">835</span>
+<span class="normal">836</span>
+<span class="normal">837</span>
+<span class="normal">838</span>
+<span class="normal">839</span>
+<span class="normal">840</span>
+<span class="normal">841</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">DcafSystem</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Main D-CAF orchestrator.</span>
+
+<span class="sd">    This is the main class that takes care of all decision making, logs and</span>
+<span class="sd">    outputs.</span>
+
+<span class="sd">    `DcafSystem` owns the PeTar solver and optional AMUSE Bridge coupling. It</span>
+<span class="sd">    initializes a formation framework, injects scheduled stars, evolves the</span>
+<span class="sd">    active system, writes snapshots and energy diagnostics, and can resume a</span>
+<span class="sd">    completed formation run from the latest saved snapshot.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        framework: Star-formation framework providing `target_stars`,</span>
+<span class="sd">            `background_gas`, `get_next_formation_time()`, and</span>
+<span class="sd">            `form_stars(active_stars)`.</span>
+<span class="sd">        config: dictionary containing `petar`, `bridge`, and `gas` configuration</span>
+<span class="sd">            objects. Defaults are set by </span>
+<span class="sd">            [get_default_configuration()][dcaf.utilities.parameters.get_default_configuration].</span>
+<span class="sd">        converter: AMUSE N-body to SI converter. If omitted, it is derived from</span>
+<span class="sd">            the target stellar mass and virial radius.</span>
+<span class="sd">        track_background_gas_energy: Whether to accumulate work from an</span>
+<span class="sd">            evolving background-gas potential in the energy diagnostics.</span>
+<span class="sd">            Turn to False could marginally improve performance.</span>
+<span class="sd">        output_folder: Base directory for snapshots, logs, and `energy.dat`.</span>
+<span class="sd">        log_level: Logging level passed to D-CAF&#39;s logger setup. Verbosity</span>
+<span class="sd">            written to `dcaf.log`. Choose `debug` to include timing diagnostics,</span>
+<span class="sd">            `info` for normal run progress, `warning` for warnings and errors</span>
+<span class="sd">            only, `error` for errors only, or `critical` for critical errors</span>
+<span class="sd">            only. Defaults to `info`.</span>
+<span class="sd">        stars_per_worker: Particle threshold used to trigger PeTar worker</span>
+<span class="sd">            scaling. Set to `None` to disable scaling.</span>
+<span class="sd">        workers_step: Number of workers added at each scaling event.</span>
+<span class="sd">        resume: Restore the latest valid snapshot after star formation has</span>
+<span class="sd">            finished.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        framework (StarFormationFramework): Formation framework controlling</span>
+<span class="sd">            the star-formation schedule (contains the target stars).</span>
+<span class="sd">        petar_code (Petar): Active PeTar stellar-dynamics solver.</span>
+<span class="sd">        bridge_code (Bridge): Bridge coupling solver, when background gas is used.</span>
+<span class="sd">        model_time (Quantity): Current simulation time.</span>
+<span class="sd">        formed_stars (Particles): Cached particles that have already formed.</span>
+<span class="sd">        output_folder (str): Directory containing snapshots and `dcaf.log`.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
-        <span class="n">framework</span><span class="p">,</span><span class="c1"># requires: target_stars, next_formation_time(), form_stars()</span>
-        <span class="n">config</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">converter</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">gas_code</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">track_background_gas_energy</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> 
-        <span class="n">output_folder</span> <span class="o">=</span> <span class="s2">&quot;./dcaf_output/&quot;</span><span class="p">,</span>
-        <span class="n">log_level</span> <span class="o">=</span> <span class="s1">&#39;debug&#39;</span><span class="p">,</span>
-        <span class="n">stars_per_worker</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">workers_step</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span>
-        <span class="n">resume</span> <span class="o">=</span> <span class="kc">False</span>
-    <span class="p">):</span>
+        <span class="n">framework</span><span class="p">:</span> <span class="n">StarFormationFramework</span><span class="p">,</span>
+        <span class="n">config</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">converter</span><span class="p">:</span> <span class="n">nbody_system</span><span class="o">.</span><span class="n">nbody_to_si</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">track_background_gas_energy</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="n">output_folder</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;./dcaf_output/&quot;</span><span class="p">,</span>
+        <span class="n">log_level</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;info&quot;</span><span class="p">,</span>
+        <span class="n">stars_per_worker</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">workers_step</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span>
+        <span class="n">resume</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">base_output_folder</span> <span class="o">=</span> <span class="n">output_folder</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">base_output_folder</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
             <span class="n">base_output_folder</span> <span class="o">=</span> <span class="s2">&quot;.&quot;</span>
@@ -2868,10 +3343,11 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">track_background_gas_energy</span> <span class="o">=</span> <span class="n">track_background_gas_energy</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">formed_stars</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">formed_stars</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Particles</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Return already formed stars updated. Only update the particles if model</span>
-<span class="sd">        time has drifted or more stars has been added. Otherwise, the stored copy is provided.</span>
+<span class="sd">        Return already formed stars updated. It only update the particles if</span>
+<span class="sd">        model time has drifted or more stars has been added. Otherwise, the</span>
+<span class="sd">        stored copy is provided.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">petar_code</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_formed_stars</span>
@@ -2883,11 +3359,13 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">update_formed_stars</span><span class="p">()</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_formed_stars</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="nf">update_formed_stars</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">update_formed_stars</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Refresh the cached formed-star particle set from PeTar.&quot;&quot;&quot;</span>
         <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">timing</span><span class="p">(</span><span class="s1">&#39;[UPDATING STARS] ********************&#39;</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_formed_stars</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">petar_code</span><span class="o">.</span><span class="n">particles</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_formed_stars</span><span class="o">.</span><span class="n">collection_attributes</span><span class="o">.</span><span class="n">code_time</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">petar_code</span><span class="o">.</span><span class="n">model_time</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">initialize_system</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">initialize_system</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Instantiate PeTar and, if present, Bridge. Also add initial stars,</span>
 <span class="sd">        or resume from the latest saved snapshot if self.resume is True.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -3035,9 +3513,13 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">write_output</span><span class="p">()</span>
 
     <span class="c1"># --- setup helpers -----------------------------------------------------</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">_setup_petar</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">nworkers</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_setup_petar</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nworkers</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize PeTar. No particles are added here.</span>
 <span class="sd">            nworkers: if not given, is retrieved from config</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            nworkers: Number of PeTar workers. Uses the PeTar configuration when</span>
+<span class="sd">                omitted.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">cfg</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;petar&quot;</span><span class="p">]</span>
         <span class="k">if</span> <span class="n">nworkers</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -3052,7 +3534,8 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">petar_code</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">r_out</span> <span class="o">=</span> <span class="n">cfg</span><span class="o">.</span><span class="n">r_out</span> 
         <span class="bp">self</span><span class="o">.</span><span class="n">petar_code</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">dt_soft</span> <span class="o">=</span> <span class="n">cfg</span><span class="o">.</span><span class="n">dt_soft</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="nf">_setup_bridge</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_setup_bridge</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize Bridge using the configured coupling timestep.&quot;&quot;&quot;</span>
         <span class="n">cfg</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;bridge&quot;</span><span class="p">]</span>
         <span class="k">if</span> <span class="n">cfg</span><span class="o">.</span><span class="n">timestep</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">timestep</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dt_soft_eff</span>
@@ -3064,7 +3547,11 @@
                                   <span class="n">use_threading</span><span class="o">=</span><span class="n">cfg</span><span class="o">.</span><span class="n">use_threading</span><span class="p">,</span>
                                   <span class="n">verbose</span><span class="o">=</span><span class="n">cfg</span><span class="o">.</span><span class="n">verbose</span><span class="p">)</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="nf">setup_gas</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_setup_gas</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Placeholder for a future gas-setup routine.</span>
+
+<span class="sd">        For possible future implementation.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># TODO: add setup gas routine to StarFormationFramework</span>
         <span class="c1">#   I think we dont need this with the current implementation</span>
         <span class="k">pass</span>
@@ -3072,10 +3559,13 @@
 
     <span class="c1"># -- helpers for the restart --------------------------------------------</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="nf">_rebuild_system</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nworkers</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_rebuild_system</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nworkers</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Stop current PeTar, create a new instance with nworkers, and re-attach</span>
 <span class="sd">        it (and Bridge if present) with the existing particles and model_time.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            nworkers:  Number of workers for the replacement PeTar instance.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># grab current state</span>
         <span class="n">old_petar</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">petar_code</span>
@@ -3117,9 +3607,13 @@
 
     <span class="c1"># --- main loop ---------------------------------------------------------</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="nf">evolve_model</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">t_end</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Advance the coupled system to t_end, interleaving outputs and</span>
-<span class="sd">        formation events.&quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">evolve_model</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">t_end</span><span class="p">:</span> <span class="n">Quantity</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Advance the coupled system to `t_end`, interleaving outputs and</span>
+<span class="sd">        formation events.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            t_end: Target time to evolve the system.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">model_time</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;Call initialize_system() before evolve_model().&quot;</span><span class="p">)</span>
 
@@ -3186,7 +3680,8 @@
 
     <span class="c1"># --- I/O ---------------------------------------------------------------</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="nf">write_output</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">write_output</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Write a stellar snapshot, gas output, and energy row.&quot;&quot;&quot;</span>
         <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">timing</span><span class="p">(</span><span class="s1">&#39;[WRITING OUTPUT]&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
                 <span class="sa">f</span><span class="s2">&quot;[DCAF] [WRITING OUTPUT] Snap: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">__current_snapshot</span><span class="si">}</span><span class="s2">, &quot;</span>
@@ -3206,7 +3701,12 @@
 
     <span class="c1"># --- internals ---------------------------------------------------------</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="nf">_add_new_stars</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">stars</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_add_new_stars</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">stars</span><span class="p">:</span> <span class="n">Particles</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Add a formation batch to PeTar and record its energy.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            stars: Newly formed stellar particles to add to the active solver.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">timing</span><span class="p">(</span><span class="s1">&#39;[ADDING STARS]&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
             <span class="n">nactive</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">petar_code</span><span class="o">.</span><span class="n">particles</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;[ADDING STARS]  Time: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">model_time</span><span class="o">.</span><span class="n">value_in</span><span class="p">(</span><span class="n">units</span><span class="o">.</span><span class="n">Myr</span><span class="p">)</span><span class="si">}</span><span class="s1">  &#39;</span>
@@ -3247,9 +3747,21 @@
                     <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">s</span><span class="o">.</span><span class="n">vz</span><span class="o">.</span><span class="n">value_in</span><span class="p">(</span><span class="n">units</span><span class="o">.</span><span class="n">kms</span><span class="p">)</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">&quot;</span>
                 <span class="p">)</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="nf">__inject_new_stars_energy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">new_stars</span><span class="p">,</span> <span class="n">U0</span> <span class="o">=</span> <span class="mi">0</span> <span class="o">|</span> <span class="n">units</span><span class="o">.</span><span class="n">J</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">__inject_new_stars_energy</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">new_stars</span><span class="p">:</span> <span class="n">Particles</span><span class="p">,</span>
+        <span class="n">U0</span><span class="p">:</span> <span class="n">Quantity</span> <span class="o">=</span> <span class="mi">0</span> <span class="o">|</span> <span class="n">units</span><span class="o">.</span><span class="n">J</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Quantity</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Add the injected energy of `new_stars` to the budget</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            new_stars: Stellar particles being added to PeTar.</span>
+<span class="sd">            U0: PeTar potential energy before adding the stars.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            (Quantity): Energy contributed by the injected</span>
+<span class="sd">                stars.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># --- kinetic of new stars</span>
         <span class="n">v2</span> <span class="o">=</span> <span class="n">new_stars</span><span class="o">.</span><span class="n">vx</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">new_stars</span><span class="o">.</span><span class="n">vy</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">new_stars</span><span class="o">.</span><span class="n">vz</span><span class="o">**</span><span class="mi">2</span>
@@ -3283,10 +3795,16 @@
         <span class="k">return</span> <span class="n">dE</span>
 
 
-    <span class="k">def</span><span class="w"> </span><span class="nf">_ceil_to_block</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">t_si</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_ceil_to_block</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">t_si</span><span class="p">:</span> <span class="n">Quantity</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Quantity</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Get the closest time to a dt_soft multiple.</span>
 <span class="sd">        We will perform operations only on those times for better performance</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            t_si: Time to round up to the next integration block.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            (Quantity): Time at the selected integration block.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">dt_soft_eff</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span> <span class="s1">&#39;dt_soft_eff must be updated&#39;</span> <span class="p">)</span>
@@ -3296,7 +3814,8 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">converter</span><span class="o">.</span><span class="n">to_si</span><span class="p">(</span> <span class="p">(</span> <span class="n">k</span> <span class="o">*</span> <span class="n">dtnb</span><span class="p">)</span>  <span class="o">|</span> <span class="n">nbody_system</span><span class="o">.</span><span class="n">time</span> <span class="p">)</span>
 
 
-    <span class="k">def</span><span class="w"> </span><span class="nf">_energy_check</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_energy_check</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Update the current stellar and gas energy diagnostics.&quot;&quot;&quot;</span>
         <span class="n">first_check</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_last_energy_check</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_last_energy_check</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model_time</span>
@@ -3362,7 +3881,7 @@
 
         <span class="bp">self</span><span class="o">.</span><span class="n">_last_energy_check</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model_time</span> 
 
-    <span class="k">def</span><span class="w"> </span><span class="nf">_write_energy_row</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_write_energy_row</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Append to energy file</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -3400,7 +3919,7 @@
             <span class="n">line</span> <span class="o">+=</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
             <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="nf">_validate_formation_schedule</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">dt_soft_nb</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_validate_formation_schedule</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dt_soft_nb</span><span class="p">:</span> <span class="n">Quantity</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Validate that the intended formation schedule do not violate a set of</span>
 <span class="sd">        rules designed to avoid adding stars twice during the same dt_soft</span>
@@ -3417,6 +3936,9 @@
 <span class="sd">        The scheduled times should follow these rules:</span>
 <span class="sd">          - First formation time t0 may be &lt; dt_soft (we will place the first add at &gt;= dt_soft).</span>
 <span class="sd">          - From the first forming block onward, no two formation times may fall in the same dt_soft block.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            dt_soft_nb: PeTar global timestep block in N-body units.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">dt_soft</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">converter</span><span class="o">.</span><span class="n">to_si</span><span class="p">(</span><span class="n">dt_soft_nb</span><span class="p">)</span>
         <span class="n">ftimes</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">framework</span><span class="p">,</span> <span class="s2">&quot;formation_times&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
@@ -3452,7 +3974,12 @@
                 <span class="s2">&quot;setting the dt_tolerance &gt; dt_soft &quot;</span>
             <span class="p">)</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="nf">_disable_future_formation</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_disable_future_formation</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Clear pending formation events after a resumed run.</span>
+
+<span class="sd">        Implementation: currently resume is only implemented after stars forms.</span>
+<span class="sd">        this should not be needed. But to be safe.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">framework</span><span class="o">.</span><span class="n">formation_sequence</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">framework</span><span class="o">.</span><span class="n">formation_times</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">framework</span><span class="o">.</span><span class="n">_StarFormationFramework__next_formation_time</span> <span class="o">=</span> <span class="kc">None</span>
@@ -3475,7 +4002,7 @@
 
 
 <h3 id="dcaf.dcaf.DcafSystem.formed_stars" class="doc doc-heading">
-            <code class="highlight language-python"><span class="n">formed_stars</span></code>
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>            <code class="highlight language-python"><span class="n">formed_stars</span></code>
 
   <span class="doc doc-labels">
       <small class="doc doc-label doc-label-property"><code>property</code></small>
@@ -3486,8 +4013,9 @@
 
     <div class="doc doc-contents ">
 
-        <p>Return already formed stars updated. Only update the particles if model
-time has drifted or more stars has been added. Otherwise, the stored copy is provided.</p>
+        <p>Return already formed stars updated. It only update the particles if
+model time has drifted or more stars has been added. Otherwise, the
+stored copy is provided.</p>
 
     </div>
 
@@ -3499,8 +4027,39 @@ time has drifted or more stars has been added. Otherwise, the stored copy is pro
 <div class="doc doc-object doc-function">
 
 
+<h3 id="dcaf.dcaf.DcafSystem.update_formed_stars" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>            <code class="highlight language-python"><span class="n">update_formed_stars</span><span class="p">()</span></code>
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Refresh the cached formed-star particle set from PeTar.</p>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>dcaf/dcaf.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">217</span>
+<span class="normal">218</span>
+<span class="normal">219</span>
+<span class="normal">220</span>
+<span class="normal">221</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">update_formed_stars</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Refresh the cached formed-star particle set from PeTar.&quot;&quot;&quot;</span>
+    <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">timing</span><span class="p">(</span><span class="s1">&#39;[UPDATING STARS] ********************&#39;</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_formed_stars</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">petar_code</span><span class="o">.</span><span class="n">particles</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_formed_stars</span><span class="o">.</span><span class="n">collection_attributes</span><span class="o">.</span><span class="n">code_time</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">petar_code</span><span class="o">.</span><span class="n">model_time</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
 <h3 id="dcaf.dcaf.DcafSystem.initialize_system" class="doc doc-heading">
-            <code class="highlight language-python"><span class="n">initialize_system</span><span class="p">()</span></code>
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>            <code class="highlight language-python"><span class="n">initialize_system</span><span class="p">()</span></code>
 
 </h3>
 
@@ -3513,52 +4072,7 @@ or resume from the latest saved snapshot if self.resume is True.</p>
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>dcaf/dcaf.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">178</span>
-<span class="normal">179</span>
-<span class="normal">180</span>
-<span class="normal">181</span>
-<span class="normal">182</span>
-<span class="normal">183</span>
-<span class="normal">184</span>
-<span class="normal">185</span>
-<span class="normal">186</span>
-<span class="normal">187</span>
-<span class="normal">188</span>
-<span class="normal">189</span>
-<span class="normal">190</span>
-<span class="normal">191</span>
-<span class="normal">192</span>
-<span class="normal">193</span>
-<span class="normal">194</span>
-<span class="normal">195</span>
-<span class="normal">196</span>
-<span class="normal">197</span>
-<span class="normal">198</span>
-<span class="normal">199</span>
-<span class="normal">200</span>
-<span class="normal">201</span>
-<span class="normal">202</span>
-<span class="normal">203</span>
-<span class="normal">204</span>
-<span class="normal">205</span>
-<span class="normal">206</span>
-<span class="normal">207</span>
-<span class="normal">208</span>
-<span class="normal">209</span>
-<span class="normal">210</span>
-<span class="normal">211</span>
-<span class="normal">212</span>
-<span class="normal">213</span>
-<span class="normal">214</span>
-<span class="normal">215</span>
-<span class="normal">216</span>
-<span class="normal">217</span>
-<span class="normal">218</span>
-<span class="normal">219</span>
-<span class="normal">220</span>
-<span class="normal">221</span>
-<span class="normal">222</span>
-<span class="normal">223</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">223</span>
 <span class="normal">224</span>
 <span class="normal">225</span>
 <span class="normal">226</span>
@@ -3658,7 +4172,52 @@ or resume from the latest saved snapshot if self.resume is True.</p>
 <span class="normal">320</span>
 <span class="normal">321</span>
 <span class="normal">322</span>
-<span class="normal">323</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">initialize_system</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="normal">323</span>
+<span class="normal">324</span>
+<span class="normal">325</span>
+<span class="normal">326</span>
+<span class="normal">327</span>
+<span class="normal">328</span>
+<span class="normal">329</span>
+<span class="normal">330</span>
+<span class="normal">331</span>
+<span class="normal">332</span>
+<span class="normal">333</span>
+<span class="normal">334</span>
+<span class="normal">335</span>
+<span class="normal">336</span>
+<span class="normal">337</span>
+<span class="normal">338</span>
+<span class="normal">339</span>
+<span class="normal">340</span>
+<span class="normal">341</span>
+<span class="normal">342</span>
+<span class="normal">343</span>
+<span class="normal">344</span>
+<span class="normal">345</span>
+<span class="normal">346</span>
+<span class="normal">347</span>
+<span class="normal">348</span>
+<span class="normal">349</span>
+<span class="normal">350</span>
+<span class="normal">351</span>
+<span class="normal">352</span>
+<span class="normal">353</span>
+<span class="normal">354</span>
+<span class="normal">355</span>
+<span class="normal">356</span>
+<span class="normal">357</span>
+<span class="normal">358</span>
+<span class="normal">359</span>
+<span class="normal">360</span>
+<span class="normal">361</span>
+<span class="normal">362</span>
+<span class="normal">363</span>
+<span class="normal">364</span>
+<span class="normal">365</span>
+<span class="normal">366</span>
+<span class="normal">367</span>
+<span class="normal">368</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">initialize_system</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Instantiate PeTar and, if present, Bridge. Also add initial stars,</span>
 <span class="sd">    or resume from the latest saved snapshot if self.resume is True.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -3813,245 +4372,126 @@ or resume from the latest saved snapshot if self.resume is True.</p>
 <div class="doc doc-object doc-function">
 
 
-<h3 id="dcaf.dcaf.DcafSystem._setup_petar" class="doc doc-heading">
-            <code class="highlight language-python"><span class="n">_setup_petar</span><span class="p">(</span><span class="n">nworkers</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
-
-</h3>
-
-
-    <div class="doc doc-contents ">
-
-        <p>Initialize PeTar. No particles are added here.
-nworkers: if not given, is retrieved from config</p>
-
-
-            <details class="mkdocstrings-source">
-              <summary>Source code in <code>dcaf/dcaf.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">326</span>
-<span class="normal">327</span>
-<span class="normal">328</span>
-<span class="normal">329</span>
-<span class="normal">330</span>
-<span class="normal">331</span>
-<span class="normal">332</span>
-<span class="normal">333</span>
-<span class="normal">334</span>
-<span class="normal">335</span>
-<span class="normal">336</span>
-<span class="normal">337</span>
-<span class="normal">338</span>
-<span class="normal">339</span>
-<span class="normal">340</span>
-<span class="normal">341</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">_setup_petar</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">nworkers</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Initialize PeTar. No particles are added here.</span>
-<span class="sd">        nworkers: if not given, is retrieved from config</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">cfg</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;petar&quot;</span><span class="p">]</span>
-    <span class="k">if</span> <span class="n">nworkers</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">nworkers</span> <span class="o">=</span> <span class="n">cfg</span><span class="o">.</span><span class="n">number_of_workers</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">petar_code</span> <span class="o">=</span> <span class="n">Petar</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">converter</span><span class="p">,</span>
-                            <span class="n">redirection</span> <span class="o">=</span> <span class="n">cfg</span><span class="o">.</span><span class="n">redirection</span><span class="p">,</span>
-                            <span class="n">number_of_workers</span> <span class="o">=</span> <span class="n">nworkers</span> <span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">_current_workers</span> <span class="o">=</span> <span class="n">nworkers</span>
-
-    <span class="bp">self</span><span class="o">.</span><span class="n">petar_code</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">theta</span> <span class="o">=</span> <span class="n">cfg</span><span class="o">.</span><span class="n">theta</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">petar_code</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">r_bin</span> <span class="o">=</span> <span class="n">cfg</span><span class="o">.</span><span class="n">r_bin</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">petar_code</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">r_out</span> <span class="o">=</span> <span class="n">cfg</span><span class="o">.</span><span class="n">r_out</span> 
-    <span class="bp">self</span><span class="o">.</span><span class="n">petar_code</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">dt_soft</span> <span class="o">=</span> <span class="n">cfg</span><span class="o">.</span><span class="n">dt_soft</span>
-</code></pre></div></td></tr></table></div>
-            </details>
-    </div>
-
-</div>
-
-<div class="doc doc-object doc-function">
-
-
-<h3 id="dcaf.dcaf.DcafSystem._rebuild_system" class="doc doc-heading">
-            <code class="highlight language-python"><span class="n">_rebuild_system</span><span class="p">(</span><span class="n">nworkers</span><span class="p">)</span></code>
-
-</h3>
-
-
-    <div class="doc doc-contents ">
-
-        <p>Stop current PeTar, create a new instance with nworkers, and re-attach
-it (and Bridge if present) with the existing particles and model_time.</p>
-
-
-            <details class="mkdocstrings-source">
-              <summary>Source code in <code>dcaf/dcaf.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">363</span>
-<span class="normal">364</span>
-<span class="normal">365</span>
-<span class="normal">366</span>
-<span class="normal">367</span>
-<span class="normal">368</span>
-<span class="normal">369</span>
-<span class="normal">370</span>
-<span class="normal">371</span>
-<span class="normal">372</span>
-<span class="normal">373</span>
-<span class="normal">374</span>
-<span class="normal">375</span>
-<span class="normal">376</span>
-<span class="normal">377</span>
-<span class="normal">378</span>
-<span class="normal">379</span>
-<span class="normal">380</span>
-<span class="normal">381</span>
-<span class="normal">382</span>
-<span class="normal">383</span>
-<span class="normal">384</span>
-<span class="normal">385</span>
-<span class="normal">386</span>
-<span class="normal">387</span>
-<span class="normal">388</span>
-<span class="normal">389</span>
-<span class="normal">390</span>
-<span class="normal">391</span>
-<span class="normal">392</span>
-<span class="normal">393</span>
-<span class="normal">394</span>
-<span class="normal">395</span>
-<span class="normal">396</span>
-<span class="normal">397</span>
-<span class="normal">398</span>
-<span class="normal">399</span>
-<span class="normal">400</span>
-<span class="normal">401</span>
-<span class="normal">402</span>
-<span class="normal">403</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">_rebuild_system</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nworkers</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Stop current PeTar, create a new instance with nworkers, and re-attach</span>
-<span class="sd">    it (and Bridge if present) with the existing particles and model_time.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="c1"># grab current state</span>
-    <span class="n">old_petar</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">petar_code</span>
-    <span class="n">stars</span>     <span class="o">=</span> <span class="n">old_petar</span><span class="o">.</span><span class="n">particles</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-    <span class="n">t_now</span>     <span class="o">=</span> <span class="n">old_petar</span><span class="o">.</span><span class="n">model_time</span>
-
-    <span class="c1"># stop old instance</span>
-    <span class="n">old_petar</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
-    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">bridge_code</span> <span class="p">:</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">bridge_code</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
-
-    <span class="c1"># update config so future calls know the current worker count</span>
-    <span class="c1"># self.config[&quot;petar&quot;].number_of_workers = nworkers</span>
-
-    <span class="c1"># build new PeTar with same converter/params but new worker count</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[DCAF][SCALING] Rebuilding PeTar with </span><span class="si">{</span><span class="n">nworkers</span><span class="si">}</span><span class="s2"> workers&quot;</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">_setup_petar</span><span class="p">(</span><span class="n">nworkers</span> <span class="o">=</span> <span class="n">nworkers</span><span class="p">)</span>  <span class="c1"># uses self.config[&quot;petar&quot;]</span>
-
-    <span class="c1"># restore particles and time</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">petar_code</span><span class="o">.</span><span class="n">particles</span><span class="o">.</span><span class="n">add_particles</span><span class="p">(</span><span class="n">stars</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">petar_code</span><span class="o">.</span><span class="n">model_time</span> <span class="o">=</span> <span class="n">t_now</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">petar_code</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">begin_time</span> <span class="o">=</span> <span class="n">t_now</span>
-
-    <span class="c1"># rebuild Bridge if we have gas; otherwise just use PeTar directly</span>
-    <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;gas_code&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_setup_bridge</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">bridge_code</span><span class="o">.</span><span class="n">add_system</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">petar_code</span><span class="p">,</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">gas_code</span><span class="p">,),</span> <span class="kc">False</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">bridge_code</span><span class="o">.</span><span class="n">add_system</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">gas_code</span><span class="p">)</span>
-        <span class="c1"># if you later have an observer/tracker, re-add it here as well</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">track_background_gas_energy</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">bridge_code</span><span class="o">.</span><span class="n">add_system</span><span class="p">(</span> <span class="bp">self</span><span class="o">.</span><span class="n">_gas_tracker</span> <span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">code</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">bridge_code</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">code</span><span class="o">.</span><span class="n">model_time</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model_time</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;[DCAF][SCALING] Bridge rebuilt after PeTar rescale&quot;</span><span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">bridge_code</span> <span class="o">=</span> <span class="kc">None</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">code</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">petar_code</span>
-</code></pre></div></td></tr></table></div>
-            </details>
-    </div>
-
-</div>
-
-<div class="doc doc-object doc-function">
-
-
 <h3 id="dcaf.dcaf.DcafSystem.evolve_model" class="doc doc-heading">
-            <code class="highlight language-python"><span class="n">evolve_model</span><span class="p">(</span><span class="n">t_end</span><span class="p">)</span></code>
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>            <code class="highlight language-python"><span class="n">evolve_model</span><span class="p">(</span><span class="n">t_end</span><span class="p">)</span></code>
 
 </h3>
 
 
     <div class="doc doc-contents ">
 
-        <p>Advance the coupled system to t_end, interleaving outputs and
+        <p>Advance the coupled system to <code>t_end</code>, interleaving outputs and
 formation events.</p>
 
 
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>t_end</code>
+            </td>
+            <td>
+                  <code><span title="amuse.units.quantities.Quantity">Quantity</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Target time to evolve the system.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
             <details class="mkdocstrings-source">
               <summary>Source code in <code>dcaf/dcaf.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">408</span>
-<span class="normal">409</span>
-<span class="normal">410</span>
-<span class="normal">411</span>
-<span class="normal">412</span>
-<span class="normal">413</span>
-<span class="normal">414</span>
-<span class="normal">415</span>
-<span class="normal">416</span>
-<span class="normal">417</span>
-<span class="normal">418</span>
-<span class="normal">419</span>
-<span class="normal">420</span>
-<span class="normal">421</span>
-<span class="normal">422</span>
-<span class="normal">423</span>
-<span class="normal">424</span>
-<span class="normal">425</span>
-<span class="normal">426</span>
-<span class="normal">427</span>
-<span class="normal">428</span>
-<span class="normal">429</span>
-<span class="normal">430</span>
-<span class="normal">431</span>
-<span class="normal">432</span>
-<span class="normal">433</span>
-<span class="normal">434</span>
-<span class="normal">435</span>
-<span class="normal">436</span>
-<span class="normal">437</span>
-<span class="normal">438</span>
-<span class="normal">439</span>
-<span class="normal">440</span>
-<span class="normal">441</span>
-<span class="normal">442</span>
-<span class="normal">443</span>
-<span class="normal">444</span>
-<span class="normal">445</span>
-<span class="normal">446</span>
-<span class="normal">447</span>
-<span class="normal">448</span>
-<span class="normal">449</span>
-<span class="normal">450</span>
-<span class="normal">451</span>
-<span class="normal">452</span>
-<span class="normal">453</span>
-<span class="normal">454</span>
-<span class="normal">455</span>
-<span class="normal">456</span>
-<span class="normal">457</span>
-<span class="normal">458</span>
-<span class="normal">459</span>
-<span class="normal">460</span>
-<span class="normal">461</span>
-<span class="normal">462</span>
-<span class="normal">463</span>
-<span class="normal">464</span>
-<span class="normal">465</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">465</span>
 <span class="normal">466</span>
 <span class="normal">467</span>
 <span class="normal">468</span>
 <span class="normal">469</span>
 <span class="normal">470</span>
 <span class="normal">471</span>
-<span class="normal">472</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">evolve_model</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">t_end</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Advance the coupled system to t_end, interleaving outputs and</span>
-<span class="sd">    formation events.&quot;&quot;&quot;</span>
+<span class="normal">472</span>
+<span class="normal">473</span>
+<span class="normal">474</span>
+<span class="normal">475</span>
+<span class="normal">476</span>
+<span class="normal">477</span>
+<span class="normal">478</span>
+<span class="normal">479</span>
+<span class="normal">480</span>
+<span class="normal">481</span>
+<span class="normal">482</span>
+<span class="normal">483</span>
+<span class="normal">484</span>
+<span class="normal">485</span>
+<span class="normal">486</span>
+<span class="normal">487</span>
+<span class="normal">488</span>
+<span class="normal">489</span>
+<span class="normal">490</span>
+<span class="normal">491</span>
+<span class="normal">492</span>
+<span class="normal">493</span>
+<span class="normal">494</span>
+<span class="normal">495</span>
+<span class="normal">496</span>
+<span class="normal">497</span>
+<span class="normal">498</span>
+<span class="normal">499</span>
+<span class="normal">500</span>
+<span class="normal">501</span>
+<span class="normal">502</span>
+<span class="normal">503</span>
+<span class="normal">504</span>
+<span class="normal">505</span>
+<span class="normal">506</span>
+<span class="normal">507</span>
+<span class="normal">508</span>
+<span class="normal">509</span>
+<span class="normal">510</span>
+<span class="normal">511</span>
+<span class="normal">512</span>
+<span class="normal">513</span>
+<span class="normal">514</span>
+<span class="normal">515</span>
+<span class="normal">516</span>
+<span class="normal">517</span>
+<span class="normal">518</span>
+<span class="normal">519</span>
+<span class="normal">520</span>
+<span class="normal">521</span>
+<span class="normal">522</span>
+<span class="normal">523</span>
+<span class="normal">524</span>
+<span class="normal">525</span>
+<span class="normal">526</span>
+<span class="normal">527</span>
+<span class="normal">528</span>
+<span class="normal">529</span>
+<span class="normal">530</span>
+<span class="normal">531</span>
+<span class="normal">532</span>
+<span class="normal">533</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">evolve_model</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">t_end</span><span class="p">:</span> <span class="n">Quantity</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Advance the coupled system to `t_end`, interleaving outputs and</span>
+<span class="sd">    formation events.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        t_end: Target time to evolve the system.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">model_time</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;Call initialize_system() before evolve_model().&quot;</span><span class="p">)</span>
 
@@ -4123,277 +4563,54 @@ formation events.</p>
 <div class="doc doc-object doc-function">
 
 
-<h3 id="dcaf.dcaf.DcafSystem._ceil_to_block" class="doc doc-heading">
-            <code class="highlight language-python"><span class="n">_ceil_to_block</span><span class="p">(</span><span class="n">t_si</span><span class="p">)</span></code>
+<h3 id="dcaf.dcaf.DcafSystem.write_output" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>            <code class="highlight language-python"><span class="n">write_output</span><span class="p">()</span></code>
 
 </h3>
 
 
     <div class="doc doc-contents ">
 
-        <p>Get the closest time to a dt_soft multiple.
-We will perform operations only on those times for better performance</p>
+        <p>Write a stellar snapshot, gas output, and energy row.</p>
 
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>dcaf/dcaf.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">574</span>
-<span class="normal">575</span>
-<span class="normal">576</span>
-<span class="normal">577</span>
-<span class="normal">578</span>
-<span class="normal">579</span>
-<span class="normal">580</span>
-<span class="normal">581</span>
-<span class="normal">582</span>
-<span class="normal">583</span>
-<span class="normal">584</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">_ceil_to_block</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">t_si</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Get the closest time to a dt_soft multiple.</span>
-<span class="sd">    We will perform operations only on those times for better performance</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">dt_soft_eff</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span> <span class="s1">&#39;dt_soft_eff must be updated&#39;</span> <span class="p">)</span>
-    <span class="n">dtnb</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">converter</span><span class="o">.</span><span class="n">to_nbody</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dt_soft_eff</span><span class="p">)</span><span class="o">.</span><span class="n">number</span>
-    <span class="n">knb</span>  <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">converter</span><span class="o">.</span><span class="n">to_nbody</span><span class="p">(</span><span class="n">t_si</span><span class="p">)</span><span class="o">.</span><span class="n">number</span> <span class="o">/</span> <span class="n">dtnb</span>
-    <span class="n">k</span>    <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">knb</span><span class="p">)</span>                                 <span class="c1"># nearest integer index</span>
-    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">converter</span><span class="o">.</span><span class="n">to_si</span><span class="p">(</span> <span class="p">(</span> <span class="n">k</span> <span class="o">*</span> <span class="n">dtnb</span><span class="p">)</span>  <span class="o">|</span> <span class="n">nbody_system</span><span class="o">.</span><span class="n">time</span> <span class="p">)</span>
-</code></pre></div></td></tr></table></div>
-            </details>
-    </div>
-
-</div>
-
-<div class="doc doc-object doc-function">
-
-
-<h3 id="dcaf.dcaf.DcafSystem._write_energy_row" class="doc doc-heading">
-            <code class="highlight language-python"><span class="n">_write_energy_row</span><span class="p">()</span></code>
-
-</h3>
-
-
-    <div class="doc doc-contents ">
-
-        <p>Append to energy file</p>
-
-
-            <details class="mkdocstrings-source">
-              <summary>Source code in <code>dcaf/dcaf.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">653</span>
-<span class="normal">654</span>
-<span class="normal">655</span>
-<span class="normal">656</span>
-<span class="normal">657</span>
-<span class="normal">658</span>
-<span class="normal">659</span>
-<span class="normal">660</span>
-<span class="normal">661</span>
-<span class="normal">662</span>
-<span class="normal">663</span>
-<span class="normal">664</span>
-<span class="normal">665</span>
-<span class="normal">666</span>
-<span class="normal">667</span>
-<span class="normal">668</span>
-<span class="normal">669</span>
-<span class="normal">670</span>
-<span class="normal">671</span>
-<span class="normal">672</span>
-<span class="normal">673</span>
-<span class="normal">674</span>
-<span class="normal">675</span>
-<span class="normal">676</span>
-<span class="normal">677</span>
-<span class="normal">678</span>
-<span class="normal">679</span>
-<span class="normal">680</span>
-<span class="normal">681</span>
-<span class="normal">682</span>
-<span class="normal">683</span>
-<span class="normal">684</span>
-<span class="normal">685</span>
-<span class="normal">686</span>
-<span class="normal">687</span>
-<span class="normal">688</span>
-<span class="normal">689</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">_write_energy_row</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Append to energy file</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">output_folder</span><span class="p">,</span> <span class="s2">&quot;energy.dat&quot;</span><span class="p">)</span>
-    <span class="n">file_is_new</span> <span class="o">=</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
-
-    <span class="c1"># extract scalars in SI (J) and time in Myr</span>
-    <span class="n">t_myr</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model_time</span><span class="o">.</span><span class="n">value_in</span><span class="p">(</span><span class="n">units</span><span class="o">.</span><span class="n">Myr</span><span class="p">))</span>
-    <span class="n">t_nb</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span> <span class="bp">self</span><span class="o">.</span><span class="n">converter</span><span class="o">.</span><span class="n">to_nbody</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model_time</span><span class="p">)</span><span class="o">.</span><span class="n">number</span> <span class="p">)</span>
-    <span class="n">vals</span> <span class="o">=</span> <span class="p">[</span>
-        <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_total_energy</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">value_in</span><span class="p">(</span><span class="n">units</span><span class="o">.</span><span class="n">J</span><span class="p">)),</span>  <span class="c1"># Total energy</span>
-        <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_energy_errors</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">),</span> <span class="c1"># step error</span>
-        <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_energy_errors</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="p">),</span> <span class="c1"># cumulative error</span>
-        <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_energy_components</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">value_in</span><span class="p">(</span><span class="n">units</span><span class="o">.</span><span class="n">J</span><span class="p">)),</span>  <span class="c1"># Ekin</span>
-        <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_energy_components</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">value_in</span><span class="p">(</span><span class="n">units</span><span class="o">.</span><span class="n">J</span><span class="p">)),</span>  <span class="c1"># U_self</span>
-        <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_energy_components</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">value_in</span><span class="p">(</span><span class="n">units</span><span class="o">.</span><span class="n">J</span><span class="p">)),</span>  <span class="c1"># U_bg</span>
-        <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_energy_components</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">value_in</span><span class="p">(</span><span class="n">units</span><span class="o">.</span><span class="n">J</span><span class="p">)),</span>  <span class="c1"># W_gas</span>
-        <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_energy_budgets</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">value_in</span><span class="p">(</span><span class="n">units</span><span class="o">.</span><span class="n">J</span><span class="p">)),</span>  <span class="c1"># E_new_stars</span>
-        <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_energy_budgets</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">value_in</span><span class="p">(</span><span class="n">units</span><span class="o">.</span><span class="n">J</span><span class="p">)),</span>  <span class="c1"># E_SE</span>
-        <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_energy_budgets</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">value_in</span><span class="p">(</span><span class="n">units</span><span class="o">.</span><span class="n">J</span><span class="p">)),</span>  <span class="c1"># E_gas_evol</span>
-        <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_energy_budgets</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">value_in</span><span class="p">(</span><span class="n">units</span><span class="o">.</span><span class="n">J</span><span class="p">)),</span>  <span class="c1"># E_bin</span>
-    <span class="p">]</span>
-
-    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s2">&quot;a&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">file_is_new</span><span class="p">:</span>
-            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span>
-                <span class="s2">&quot;# units in Joules by default </span><span class="se">\n</span><span class="s2">&quot;</span>
-                <span class="s2">&quot;# t_Myr t_nb E |dE/E|  sum(|dE/E|) T_*  U_*,*  U_*,gas&quot;</span>
-                <span class="s2">&quot;  W_gas  E_new_stars  E_SE   E_gas_evol  E_bin</span><span class="se">\n</span><span class="s2">&quot;</span>
-            <span class="p">)</span>
-
-        <span class="n">line</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">t_myr</span><span class="si">:</span><span class="s2">.6e</span><span class="si">}</span><span class="s2">  </span><span class="si">{</span><span class="n">t_nb</span><span class="si">:</span><span class="s2">.6e</span><span class="si">}</span><span class="s2">  &quot;</span>
-        <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">vals</span><span class="p">:</span>
-            <span class="n">line</span> <span class="o">+=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">v</span><span class="si">:</span><span class="s1">.6e</span><span class="si">}</span><span class="s1">  &#39;</span>
-        <span class="n">line</span> <span class="o">+=</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
-        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
-            </details>
-    </div>
-
-</div>
-
-<div class="doc doc-object doc-function">
-
-
-<h3 id="dcaf.dcaf.DcafSystem._validate_formation_schedule" class="doc doc-heading">
-            <code class="highlight language-python"><span class="n">_validate_formation_schedule</span><span class="p">(</span><span class="n">dt_soft_nb</span><span class="p">)</span></code>
-
-</h3>
-
-
-    <div class="doc doc-contents ">
-
-        <p>Validate that the intended formation schedule do not violate a set of
-rules designed to avoid adding stars twice during the same dt_soft
-block. Dcaf will be delay the formation events to the end of the next
-dt_soft block for better performance, but this means it can not add
-twice on the same block since may cause unintended results.
-Instead of handeling those events in dcaf, we leave the user to handle
-the decission on how to proceed. In case those rules are brokent, we
-raise an informative exception with suggested modifications to either
-the formation schedule or the chosen dt_soft.
-As a rule of thumb, formation events should be separated at least twice
-dt_soft in order to be consistent.</p>
-
-
-<details class="the-scheduled-times-should-follow-these-rules" open>
-  <summary>The scheduled times should follow these rules</summary>
-  <ul>
-<li>First formation time t0 may be &lt; dt_soft (we will place the first add at &gt;= dt_soft).</li>
-<li>From the first forming block onward, no two formation times may fall in the same dt_soft block.</li>
-</ul>
-</details>
-
-            <details class="mkdocstrings-source">
-              <summary>Source code in <code>dcaf/dcaf.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">691</span>
-<span class="normal">692</span>
-<span class="normal">693</span>
-<span class="normal">694</span>
-<span class="normal">695</span>
-<span class="normal">696</span>
-<span class="normal">697</span>
-<span class="normal">698</span>
-<span class="normal">699</span>
-<span class="normal">700</span>
-<span class="normal">701</span>
-<span class="normal">702</span>
-<span class="normal">703</span>
-<span class="normal">704</span>
-<span class="normal">705</span>
-<span class="normal">706</span>
-<span class="normal">707</span>
-<span class="normal">708</span>
-<span class="normal">709</span>
-<span class="normal">710</span>
-<span class="normal">711</span>
-<span class="normal">712</span>
-<span class="normal">713</span>
-<span class="normal">714</span>
-<span class="normal">715</span>
-<span class="normal">716</span>
-<span class="normal">717</span>
-<span class="normal">718</span>
-<span class="normal">719</span>
-<span class="normal">720</span>
-<span class="normal">721</span>
-<span class="normal">722</span>
-<span class="normal">723</span>
-<span class="normal">724</span>
-<span class="normal">725</span>
-<span class="normal">726</span>
-<span class="normal">727</span>
-<span class="normal">728</span>
-<span class="normal">729</span>
-<span class="normal">730</span>
-<span class="normal">731</span>
-<span class="normal">732</span>
-<span class="normal">733</span>
-<span class="normal">734</span>
-<span class="normal">735</span>
-<span class="normal">736</span>
-<span class="normal">737</span>
-<span class="normal">738</span>
-<span class="normal">739</span>
-<span class="normal">740</span>
-<span class="normal">741</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">_validate_formation_schedule</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">dt_soft_nb</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Validate that the intended formation schedule do not violate a set of</span>
-<span class="sd">    rules designed to avoid adding stars twice during the same dt_soft</span>
-<span class="sd">    block. Dcaf will be delay the formation events to the end of the next</span>
-<span class="sd">    dt_soft block for better performance, but this means it can not add</span>
-<span class="sd">    twice on the same block since may cause unintended results.</span>
-<span class="sd">    Instead of handeling those events in dcaf, we leave the user to handle</span>
-<span class="sd">    the decission on how to proceed. In case those rules are brokent, we</span>
-<span class="sd">    raise an informative exception with suggested modifications to either</span>
-<span class="sd">    the formation schedule or the chosen dt_soft.</span>
-<span class="sd">    As a rule of thumb, formation events should be separated at least twice</span>
-<span class="sd">    dt_soft in order to be consistent.</span>
-
-<span class="sd">    The scheduled times should follow these rules:</span>
-<span class="sd">      - First formation time t0 may be &lt; dt_soft (we will place the first add at &gt;= dt_soft).</span>
-<span class="sd">      - From the first forming block onward, no two formation times may fall in the same dt_soft block.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">dt_soft</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">converter</span><span class="o">.</span><span class="n">to_si</span><span class="p">(</span><span class="n">dt_soft_nb</span><span class="p">)</span>
-    <span class="n">ftimes</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">framework</span><span class="p">,</span> <span class="s2">&quot;formation_times&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">ftimes</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">ftimes</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;[DCAF][VALIDATOR] formation_times is empty.&quot;</span><span class="p">)</span>
-
-    <span class="n">ftimes</span> <span class="o">=</span> <span class="p">[</span> <span class="n">t</span><span class="o">.</span><span class="n">value_in</span><span class="p">(</span><span class="n">units</span><span class="o">.</span><span class="n">Myr</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">ftimes</span> <span class="p">]</span> <span class="o">|</span> <span class="n">units</span><span class="o">.</span><span class="n">Myr</span>
-
-    <span class="n">t0</span> <span class="o">=</span> <span class="n">ftimes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-
-    <span class="n">t_eff0</span> <span class="o">=</span> <span class="n">dt_soft</span> <span class="k">if</span> <span class="n">t0</span> <span class="o">&lt;</span> <span class="n">dt_soft</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ceil_to_block</span><span class="p">(</span><span class="n">t0</span><span class="p">)</span>
-
-    <span class="n">blocks</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">floor</span><span class="p">(((</span><span class="n">ftimes</span> <span class="o">-</span> <span class="n">t_eff0</span><span class="p">)</span> <span class="o">/</span> <span class="n">dt_soft</span><span class="p">))</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
-
-    <span class="c1"># Check duplicates after the first</span>
-    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">blocks</span><span class="p">[</span><span class="mi">1</span><span class="p">:]))</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">blocks</span><span class="p">[</span><span class="mi">1</span><span class="p">:]):</span>
-        <span class="c1"># Gaps between consecutive events</span>
-        <span class="n">gaps</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">ftimes</span><span class="p">))</span>
-        <span class="n">min_gap</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">gaps</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">gaps</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="k">else</span> <span class="kc">None</span>
-
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
-            <span class="s2">&quot;[DCAF][VALIDATOR] Two or more formation events fall in the &quot;</span>
-            <span class="s2">&quot;same dt_soft block. Counting from the first forming block at &quot;</span>
-            <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">t_eff0</span><span class="o">.</span><span class="n">in_</span><span class="p">(</span><span class="n">units</span><span class="o">.</span><span class="n">Myr</span><span class="p">)</span><span class="si">}</span><span class="s2"> &quot;</span>
-            <span class="sa">f</span><span class="s2">&quot;(minimum width is dt_soft= </span><span class="si">{</span><span class="n">dt_soft</span><span class="o">.</span><span class="n">in_</span><span class="p">(</span><span class="n">units</span><span class="o">.</span><span class="n">Myr</span><span class="p">)</span><span class="si">}</span><span class="s2">)</span><span class="se">\n</span><span class="s2">&quot;</span>
-            <span class="sa">f</span><span class="s2">&quot;Currently the minimum space between formation events provided&quot;</span>
-            <span class="sa">f</span><span class="s2">&quot; is </span><span class="si">{</span><span class="n">min_gap</span><span class="o">.</span><span class="n">in_</span><span class="p">(</span><span class="n">units</span><span class="o">.</span><span class="n">Myr</span><span class="p">)</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">min_gap</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">&#39;N/A&#39;</span><span class="si">}</span><span class="s2">. &quot;</span>
-            <span class="s2">&quot; The solution is either decrease dt_soft below the minimum&quot;</span>
-            <span class="s2">&quot; space between events or increase the space between events &quot;</span>
-            <span class="s2">&quot; to a value greater than dt_soft. &quot;</span>
-            <span class="s2">&quot; If using a class inherited from &quot;</span>
-            <span class="s2">&quot;dcaf.framework.starformation.StarFormationFramework this means &quot;</span>
-            <span class="s2">&quot;setting the dt_tolerance &gt; dt_soft &quot;</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">538</span>
+<span class="normal">539</span>
+<span class="normal">540</span>
+<span class="normal">541</span>
+<span class="normal">542</span>
+<span class="normal">543</span>
+<span class="normal">544</span>
+<span class="normal">545</span>
+<span class="normal">546</span>
+<span class="normal">547</span>
+<span class="normal">548</span>
+<span class="normal">549</span>
+<span class="normal">550</span>
+<span class="normal">551</span>
+<span class="normal">552</span>
+<span class="normal">553</span>
+<span class="normal">554</span>
+<span class="normal">555</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">write_output</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Write a stellar snapshot, gas output, and energy row.&quot;&quot;&quot;</span>
+    <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">timing</span><span class="p">(</span><span class="s1">&#39;[WRITING OUTPUT]&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;[DCAF] [WRITING OUTPUT] Snap: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">__current_snapshot</span><span class="si">}</span><span class="s2">, &quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;Time </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">model_time</span><span class="o">.</span><span class="n">in_</span><span class="p">(</span><span class="n">units</span><span class="o">.</span><span class="n">Myr</span><span class="p">)</span><span class="si">}</span><span class="s2"> *************&quot;</span>
         <span class="p">)</span>
+        <span class="n">filename</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">output_folder</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">snapshot_basename</span><span class="si">}{</span><span class="bp">self</span><span class="o">.</span><span class="n">__current_snapshot</span><span class="si">:</span><span class="s2">03d</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">formed_stars</span><span class="o">.</span><span class="n">collection_attributes</span><span class="o">.</span><span class="n">model_time</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model_time</span>
+        <span class="n">write_set_to_file</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">formed_stars</span><span class="p">,</span> <span class="n">filename</span> <span class="o">+</span> <span class="s2">&quot;.amuse&quot;</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;amuse&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__current_snapshot</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">framework</span><span class="o">.</span><span class="n">background_gas</span> <span class="ow">and</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">framework</span><span class="o">.</span><span class="n">background_gas</span><span class="p">,</span> <span class="s1">&#39;write_output&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">framework</span><span class="o">.</span><span class="n">background_gas</span><span class="o">.</span><span class="n">write_output</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_energy_check</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_write_energy_row</span><span class="p">()</span>
 </code></pre></div></td></tr></table></div>
             </details>
     </div>
@@ -4413,7 +4630,7 @@ dt_soft in order to be consistent.</p>
 
 
 <h2 id="dcaf.dcaf.GasEnergyTracker" class="doc doc-heading">
-            <code>GasEnergyTracker</code>
+<code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>            <code>GasEnergyTracker</code>
 
 
 </h2>
@@ -4425,6 +4642,46 @@ dt_soft in order to be consistent.</p>
 
         <p>This is a helper class to pass into Bridge in order to keep track of the
 work done by the gas at Bridge timestep level for energy conservation check.</p>
+<p>This helper is added to Bridge alongside the stellar dynamics and background
+gas systems when <code>track_background_gas_energy</code> is enabled. It does not exert
+forces: its gravity and potential methods return zero so it acts only as an
+energy observer.</p>
+<p>At every Bridge substep, <code>evolve_model()</code> evaluates <code>dPhi/dt</code> from the
+background-gas model at the current stellar positions. It computes
+<code>sum(m_i * dPhi/dt)</code> and integrates this quantity over the Bridge timestep
+with the trapezoidal rule. The accumulated work is retrieved by
+<code>DcafSystem._energy_check()</code> and included in the energy diagnostics.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>dcaf</code>
+            </td>
+            <td>
+                  <code><a class="autorefs autorefs-internal" title="            DcafSystem (dcaf.dcaf.DcafSystem)" href="#dcaf.dcaf.DcafSystem">DcafSystem</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>D-CAF system whose gas potential is tracked.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
 
 
 
@@ -4433,76 +4690,203 @@ work done by the gas at Bridge timestep level for energy conservation check.</p>
 
 
 
+
+
+<p><span class="doc-section-title">Methods:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+            <tr class="doc-section-item">
+              <td><code><a class="autorefs autorefs-internal" title="            get_gravity_at_point(*args, **kwargs) (dcaf.dcaf.GasEnergyTracker.get_gravity_at_point)" href="#dcaf.dcaf.GasEnergyTracker.get_gravity_at_point">get_gravity_at_point</a></code></td>
+              <td>
+                <div class="doc-md-description">
+                  <p>Return zero acceleration for Bridge compatibility.</p>
+                </div>
+              </td>
+            </tr>
+            <tr class="doc-section-item">
+              <td><code><a class="autorefs autorefs-internal" title="            get_potential_at_point(*args, **kwargs) (dcaf.dcaf.GasEnergyTracker.get_potential_at_point)" href="#dcaf.dcaf.GasEnergyTracker.get_potential_at_point">get_potential_at_point</a></code></td>
+              <td>
+                <div class="doc-md-description">
+                  <p>Return an inert potential for Bridge compatibility.</p>
+                </div>
+              </td>
+            </tr>
+            <tr class="doc-section-item">
+              <td><code><a class="autorefs autorefs-internal" title="            stop(*args, **kwargs) (dcaf.dcaf.GasEnergyTracker.stop)" href="#dcaf.dcaf.GasEnergyTracker.stop">stop</a></code></td>
+              <td>
+                <div class="doc-md-description">
+                  <p>Implement Bridge's stop hook without extra cleanup.</p>
+                </div>
+              </td>
+            </tr>
+            <tr class="doc-section-item">
+              <td><code><a class="autorefs autorefs-internal" title="            evolve_model(t_next) (dcaf.dcaf.GasEnergyTracker.evolve_model)" href="#dcaf.dcaf.GasEnergyTracker.evolve_model">evolve_model</a></code></td>
+              <td>
+                <div class="doc-md-description">
+                  <p>Integrate the work done by the evolving gas potential.</p>
+                </div>
+              </td>
+            </tr>
+            <tr class="doc-section-item">
+              <td><code><a class="autorefs autorefs-internal" title="            retrieve_stored_energy() (dcaf.dcaf.GasEnergyTracker.retrieve_stored_energy)" href="#dcaf.dcaf.GasEnergyTracker.retrieve_stored_energy">retrieve_stored_energy</a></code></td>
+              <td>
+                <div class="doc-md-description">
+                  <p>Return accumulated gas work and reset the accumulator.</p>
+                </div>
+              </td>
+            </tr>
+      </tbody>
+    </table>
 
 
               <details class="mkdocstrings-source">
                 <summary>Source code in <code>dcaf/dcaf.py</code></summary>
-                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">749</span>
-<span class="normal">750</span>
-<span class="normal">751</span>
-<span class="normal">752</span>
-<span class="normal">753</span>
-<span class="normal">754</span>
-<span class="normal">755</span>
-<span class="normal">756</span>
-<span class="normal">757</span>
-<span class="normal">758</span>
-<span class="normal">759</span>
-<span class="normal">760</span>
-<span class="normal">761</span>
-<span class="normal">762</span>
-<span class="normal">763</span>
-<span class="normal">764</span>
-<span class="normal">765</span>
-<span class="normal">766</span>
-<span class="normal">767</span>
-<span class="normal">768</span>
-<span class="normal">769</span>
-<span class="normal">770</span>
-<span class="normal">771</span>
-<span class="normal">772</span>
-<span class="normal">773</span>
-<span class="normal">774</span>
-<span class="normal">775</span>
-<span class="normal">776</span>
-<span class="normal">777</span>
-<span class="normal">778</span>
-<span class="normal">779</span>
-<span class="normal">780</span>
-<span class="normal">781</span>
-<span class="normal">782</span>
-<span class="normal">783</span>
-<span class="normal">784</span>
-<span class="normal">785</span>
-<span class="normal">786</span>
-<span class="normal">787</span>
-<span class="normal">788</span>
-<span class="normal">789</span>
-<span class="normal">790</span>
-<span class="normal">791</span>
-<span class="normal">792</span>
-<span class="normal">793</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">GasEnergyTracker</span><span class="p">:</span>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">843</span>
+<span class="normal">844</span>
+<span class="normal">845</span>
+<span class="normal">846</span>
+<span class="normal">847</span>
+<span class="normal">848</span>
+<span class="normal">849</span>
+<span class="normal">850</span>
+<span class="normal">851</span>
+<span class="normal">852</span>
+<span class="normal">853</span>
+<span class="normal">854</span>
+<span class="normal">855</span>
+<span class="normal">856</span>
+<span class="normal">857</span>
+<span class="normal">858</span>
+<span class="normal">859</span>
+<span class="normal">860</span>
+<span class="normal">861</span>
+<span class="normal">862</span>
+<span class="normal">863</span>
+<span class="normal">864</span>
+<span class="normal">865</span>
+<span class="normal">866</span>
+<span class="normal">867</span>
+<span class="normal">868</span>
+<span class="normal">869</span>
+<span class="normal">870</span>
+<span class="normal">871</span>
+<span class="normal">872</span>
+<span class="normal">873</span>
+<span class="normal">874</span>
+<span class="normal">875</span>
+<span class="normal">876</span>
+<span class="normal">877</span>
+<span class="normal">878</span>
+<span class="normal">879</span>
+<span class="normal">880</span>
+<span class="normal">881</span>
+<span class="normal">882</span>
+<span class="normal">883</span>
+<span class="normal">884</span>
+<span class="normal">885</span>
+<span class="normal">886</span>
+<span class="normal">887</span>
+<span class="normal">888</span>
+<span class="normal">889</span>
+<span class="normal">890</span>
+<span class="normal">891</span>
+<span class="normal">892</span>
+<span class="normal">893</span>
+<span class="normal">894</span>
+<span class="normal">895</span>
+<span class="normal">896</span>
+<span class="normal">897</span>
+<span class="normal">898</span>
+<span class="normal">899</span>
+<span class="normal">900</span>
+<span class="normal">901</span>
+<span class="normal">902</span>
+<span class="normal">903</span>
+<span class="normal">904</span>
+<span class="normal">905</span>
+<span class="normal">906</span>
+<span class="normal">907</span>
+<span class="normal">908</span>
+<span class="normal">909</span>
+<span class="normal">910</span>
+<span class="normal">911</span>
+<span class="normal">912</span>
+<span class="normal">913</span>
+<span class="normal">914</span>
+<span class="normal">915</span>
+<span class="normal">916</span>
+<span class="normal">917</span>
+<span class="normal">918</span>
+<span class="normal">919</span>
+<span class="normal">920</span>
+<span class="normal">921</span>
+<span class="normal">922</span>
+<span class="normal">923</span>
+<span class="normal">924</span>
+<span class="normal">925</span>
+<span class="normal">926</span>
+<span class="normal">927</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">GasEnergyTracker</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    This is a helper class to pass into Bridge in order to keep track of the</span>
 <span class="sd">    work done by the gas at Bridge timestep level for energy conservation check.</span>
 
+<span class="sd">    This helper is added to Bridge alongside the stellar dynamics and background</span>
+<span class="sd">    gas systems when `track_background_gas_energy` is enabled. It does not exert</span>
+<span class="sd">    forces: its gravity and potential methods return zero so it acts only as an</span>
+<span class="sd">    energy observer.</span>
+
+<span class="sd">    At every Bridge substep, `evolve_model()` evaluates `dPhi/dt` from the</span>
+<span class="sd">    background-gas model at the current stellar positions. It computes</span>
+<span class="sd">    `sum(m_i * dPhi/dt)` and integrates this quantity over the Bridge timestep</span>
+<span class="sd">    with the trapezoidal rule. The accumulated work is retrieved by</span>
+<span class="sd">    `DcafSystem._energy_check()` and included in the energy diagnostics.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        dcaf: D-CAF system whose gas potential is tracked.</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dcaf</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dcaf</span><span class="p">:</span> <span class="n">DcafSystem</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">dcaf</span> <span class="o">=</span> <span class="n">dcaf</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">model_time</span> <span class="o">=</span> <span class="mi">0</span> <span class="o">|</span> <span class="n">units</span><span class="o">.</span><span class="n">s</span>   <span class="c1"># Bridge reads this</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">W_gas</span> <span class="o">=</span> <span class="mi">0</span> <span class="o">|</span> <span class="n">units</span><span class="o">.</span><span class="n">J</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_last_sum</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_logfile</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;gas_energy_dbg.log&#39;</span><span class="p">,</span><span class="s1">&#39;a&#39;</span><span class="p">)</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">get_gravity_at_point</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_gravity_at_point</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="nb">object</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="nb">object</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">Quantity</span><span class="p">,</span> <span class="n">Quantity</span><span class="p">,</span> <span class="n">Quantity</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return zero acceleration for Bridge compatibility.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            (tuple[Quantity, Quantity, Quantity]): Zero acceleration components.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">zero</span> <span class="o">=</span> <span class="mi">0</span> <span class="o">|</span> <span class="n">units</span><span class="o">.</span><span class="n">ms</span><span class="o">**</span><span class="mi">2</span>
         <span class="k">return</span> <span class="n">zero</span><span class="p">,</span> <span class="n">zero</span><span class="p">,</span> <span class="n">zero</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">get_potential_at_point</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_potential_at_point</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="nb">object</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="nb">object</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Quantity</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return an inert potential for Bridge compatibility.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            (Quantity): Zero gravitational potential.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="mi">0</span> <span class="o">|</span> <span class="p">(</span><span class="n">units</span><span class="o">.</span><span class="n">kms</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>       <span class="c1"># inert potential</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">stop</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">stop</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="nb">object</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="nb">object</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Implement Bridge&#39;s stop hook without extra cleanup.&quot;&quot;&quot;</span>
         <span class="k">pass</span>
         <span class="k">return</span> 
     <span class="c1"># Called each Bridge substep</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">evolve_model</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">t_next</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">evolve_model</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">t_next</span><span class="p">:</span> <span class="n">Quantity</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Integrate the work done by the evolving gas potential.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            t_next: Bridge time at the end of the current coupling step.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">t_prev</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model_time</span>
         <span class="n">dt</span> <span class="o">=</span> <span class="n">t_next</span> <span class="o">-</span> <span class="n">t_prev</span>
         <span class="n">stars</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dcaf</span><span class="o">.</span><span class="n">petar_code</span><span class="o">.</span><span class="n">particles</span>
@@ -4522,7 +4906,13 @@ work done by the gas at Bridge timestep level for energy conservation check.</p>
         <span class="bp">self</span><span class="o">.</span><span class="n">model_time</span> <span class="o">=</span> <span class="n">t_next</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_logfile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">t_next</span><span class="si">}</span><span class="s1">   </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">W_gas</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="nf">retrieve_stored_energy</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">retrieve_stored_energy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Quantity</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return accumulated gas work and reset the accumulator.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            (Quantity): Work done by the background-gas potential since the</span>
+<span class="sd">                previous retrieval.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">wout</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">W_gas</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">W_gas</span> <span class="o">=</span> <span class="mi">0</span> <span class="o">|</span> <span class="n">units</span><span class="o">.</span><span class="n">J</span>
         <span class="k">return</span> <span class="n">wout</span>
@@ -4541,6 +4931,326 @@ work done by the gas at Bridge timestep level for energy conservation check.</p>
 
 
 
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="dcaf.dcaf.GasEnergyTracker.get_gravity_at_point" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>            <code class="highlight language-python"><span class="n">get_gravity_at_point</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></code>
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Return zero acceleration for Bridge compatibility.</p>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><span title="tuple">tuple</span>[<span title="amuse.units.quantities.Quantity">Quantity</span>, <span title="amuse.units.quantities.Quantity">Quantity</span>, <span title="amuse.units.quantities.Quantity">Quantity</span>]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Zero acceleration components.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>dcaf/dcaf.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">869</span>
+<span class="normal">870</span>
+<span class="normal">871</span>
+<span class="normal">872</span>
+<span class="normal">873</span>
+<span class="normal">874</span>
+<span class="normal">875</span>
+<span class="normal">876</span>
+<span class="normal">877</span>
+<span class="normal">878</span>
+<span class="normal">879</span>
+<span class="normal">880</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">get_gravity_at_point</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="nb">object</span><span class="p">,</span>
+    <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="nb">object</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">Quantity</span><span class="p">,</span> <span class="n">Quantity</span><span class="p">,</span> <span class="n">Quantity</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return zero acceleration for Bridge compatibility.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        (tuple[Quantity, Quantity, Quantity]): Zero acceleration components.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">zero</span> <span class="o">=</span> <span class="mi">0</span> <span class="o">|</span> <span class="n">units</span><span class="o">.</span><span class="n">ms</span><span class="o">**</span><span class="mi">2</span>
+    <span class="k">return</span> <span class="n">zero</span><span class="p">,</span> <span class="n">zero</span><span class="p">,</span> <span class="n">zero</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="dcaf.dcaf.GasEnergyTracker.get_potential_at_point" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>            <code class="highlight language-python"><span class="n">get_potential_at_point</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></code>
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Return an inert potential for Bridge compatibility.</p>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><span title="amuse.units.quantities.Quantity">Quantity</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Zero gravitational potential.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>dcaf/dcaf.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">881</span>
+<span class="normal">882</span>
+<span class="normal">883</span>
+<span class="normal">884</span>
+<span class="normal">885</span>
+<span class="normal">886</span>
+<span class="normal">887</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">get_potential_at_point</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="nb">object</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="nb">object</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Quantity</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return an inert potential for Bridge compatibility.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        (Quantity): Zero gravitational potential.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="mi">0</span> <span class="o">|</span> <span class="p">(</span><span class="n">units</span><span class="o">.</span><span class="n">kms</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>       <span class="c1"># inert potential</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="dcaf.dcaf.GasEnergyTracker.stop" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>            <code class="highlight language-python"><span class="n">stop</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></code>
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Implement Bridge's stop hook without extra cleanup.</p>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>dcaf/dcaf.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">888</span>
+<span class="normal">889</span>
+<span class="normal">890</span>
+<span class="normal">891</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">stop</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="nb">object</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="nb">object</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Implement Bridge&#39;s stop hook without extra cleanup.&quot;&quot;&quot;</span>
+    <span class="k">pass</span>
+    <span class="k">return</span> 
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="dcaf.dcaf.GasEnergyTracker.evolve_model" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>            <code class="highlight language-python"><span class="n">evolve_model</span><span class="p">(</span><span class="n">t_next</span><span class="p">)</span></code>
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Integrate the work done by the evolving gas potential.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>t_next</code>
+            </td>
+            <td>
+                  <code><span title="amuse.units.quantities.Quantity">Quantity</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Bridge time at the end of the current coupling step.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>dcaf/dcaf.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">893</span>
+<span class="normal">894</span>
+<span class="normal">895</span>
+<span class="normal">896</span>
+<span class="normal">897</span>
+<span class="normal">898</span>
+<span class="normal">899</span>
+<span class="normal">900</span>
+<span class="normal">901</span>
+<span class="normal">902</span>
+<span class="normal">903</span>
+<span class="normal">904</span>
+<span class="normal">905</span>
+<span class="normal">906</span>
+<span class="normal">907</span>
+<span class="normal">908</span>
+<span class="normal">909</span>
+<span class="normal">910</span>
+<span class="normal">911</span>
+<span class="normal">912</span>
+<span class="normal">913</span>
+<span class="normal">914</span>
+<span class="normal">915</span>
+<span class="normal">916</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">evolve_model</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">t_next</span><span class="p">:</span> <span class="n">Quantity</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Integrate the work done by the evolving gas potential.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        t_next: Bridge time at the end of the current coupling step.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">t_prev</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model_time</span>
+    <span class="n">dt</span> <span class="o">=</span> <span class="n">t_next</span> <span class="o">-</span> <span class="n">t_prev</span>
+    <span class="n">stars</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dcaf</span><span class="o">.</span><span class="n">petar_code</span><span class="o">.</span><span class="n">particles</span>
+    <span class="c1">#print(&#39;here&#39;,type(stars),len(stars))</span>
+    <span class="c1">#exit()</span>
+    <span class="k">if</span> <span class="n">dt</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">|</span> <span class="n">units</span><span class="o">.</span><span class="n">s</span> <span class="ow">and</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dcaf</span><span class="p">,</span> <span class="s2">&quot;gas_code&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="c1">#x, y, z, m = stars.get_values_in_store(attributes=[&#39;x&#39;,&#39;y&#39;,&#39;z&#39;,&#39;mass&#39;])</span>
+
+        <span class="n">dphi_dt</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dcaf</span><span class="o">.</span><span class="n">gas_code</span><span class="o">.</span><span class="n">get_potential_derivative_at_point</span><span class="p">(</span>
+            <span class="n">stars</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">stars</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="n">stars</span><span class="o">.</span><span class="n">z</span>
+        <span class="p">)</span>
+        <span class="n">sum_now</span> <span class="o">=</span> <span class="p">(</span><span class="n">stars</span><span class="o">.</span><span class="n">mass</span> <span class="o">*</span> <span class="n">dphi_dt</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_last_sum</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">W_gas</span> <span class="o">+=</span> <span class="mf">0.5</span><span class="o">*</span><span class="p">(</span> <span class="bp">self</span><span class="o">.</span><span class="n">_last_sum</span> <span class="o">+</span> <span class="n">sum_now</span>  <span class="p">)</span><span class="o">*</span><span class="n">dt</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_last_sum</span> <span class="o">=</span> <span class="n">sum_now</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">model_time</span> <span class="o">=</span> <span class="n">t_next</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_logfile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">t_next</span><span class="si">}</span><span class="s1">   </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">W_gas</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="dcaf.dcaf.GasEnergyTracker.retrieve_stored_energy" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>            <code class="highlight language-python"><span class="n">retrieve_stored_energy</span><span class="p">()</span></code>
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Return accumulated gas work and reset the accumulator.</p>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><span title="amuse.units.quantities.Quantity">Quantity</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Work done by the background-gas potential since the
+previous retrieval.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>dcaf/dcaf.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">918</span>
+<span class="normal">919</span>
+<span class="normal">920</span>
+<span class="normal">921</span>
+<span class="normal">922</span>
+<span class="normal">923</span>
+<span class="normal">924</span>
+<span class="normal">925</span>
+<span class="normal">926</span>
+<span class="normal">927</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">retrieve_stored_energy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Quantity</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return accumulated gas work and reset the accumulator.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        (Quantity): Work done by the background-gas potential since the</span>
+<span class="sd">            previous retrieval.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">wout</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">W_gas</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">W_gas</span> <span class="o">=</span> <span class="mi">0</span> <span class="o">|</span> <span class="n">units</span><span class="o">.</span><span class="n">J</span>
+    <span class="k">return</span> <span class="n">wout</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
 
 
 
@@ -4614,6 +5324,10 @@ work done by the gas at Bridge timestep level for energy conservation check.</p>
     
     
       <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../../javascripts/mathjax.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   </body>
