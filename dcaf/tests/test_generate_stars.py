@@ -38,8 +38,10 @@ def test_generate_stars(
     seed=42
     ):
     #mu=-2.15, sigma=0.9):
-    test_title = 'Test: lognormal PDF: $\mu= %.2f$ log$_\sigma=%.2f$,\
-    $\\beta=%.2f$'%(mu,logsigma,beta)
+    test_title = (
+        r"Test: lognormal PDF: $\mu= %.2f$ log$_\sigma=%.2f$, "
+        r"$\beta=%.2f$" % (mu, logsigma, beta)
+    )
 
     rng = np.random.default_rng(seed)
 

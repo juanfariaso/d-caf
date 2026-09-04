@@ -1,5 +1,4 @@
 site_name: Dynamic Cluster Assembly Framework (D-CAF)
-
 theme:
   name: material
 
@@ -28,6 +27,7 @@ plugins:
   - api-autonav:
       modules:
         - dcaf
+      on_implicit_namespace_package: skip
       nav_section_title: API Reference
       api_root_uri: reference
       nav_item_prefix : ""
@@ -39,3 +39,11 @@ nav:
 
 extra_css:
    - stylesheets/api-reference.css
+
+markdown_extensions:
+  - pymdownx.arithmatex:
+      generic: true
+
+extra_javascript:
+  - javascripts/mathjax.js
+  - https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js
