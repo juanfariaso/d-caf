@@ -18,6 +18,8 @@ plugins:
             show_source: true
             show_submodules: false
             show_if_no_docstring: false
+            show_root_heading: true
+            show_symbol_type_heading: true
             filters: 
               - public
               - "!^__version__$"
@@ -33,7 +35,11 @@ plugins:
       nav_section_title: API Reference
       api_root_uri: reference
       nav_item_prefix : ""
+      show_full_namespace: true
 
 nav:
   - Home: index.md
   - Installation: install.md
+
+extra_css:
+   - stylesheets/api-reference.css
