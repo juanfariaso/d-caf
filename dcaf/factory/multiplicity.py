@@ -8,7 +8,7 @@ and velocity of the companions.
 Then, we proceed as follows:
 
 1. We choose which stars become primordial binaries
-2. Rick companions by adjusting to a predefined mass ratio distribution
+2. Pick companions by adjusting to a predefined mass ratio distribution
 3. Calculate the orbits of the systems based on binary populations, probably a\
 user defined function could also work.
 4. Put all stars together at the location of the primary, using its coordinates\
@@ -1703,12 +1703,6 @@ class FieldBinaryPopulation(BinaryPopulation):
         **kwargs: Quantity,
     ) -> Quantity:
         """Return stored or newly sampled field-binary periods.
-
-        Note:
-            With `sample=True`, this method draws directly from the field
-            period distribution and does not apply `max_semi_major_axis`.
-            That cap is applied only while `preprocess_stars(...)` constructs
-            a population.
 
         Args:
             stars: Prepared stellar particles.
