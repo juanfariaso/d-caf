@@ -2231,7 +2231,7 @@ and velocity of the companions.</p>
 <p>Then, we proceed as follows:</p>
 <ol>
 <li>We choose which stars become primordial binaries</li>
-<li>Rick companions by adjusting to a predefined mass ratio distribution</li>
+<li>Pick companions by adjusting to a predefined mass ratio distribution</li>
 <li>Calculate the orbits of the systems based on binary populations, probably auser defined function could also work.</li>
 <li>Put all stars together at the location of the primary, using its coordinatesas center of mass.</li>
 </ol>
@@ -10198,13 +10198,7 @@ during population preprocessing.</p>
 <span class="normal">1743</span>
 <span class="normal">1744</span>
 <span class="normal">1745</span>
-<span class="normal">1746</span>
-<span class="normal">1747</span>
-<span class="normal">1748</span>
-<span class="normal">1749</span>
-<span class="normal">1750</span>
-<span class="normal">1751</span>
-<span class="normal">1752</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">FieldBinaryPopulation</span><span class="p">(</span><span class="n">BinaryPopulation</span><span class="p">):</span>
+<span class="normal">1746</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">FieldBinaryPopulation</span><span class="p">(</span><span class="n">BinaryPopulation</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    This class implements \</span>
 <span class="sd">    [Cournoyer-Cloutier et al. (2024)](https://iopscience.iop.org/article/10.3847/1538-4357/ad90b3) \</span>
@@ -10509,12 +10503,6 @@ during population preprocessing.</p>
         <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Quantity</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Quantity</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Return stored or newly sampled field-binary periods.</span>
-
-<span class="sd">        Note:</span>
-<span class="sd">            With `sample=True`, this method draws directly from the field</span>
-<span class="sd">            period distribution and does not apply `max_semi_major_axis`.</span>
-<span class="sd">            That cap is applied only while `preprocess_stars(...)` constructs</span>
-<span class="sd">            a population.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            stars: Prepared stellar particles.</span>
@@ -11278,14 +11266,6 @@ requested count.</p>
         <p>Return stored or newly sampled field-binary periods.</p>
 
 
-<details class="note" open>
-  <summary>Note</summary>
-  <p>With <code>sample=True</code>, this method draws directly from the field
-period distribution and does not apply <code>max_semi_major_axis</code>.
-That cap is applied only while <code>preprocess_stars(...)</code> constructs
-a population.</p>
-</details>
-
 <p><span class="doc-section-title">Parameters:</span></p>
     <table>
       <thead>
@@ -11415,13 +11395,7 @@ a population.</p>
 <span class="normal">1718</span>
 <span class="normal">1719</span>
 <span class="normal">1720</span>
-<span class="normal">1721</span>
-<span class="normal">1722</span>
-<span class="normal">1723</span>
-<span class="normal">1724</span>
-<span class="normal">1725</span>
-<span class="normal">1726</span>
-<span class="normal">1727</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">get_periods</span><span class="p">(</span>
+<span class="normal">1721</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">get_periods</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span>
     <span class="n">stars</span><span class="p">:</span> <span class="n">Particles</span><span class="p">,</span>
     <span class="n">primary_index</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span>
@@ -11430,12 +11404,6 @@ a population.</p>
     <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Quantity</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Quantity</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Return stored or newly sampled field-binary periods.</span>
-
-<span class="sd">    Note:</span>
-<span class="sd">        With `sample=True`, this method draws directly from the field</span>
-<span class="sd">        period distribution and does not apply `max_semi_major_axis`.</span>
-<span class="sd">        That cap is applied only while `preprocess_stars(...)` constructs</span>
-<span class="sd">        a population.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        stars: Prepared stellar particles.</span>
@@ -11576,7 +11544,13 @@ a population.</p>
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>dcaf/factory/multiplicity.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1729</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1723</span>
+<span class="normal">1724</span>
+<span class="normal">1725</span>
+<span class="normal">1726</span>
+<span class="normal">1727</span>
+<span class="normal">1728</span>
+<span class="normal">1729</span>
 <span class="normal">1730</span>
 <span class="normal">1731</span>
 <span class="normal">1732</span>
@@ -11593,13 +11567,7 @@ a population.</p>
 <span class="normal">1743</span>
 <span class="normal">1744</span>
 <span class="normal">1745</span>
-<span class="normal">1746</span>
-<span class="normal">1747</span>
-<span class="normal">1748</span>
-<span class="normal">1749</span>
-<span class="normal">1750</span>
-<span class="normal">1751</span>
-<span class="normal">1752</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">get_eccentricities</span><span class="p">(</span>
+<span class="normal">1746</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">get_eccentricities</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span>
     <span class="n">stars</span><span class="p">:</span> <span class="n">Particles</span><span class="p">,</span>
     <span class="n">primary_index</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span>
@@ -11727,7 +11695,13 @@ unresolved-system centres of mass.</p>
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>dcaf/factory/multiplicity.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1754</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1748</span>
+<span class="normal">1749</span>
+<span class="normal">1750</span>
+<span class="normal">1751</span>
+<span class="normal">1752</span>
+<span class="normal">1753</span>
+<span class="normal">1754</span>
 <span class="normal">1755</span>
 <span class="normal">1756</span>
 <span class="normal">1757</span>
@@ -11788,13 +11762,7 @@ unresolved-system centres of mass.</p>
 <span class="normal">1812</span>
 <span class="normal">1813</span>
 <span class="normal">1814</span>
-<span class="normal">1815</span>
-<span class="normal">1816</span>
-<span class="normal">1817</span>
-<span class="normal">1818</span>
-<span class="normal">1819</span>
-<span class="normal">1820</span>
-<span class="normal">1821</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">synchronize_resolved_with_unresolved</span><span class="p">(</span>
+<span class="normal">1815</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">synchronize_resolved_with_unresolved</span><span class="p">(</span>
     <span class="n">unresolved_stars</span><span class="p">:</span> <span class="n">Particles</span><span class="p">,</span>
     <span class="n">resolved_stars</span><span class="p">:</span> <span class="n">Particles</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Particles</span><span class="p">:</span>
