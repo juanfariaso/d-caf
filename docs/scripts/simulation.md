@@ -47,6 +47,64 @@ same YAML value.
 Quantities in YAML use a number followed by the expected unit, for example
 `10.0 parsec` or `30.0 Myr`.
 
+### Physical Model
+
+The runner treats `Mstars` as the target final stellar mass and `sfe` as the
+global star-formation efficiency. It therefore derives the cloud mass as
+
+$$
+M_{\rm cl} = \frac{M_\star}{\epsilon}.
+$$
+
+`Rcl` defines the cloud radius used to calculate the mean-density free-fall
+time,
+
+$$
+t_{\rm ff} = \left(\frac{3\pi}{32 G \rho_{\rm mean}}\right)^{1/2},
+\qquad
+\rho_{\rm mean} = \frac{3 M_{\rm cl}}{4\pi R_{\rm cl}^3}.
+$$
+
+The Plummer background mass is normalized so that the mass enclosed within
+`Rcl` equals `Mcl`. With gas scale radius `Rpl`, the enclosed fraction is
+
+$$
+f_{\rm Pl} = \frac{R_{\rm cl}^3}
+{\left(R_{\rm cl}^2 + R_{\rm Pl}^2\right)^{3/2}},
+\qquad
+M_{\rm Pl} = \frac{M_{\rm cl}}{f_{\rm Pl}}.
+$$
+
+Stars form at a constant scheduled rate throughout the embedded phase,
+
+$$
+\dot{M}_\star = \frac{M_\star}{t_{\rm ge}}.
+$$
+
+During that same phase, `mdot_factor` sets an optional gas mass change relative
+to this stellar formation rate:
+
+$$
+\dot{M}_{\rm gas} = \texttt{mdot_factor}\,\dot{M}_\star,
+\qquad
+M_{\rm gas}(t) = M_{\rm Pl} + \dot{M}_{\rm gas} t
+\quad (0 \leq t \leq t_{\rm ge}).
+$$
+
+Thus the default `mdot_factor: 0` keeps the gas mass fixed. At `t_ge`, gas mass
+growth or depletion stops and the Plummer scale radius expands exponentially on
+`t_exp`:
+
+$$
+R_{\rm Pl}(t) = R_{\rm Pl}(t_{\rm ge})
+\exp\left(\frac{t-t_{\rm ge}}{t_{\rm exp}}\right).
+$$
+
+`Fmax` is the maximum fraction of the initial gas mass enclosed within 10% of
+the cloud's initial mass radius during the embedded-phase collapse. It sets the
+pre-expulsion collapse timescale; leave it `null` to keep the gas scale radius
+fixed during the embedded phase.
+
 ```yaml
 seed_index: 0
 Rcl: 10.0 parsec
@@ -59,8 +117,7 @@ nworkers: 2
 field_binaries: false
 ```
 
-Use the following keys as the runner's configuration contract. Other YAML keys
-are not part of this workflow.
+These are the possible parameters accepted in `config.yaml`:
 
 | Key | Unit | Default | Meaning |
 | --- | --- | --- | --- |
@@ -69,20 +126,20 @@ are not part of this workflow.
 | `Rcl` | pc | `10.0` | Cloud radius used when `tff` is not given. |
 | `Rpl` | pc | `7.0` | Initial gas Plummer scale radius. |
 | `Mstars` | MSun | `2000.0` | Target stellar mass used for IMF sampling. |
-| `sfe` | -- | `0.3` | Stellar mass fraction used to derive the cloud mass: `Mcl = Mstars / sfe`. |
-| `Fmax` | -- | `null` | Optional maximum collapse factor used to derive `t_col`. |
-| `tge_over_tff` | -- | `1.0` | Gas-expulsion time in free-fall-time units, unless `t_ge` is given. |
-| `texp_over_tff` | -- | `1.0` | Gas-expansion time in free-fall-time units, unless `t_exp` is given. |
-| `t_ge` | Myr | `null` | Explicit gas-expulsion time. |
-| `t_exp` | Myr | `null` | Explicit gas-expansion time. |
-| `mdot_factor` | -- | `0.0` | Gas mass-growth rate relative to the stellar formation rate. |
+| `sfe` | -- | `0.3` | Target star formation efficiency used to derive the cloud mass: `Mcl = Mstars / sfe`. |
+| `Fmax` | -- | `null` | Optional maximum collapse fraction, the fraction of mass that the interior 10% cloud mass radius raise before gas-expulsion, used to derive `t_col`.  |
+| `tge_over_tff` | -- | `1.0` | Gas-expulsion time (when gas expulsion begins) in free-fall-time units, unless `t_ge` is given explicitly. |
+| `texp_over_tff` | -- | `1.0` | Gas-expansion timescale in free-fall-time units, unless `t_exp` is given. |
+| `t_ge` | Myr | `null` | Time when gas-expulsion begins. |
+| `t_exp` | Myr | `null` | Explicit gas-expulsion timescale. |
+| `mdot_factor` | -- | `0.0` | Gas mass change rate relative to the stellar formation rate. |
 | `eta_radius` | -- | `0.5` | Stellar Plummer scale radius relative to the initial gas scale radius. |
-| `eta_sigma` | -- | `0.6` | Central stellar velocity-dispersion scaling. |
+| `eta_sigma` | -- | `0.6` | Stellar velocity-dispersion scaling relative to the cloud virial velocity. |
 | `kappa` | -- | `1.8` | Exponent controlling the radial velocity-dispersion profile. |
 | `nworkers` | -- | `2` | PeTar worker count. |
 | `t_end` | Myr | `30.0` | Final model time. |
 | `dt_out` | Myr | `0.05` | Requested output interval, rounded to a power-of-two N-body time step. |
-| `dt_level` | -- | `15` | PeTar softening-step level, setting `dt_soft = 2^-dt_level` in N-body units. |
+| `dt_level` | -- | `15` | PeTar softening-step parameter, setting `dt_soft = 2^-dt_level` in N-body units. |
 | `stars_per_worker` | -- | `0` | Threshold for worker scaling. `0` disables scaling. |
 | `track_background_gas_energy` | -- | `false` | Include the evolving background potential in energy diagnostics. |
 | `test_background` | -- | `false` | Evaluate and plot the background-gas evolution instead of starting D-CAF. |
