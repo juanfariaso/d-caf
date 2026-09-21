@@ -12,22 +12,22 @@
         <link rel="prev" href="../">
       
       
-        <link rel="next" href="formation/">
+        <link rel="next" href="../../reference/dcaf/">
       
       
         
       
       
-      <link rel="icon" href="../../../assets/images/favicon.png">
+      <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
       
-        <title>dcaf.analysis - Dynamic Cluster Assembly Framework (D-CAF)</title>
+        <title>Parametric Plummer Simulation - Dynamic Cluster Assembly Framework (D-CAF)</title>
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
       
       
 
@@ -46,11 +46,11 @@
       
     
     
-      <link rel="stylesheet" href="../../../assets/_mkdocstrings.css">
+      <link rel="stylesheet" href="../../assets/_mkdocstrings.css">
     
-      <link rel="stylesheet" href="../../../stylesheets/api-reference.css">
+      <link rel="stylesheet" href="../../stylesheets/api-reference.css">
     
-    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -68,7 +68,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#dcaf.analysis" class="md-skip">
+        <a href="#parametric-plummer-simulation" class="md-skip">
           Skip to content
         </a>
       
@@ -84,7 +84,7 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../../.." title="Dynamic Cluster Assembly Framework (D-CAF)" class="md-header__button md-logo" aria-label="Dynamic Cluster Assembly Framework (D-CAF)" data-md-component="logo">
+    <a href="../.." title="Dynamic Cluster Assembly Framework (D-CAF)" class="md-header__button md-logo" aria-label="Dynamic Cluster Assembly Framework (D-CAF)" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -104,7 +104,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              dcaf.analysis
+              Parametric Plummer Simulation
             
           </span>
         </div>
@@ -182,7 +182,7 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../../.." title="Dynamic Cluster Assembly Framework (D-CAF)" class="md-nav__button md-logo" aria-label="Dynamic Cluster Assembly Framework (D-CAF)" data-md-component="logo">
+    <a href="../.." title="Dynamic Cluster Assembly Framework (D-CAF)" class="md-nav__button md-logo" aria-label="Dynamic Cluster Assembly Framework (D-CAF)" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -200,7 +200,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../.." class="md-nav__link">
+      <a href="../.." class="md-nav__link">
         
   
   
@@ -227,7 +227,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../install/" class="md-nav__link">
+      <a href="../../install/" class="md-nav__link">
         
   
   
@@ -301,7 +301,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../tutorials/" class="md-nav__link">
+      <a href="../../tutorials/" class="md-nav__link">
         
   
   
@@ -329,7 +329,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../tutorials/static-plummer/" class="md-nav__link">
+      <a href="../../tutorials/static-plummer/" class="md-nav__link">
         
   
   
@@ -361,18 +361,20 @@
       
   
   
+    
   
   
+  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
         
           
           <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
@@ -393,7 +395,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_4">
             <span class="md-nav__icon md-icon"></span>
             
@@ -411,7 +413,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../scripts/" class="md-nav__link">
+      <a href="../" class="md-nav__link">
         
   
   
@@ -436,10 +438,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../../scripts/simulation/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Parametric Plummer Simulation
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -455,6 +484,109 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#run-a-simulation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Run A Simulation
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuration
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Configuration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#physical-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Physical Model
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#workflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Workflow
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#outputs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Outputs
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resume-a-run" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resume A Run
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#related-apis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Related APIs
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -471,20 +603,18 @@
       
   
   
-    
   
   
-  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
         
           
           <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
@@ -505,7 +635,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_5">
             <span class="md-nav__icon md-icon"></span>
             
@@ -520,20 +650,18 @@
                 
   
   
-    
   
   
-  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_1" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_1" >
         
           
           <label class="md-nav__link" for="__nav_5_1" id="__nav_5_1_label" tabindex="0">
@@ -554,7 +682,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_1_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_1_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_5_1">
             <span class="md-nav__icon md-icon"></span>
             
@@ -572,7 +700,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../" class="md-nav__link">
+      <a href="../../reference/dcaf/" class="md-nav__link">
         
   
   
@@ -597,20 +725,18 @@
                 
   
   
-    
   
   
-  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_1_2" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_1_2" >
         
           
           <label class="md-nav__link" for="__nav_5_1_2" id="__nav_5_1_2_label" tabindex="0">
@@ -631,7 +757,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_5_1_2_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_5_1_2_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_5_1_2">
             <span class="md-nav__icon md-icon"></span>
             
@@ -646,19 +772,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../reference/dcaf/analysis/" class="md-nav__link">
         
   
   
@@ -674,7 +791,6 @@
   
 
       </a>
-      
     </li>
   
 
@@ -687,7 +803,7 @@
   
   
     <li class="md-nav__item">
-      <a href="formation/" class="md-nav__link">
+      <a href="../../reference/dcaf/analysis/formation/" class="md-nav__link">
         
   
   
@@ -715,7 +831,7 @@
   
   
     <li class="md-nav__item">
-      <a href="multiples/" class="md-nav__link">
+      <a href="../../reference/dcaf/analysis/multiples/" class="md-nav__link">
         
   
   
@@ -798,7 +914,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../backgroundgas/" class="md-nav__link">
+      <a href="../../reference/dcaf/backgroundgas/" class="md-nav__link">
         
   
   
@@ -826,7 +942,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../backgroundgas/base/" class="md-nav__link">
+      <a href="../../reference/dcaf/backgroundgas/base/" class="md-nav__link">
         
   
   
@@ -854,7 +970,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../backgroundgas/plummer/" class="md-nav__link">
+      <a href="../../reference/dcaf/backgroundgas/plummer/" class="md-nav__link">
         
   
   
@@ -890,7 +1006,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../dcaf/" class="md-nav__link">
+      <a href="../../reference/dcaf/dcaf/" class="md-nav__link">
         
   
   
@@ -965,7 +1081,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../factory/" class="md-nav__link">
+      <a href="../../reference/dcaf/factory/" class="md-nav__link">
         
   
   
@@ -993,7 +1109,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../factory/field_binary_population/" class="md-nav__link">
+      <a href="../../reference/dcaf/factory/field_binary_population/" class="md-nav__link">
         
   
   
@@ -1021,7 +1137,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../factory/multiplicity/" class="md-nav__link">
+      <a href="../../reference/dcaf/factory/multiplicity/" class="md-nav__link">
         
   
   
@@ -1104,7 +1220,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../framework/" class="md-nav__link">
+      <a href="../../reference/dcaf/framework/" class="md-nav__link">
         
   
   
@@ -1132,7 +1248,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../framework/starformation/" class="md-nav__link">
+      <a href="../../reference/dcaf/framework/starformation/" class="md-nav__link">
         
   
   
@@ -1215,7 +1331,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../io/" class="md-nav__link">
+      <a href="../../reference/dcaf/io/" class="md-nav__link">
         
   
   
@@ -1243,7 +1359,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../io/output/" class="md-nav__link">
+      <a href="../../reference/dcaf/io/output/" class="md-nav__link">
         
   
   
@@ -1271,7 +1387,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../io/restart/" class="md-nav__link">
+      <a href="../../reference/dcaf/io/restart/" class="md-nav__link">
         
   
   
@@ -1354,7 +1470,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../models/" class="md-nav__link">
+      <a href="../../reference/dcaf/models/" class="md-nav__link">
         
   
   
@@ -1382,7 +1498,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../models/turbulentclumpmodel/" class="md-nav__link">
+      <a href="../../reference/dcaf/models/turbulentclumpmodel/" class="md-nav__link">
         
   
   
@@ -1465,7 +1581,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../utilities/" class="md-nav__link">
+      <a href="../../reference/dcaf/utilities/" class="md-nav__link">
         
   
   
@@ -1493,7 +1609,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../utilities/config/" class="md-nav__link">
+      <a href="../../reference/dcaf/utilities/config/" class="md-nav__link">
         
   
   
@@ -1521,7 +1637,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../utilities/helpers/" class="md-nav__link">
+      <a href="../../reference/dcaf/utilities/helpers/" class="md-nav__link">
         
   
   
@@ -1549,7 +1665,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../utilities/logger/" class="md-nav__link">
+      <a href="../../reference/dcaf/utilities/logger/" class="md-nav__link">
         
   
   
@@ -1577,7 +1693,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../utilities/parameters/" class="md-nav__link">
+      <a href="../../reference/dcaf/utilities/parameters/" class="md-nav__link">
         
   
   
@@ -1641,6 +1757,97 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#run-a-simulation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Run A Simulation
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuration
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Configuration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#physical-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Physical Model
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#workflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Workflow
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#outputs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Outputs
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resume-a-run" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resume A Run
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#related-apis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Related APIs
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -1656,86 +1863,307 @@
 
 
 
-<div class="doc doc-object doc-module">
+<h1 id="parametric-plummer-simulation">Parametric Plummer Simulation</h1>
+<p><code>dcaf.scripts.parametric_plummer</code> is the supplied end-to-end runner for a
+parametric star-cluster formation simulation. It samples a Kroupa stellar mass
+distribution, creates a Plummer realization, applies a radial velocity-
+dispersion profile, schedules gradual star formation, and evolves the result
+with D-CAF in an evolving Plummer background potential.</p>
+<p>This is a specific workflow, rather than a general interface for every
+<code>StarFormationFramework</code> or background-gas model. For custom Python workflows,
+see the <a href="../../reference/dcaf/dcaf/">DCAF system API</a> and the
+<a href="../../reference/dcaf/framework/starformation/">star-formation framework API</a>.</p>
+<h2 id="run-a-simulation">Run A Simulation</h2>
+<p>Install D-CAF first using the <a href="../../install/">installation guide</a>. This provides
+the <code>dcaf-plummer</code> command.</p>
+<p>Run the module from a working directory where its output files should be
+created:</p>
+<pre><code class="language-shell">dcaf-plummer --config config.yaml
+</code></pre>
+<p>The runner writes the effective parameters to <code>config.yaml</code> in the current
+working directory before starting. Use a separate working directory for each
+independent run if you want to keep configurations and gas-output files
+separate.</p>
+<p>Before committing resources to a simulation, confirm that the configuration is
+accepted without initializing D-CAF:</p>
+<pre><code class="language-shell">dcaf-plummer --config config.yaml --dry_run
+</code></pre>
+<p>The <code>--dry_run</code> option checks parsing only. It does not construct particles,
+validate the physical model, or initialize PeTar.</p>
+<h2 id="configuration">Configuration</h2>
+<p>The runner starts from its built-in defaults, applies values from <code>--config</code>,
+then applies command-line options. A command-line value therefore overrides the
+same YAML value.</p>
+<p>Quantities in YAML use a number followed by the expected unit, for example
+<code>10.0 parsec</code> or <code>30.0 Myr</code>.</p>
+<h3 id="physical-model">Physical Model</h3>
+<p>The runner treats <code>Mstars</code> as the target final stellar mass and <code>sfe</code> as the
+global star-formation efficiency. It therefore derives the cloud mass as</p>
+<div class="arithmatex">\[
+M_{\rm cl} = \frac{M_\star}{\epsilon}.
+\]</div>
+<p><code>Rcl</code> defines the cloud radius used to calculate the mean-density free-fall
+time,</p>
+<div class="arithmatex">\[
+t_{\rm ff} = \left(\frac{3\pi}{32 G \rho_{\rm mean}}\right)^{1/2},
+\qquad
+\rho_{\rm mean} = \frac{3 M_{\rm cl}}{4\pi R_{\rm cl}^3}.
+\]</div>
+<p>The Plummer background mass is normalized so that the mass enclosed within
+<code>Rcl</code> equals <code>Mcl</code>. With gas scale radius <code>Rpl</code>, the enclosed fraction is</p>
+<div class="arithmatex">\[
+f_{\rm Pl} = \frac{R_{\rm cl}^3}
+{\left(R_{\rm cl}^2 + R_{\rm Pl}^2\right)^{3/2}},
+\qquad
+M_{\rm Pl} = \frac{M_{\rm cl}}{f_{\rm Pl}}.
+\]</div>
+<p>Stars form at a constant scheduled rate throughout the embedded phase,</p>
+<div class="arithmatex">\[
+\dot{M}_\star = \frac{M_\star}{t_{\rm ge}}.
+\]</div>
+<p>During that same phase, <code>mdot_factor</code> sets an optional gas mass change relative
+to this stellar formation rate:</p>
+<div class="arithmatex">\[
+\dot{M}_{\rm gas} = \texttt{mdot_factor}\,\dot{M}_\star,
+\qquad
+M_{\rm gas}(t) = M_{\rm Pl} + \dot{M}_{\rm gas} t
+\quad (0 \leq t \leq t_{\rm ge}).
+\]</div>
+<p>Thus the default <code>mdot_factor: 0</code> keeps the gas mass fixed. At <code>t_ge</code>, gas mass
+growth or depletion stops and the Plummer scale radius expands exponentially on
+<code>t_exp</code>:</p>
+<div class="arithmatex">\[
+R_{\rm Pl}(t) = R_{\rm Pl}(t_{\rm ge})
+\exp\left(\frac{t-t_{\rm ge}}{t_{\rm exp}}\right).
+\]</div>
+<p><code>Fmax</code> is the maximum fraction of the initial gas mass enclosed within 10% of
+the cloud's initial mass radius during the embedded-phase collapse. It sets the
+pre-expulsion collapse timescale; leave it <code>null</code> to keep the gas scale radius
+fixed during the embedded phase.</p>
+<pre><code class="language-yaml">seed_index: 0
+Rcl: 10.0 parsec
+Rpl: 7.0 parsec
+Mstars: 2000.0 MSun
+sfe: 0.3
+t_end: 30.0 Myr
+dt_out: 0.05 Myr
+nworkers: 2
+field_binaries: false
+</code></pre>
+<p>These are the possible parameters accepted in <code>config.yaml</code>:</p>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Unit</th>
+<th>Default</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>seed_index</code></td>
+<td>--</td>
+<td><code>0</code></td>
+<td>Index into the runner's fixed list of random seeds.</td>
+</tr>
+<tr>
+<td><code>tff</code></td>
+<td>Myr</td>
+<td><code>null</code></td>
+<td>Target cloud free-fall time. When given, it determines <code>Rcl</code> while preserving <code>Rpl / Rcl</code>.</td>
+</tr>
+<tr>
+<td><code>Rcl</code></td>
+<td>pc</td>
+<td><code>10.0</code></td>
+<td>Cloud radius used when <code>tff</code> is not given.</td>
+</tr>
+<tr>
+<td><code>Rpl</code></td>
+<td>pc</td>
+<td><code>7.0</code></td>
+<td>Initial gas Plummer scale radius.</td>
+</tr>
+<tr>
+<td><code>Mstars</code></td>
+<td>MSun</td>
+<td><code>2000.0</code></td>
+<td>Target stellar mass used for IMF sampling.</td>
+</tr>
+<tr>
+<td><code>sfe</code></td>
+<td>--</td>
+<td><code>0.3</code></td>
+<td>Target star formation efficiency used to derive the cloud mass: <code>Mcl = Mstars / sfe</code>.</td>
+</tr>
+<tr>
+<td><code>Fmax</code></td>
+<td>--</td>
+<td><code>null</code></td>
+<td>Optional maximum collapse fraction, the fraction of mass that the interior 10% cloud mass radius raise before gas-expulsion, used to derive <code>t_col</code>.</td>
+</tr>
+<tr>
+<td><code>tge_over_tff</code></td>
+<td>--</td>
+<td><code>1.0</code></td>
+<td>Gas-expulsion time (when gas expulsion begins) in free-fall-time units, unless <code>t_ge</code> is given explicitly.</td>
+</tr>
+<tr>
+<td><code>texp_over_tff</code></td>
+<td>--</td>
+<td><code>1.0</code></td>
+<td>Gas-expansion timescale in free-fall-time units, unless <code>t_exp</code> is given.</td>
+</tr>
+<tr>
+<td><code>t_ge</code></td>
+<td>Myr</td>
+<td><code>null</code></td>
+<td>Time when gas-expulsion begins.</td>
+</tr>
+<tr>
+<td><code>t_exp</code></td>
+<td>Myr</td>
+<td><code>null</code></td>
+<td>Explicit gas-expulsion timescale.</td>
+</tr>
+<tr>
+<td><code>mdot_factor</code></td>
+<td>--</td>
+<td><code>0.0</code></td>
+<td>Gas mass change rate relative to the stellar formation rate.</td>
+</tr>
+<tr>
+<td><code>eta_radius</code></td>
+<td>--</td>
+<td><code>0.5</code></td>
+<td>Stellar Plummer scale radius relative to the initial gas scale radius.</td>
+</tr>
+<tr>
+<td><code>eta_sigma</code></td>
+<td>--</td>
+<td><code>0.6</code></td>
+<td>Stellar velocity-dispersion scaling relative to the cloud virial velocity.</td>
+</tr>
+<tr>
+<td><code>kappa</code></td>
+<td>--</td>
+<td><code>1.8</code></td>
+<td>Exponent controlling the radial velocity-dispersion profile.</td>
+</tr>
+<tr>
+<td><code>nworkers</code></td>
+<td>--</td>
+<td><code>2</code></td>
+<td>PeTar worker count.</td>
+</tr>
+<tr>
+<td><code>t_end</code></td>
+<td>Myr</td>
+<td><code>30.0</code></td>
+<td>Final model time.</td>
+</tr>
+<tr>
+<td><code>dt_out</code></td>
+<td>Myr</td>
+<td><code>0.05</code></td>
+<td>Requested output interval, rounded to a power-of-two N-body time step.</td>
+</tr>
+<tr>
+<td><code>dt_level</code></td>
+<td>--</td>
+<td><code>15</code></td>
+<td>PeTar softening-step parameter, setting <code>dt_soft = 2^-dt_level</code> in N-body units.</td>
+</tr>
+<tr>
+<td><code>stars_per_worker</code></td>
+<td>--</td>
+<td><code>0</code></td>
+<td>Threshold for worker scaling. <code>0</code> disables scaling.</td>
+</tr>
+<tr>
+<td><code>track_background_gas_energy</code></td>
+<td>--</td>
+<td><code>false</code></td>
+<td>Include the evolving background potential in energy diagnostics.</td>
+</tr>
+<tr>
+<td><code>test_background</code></td>
+<td>--</td>
+<td><code>false</code></td>
+<td>Evaluate and plot the background-gas evolution instead of starting D-CAF.</td>
+</tr>
+<tr>
+<td><code>field_binaries</code></td>
+<td>--</td>
+<td><code>false</code></td>
+<td>Apply the configured field-binary population to the initial stars.</td>
+</tr>
+<tr>
+<td><code>dry_run</code></td>
+<td>--</td>
+<td><code>false</code></td>
+<td>Exit after parameter parsing.</td>
+</tr>
+</tbody>
+</table>
+<p>For example, a single command-line override can shorten a configuration run:</p>
+<pre><code class="language-shell">dcaf-plummer --config config.yaml --t_end 5.0
+</code></pre>
+<h2 id="workflow">Workflow</h2>
+<p>The runner performs the following steps:</p>
+<ol>
+<li>Derive the cloud mass from <code>Mstars / sfe</code>, then determine the cloud
+   free-fall time or radius.</li>
+<li>Derive gas-evolution times and construct a <code>PlummerSphere</code> background
+   potential.</li>
+<li>Sample Kroupa IMF stellar masses and generate a Plummer realization.</li>
+<li>Rescale the stellar positions and velocities using <code>eta_radius</code>,
+   <code>eta_sigma</code>, and <code>kappa</code>.</li>
+<li>Optionally replace the initial stars with a field-binary population.</li>
+<li>Schedule formation through <code>MyFormationFramework</code>, a simple
+   <code>StarFormationFramework</code> implementation supplied by the runner.</li>
+<li>Configure PeTar, initialize <code>DcafSystem</code>, and evolve to <code>t_end</code>.</li>
+</ol>
+<h2 id="outputs">Outputs</h2>
+<p><code>DcafSystem</code> writes its main results in <code>./dcaf_output/</code>:</p>
+<ul>
+<li><code>stars_###.amuse</code>: AMUSE stellar snapshots with saved <code>model_time</code> metadata.</li>
+<li><code>energy.dat</code>: energy diagnostics at each output time.</li>
+<li><code>dcaf.log</code>: runtime log. The runner sets this to debug level, so it includes
+  timing diagnostics.</li>
+</ul>
+<p>The Plummer background also writes <code>background_gas.dat</code> in the current working
+directory. See the <a href="../../reference/dcaf/io/output/">output and snapshot API</a>
+and the <a href="../../reference/dcaf/backgroundgas/base/">background-potential API</a> for
+the file formats and loading helpers.</p>
+<h2 id="resume-a-run">Resume A Run</h2>
+<p>Resume uses the latest valid stellar snapshot and is supported only after star
+formation has finished. It reads <code>config.yaml</code> by default, or a file explicitly
+provided with <code>--config</code>:</p>
+<pre><code class="language-shell">dcaf-plummer --resume --config config.yaml --t_end 50.0
+</code></pre>
+<p>During resume, <code>t_end</code> is the only ordinary numerical command-line override.
+The runner creates the next continuous output segment, such as
+<code>dcaf_output_1/</code>, and retains the previous segment as the restore source. See
+the <a href="../../reference/dcaf/io/restart/">restart API</a> for the exact validation and
+folder rules.</p>
+<h2 id="related-apis">Related APIs</h2>
+<ul>
+<li><a href="../../reference/dcaf/dcaf/">DCAF system</a>: solver lifecycle and output behavior.</li>
+<li><a href="../../reference/dcaf/framework/starformation/">Star-formation framework</a>:
+  formation scheduling and custom frameworks.</li>
+<li><a href="../../reference/dcaf/backgroundgas/plummer/">Plummer background potential</a>:
+  gas evolution model used by this runner.</li>
+<li><a href="../../reference/dcaf/factory/field_binary_population/">Field binary population</a>:
+  optional initial binary population.</li>
+</ul>
 
 
 
-<h1 id="dcaf.analysis" class="doc doc-heading">
-<code class="doc-symbol doc-symbol-heading doc-symbol-module"></code>            <code>dcaf.analysis</code>
-
-
-</h1>
-
-    <div class="doc doc-contents first">
 
 
 
-
-
-
-<p><span class="doc-section-title">Modules:</span></p>
-    <table>
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Description</th>
-        </tr>
-      </thead>
-      <tbody>
-          <tr class="doc-section-item">
-            <td><code><a class="autorefs autorefs-internal" title="            dcaf.analysis.formation" href="formation/#dcaf.analysis.formation">formation</a></code></td>
-            <td>
-              <div class="doc-md-description">
-                
-              </div>
-            </td>
-          </tr>
-          <tr class="doc-section-item">
-            <td><code><a class="autorefs autorefs-internal" title="            dcaf.analysis.multiples" href="multiples/#dcaf.analysis.multiples">multiples</a></code></td>
-            <td>
-              <div class="doc-md-description">
-                
-              </div>
-            </td>
-          </tr>
-      </tbody>
-    </table>
-
-
-
-
-
-
-
-
-
-<div class="doc doc-children">
-
-
-
-
-
-
-
-
-
-
-
-
-  </div>
-
-    </div>
-
-</div>
-
-
-
-
-
-
-
-  
-  
 
 
 
@@ -1779,12 +2207,12 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": [], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
       
-        <script src="../../../javascripts/mathjax.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
         <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
       
