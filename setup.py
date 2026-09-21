@@ -17,6 +17,5 @@ setup(
             "dcaf-plummer=dcaf.cli:parametric_plummer",
         ],
     },
-    scripts=["scripts/dcaf_analysis"],
     python_requires=">=3.11",
 )
