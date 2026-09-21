@@ -8,16 +8,14 @@ def random_unit_vector(n_sample=1, gen=None, seed=42):
     """
     Generate random unit vectors on the unit sphere
 
-    Parameters
-    ----------
-    n_sample : int, default=0
-        Number of vectors to generate.
-        If 0 → behaves like 1.
-        Always returns shape (n, 3).
-    gen : numpy Generator, optional
-        Random generator. If None, a new one is created with `seed`.
-    seed : int, default=42
-        Seed used if `gen` is None.
+    Args:
+        n_sample: Number of vectors to generate. Always returns shape `(n, 3)`.
+        gen: Random generator. If None, a new one is created with `seed`.
+        seed: Seed used if `gen` is None.
+
+    Returns:
+        (numpy.ndarray): Unit vectors with shape
+            `(n_sample, 3)`.
     """
     if gen is None:
         gen = np.random.default_rng(seed)
@@ -28,7 +26,16 @@ def random_unit_vector(n_sample=1, gen=None, seed=42):
 
 
 def robust_stats(X):
-    """Component-wise (median, dispersion) with MAD*1.4826; fallback to std if needed."""
+    """Component-wise (median, dispersion) with MAD*1.4826; fallback to std if needed.
+
+    Args:
+        X: Input samples with shape `(n_samples, ...)`, with observations along
+            axis 0.
+
+    Returns:
+        (tuple[numpy.ndarray, numpy.ndarray]): Component-wise median and
+            dispersion, each with shape `X.shape[1:]`.
+    """
     med = np.median(X, axis=0)
     mad = np.median(np.abs(X - med), axis=0)
     sig = 1.4826 * mad
@@ -39,23 +46,17 @@ def robust_stats(X):
 
 def sample_sphere_surface(center, r, n, rng=None):
     """
-    Return n points uniformly distributed on the surface of a sphere of radius r, centered at `center`.
+    Return n points uniformly distributed on the surface of a sphere of radius\
+    `r` at `center`.
 
-    Parameters
-    ----------
-    center : array-like, shape (3,)
-        Sphere center (x, y, z).
-    r : float
-        Sphere radius.
-    n : int
-        Number of surface points to sample.
-    rng : np.random.Generator or int, optional
-        Random generator or seed
+    Args:
+        center: Sphere center (x, y, z).
+        r: Sphere radius.
+        n: Number of surface points to sample.
+        rng: Random generator or seed.
 
-    Returns
-    -------
-    P : ndarray, shape (n, 3)
-        Sampled surface points.
+    Returns:
+        (numpy.ndarray): Sampled surface points.
     """
     gen = rng if isinstance(rng, np.random.Generator) else np.random.default_rng(rng)
 
@@ -78,14 +79,12 @@ def sample_sphere_surface(center, r, n, rng=None):
     return P
 
 
-def weights_by_density(pos, k=5, beta=1.0, tree = None):
-    """
-    Compute weighted probabilities based on local density
-    beta = 0   -> uniform
-    beta = 1   -> inverse density
-    0<beta<1   -> flattened
-    beta>1     -> higher weights for isolated particles
-    """
+def weights_by_density(
+    pos: np.ndarray,
+    k: int = 5,
+    beta: float = 1.0,
+    tree: cKDTree = None,
+) -> np.ndarray:
     if tree is None:
         tree = cKDTree(pos)
     d, _ = tree.query(pos, k=k+1)

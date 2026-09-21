@@ -16,6 +16,9 @@ Follow the [install guide](install.md) for detailed instructions.
 
 After that, there are some examples on the github repository and a ready to use script that was used on the publication of the D-CAF paper.
 
+The [Scripts guide](scripts/index.md) documents the runnable workflows supplied
+with D-CAF, beginning with the parametric Plummer-background simulation runner.
+
 ## References
 
 [Farias, J. P., & Sills, A., 2026, ApJ, 1008, 138.](https://iopscience.iop.org/article/10.3847/1538-4357/ae8f41)

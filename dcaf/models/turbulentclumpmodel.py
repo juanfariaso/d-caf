@@ -1,58 +1,64 @@
-"""
-Module that implements the Turbulent Core Model: https://iopscience.iop.org/article/10.1086/346149 
-applied to the formation of star clusters (as in
-https://iopscience.iop.org/article/10.3847/1538-4357/aa63f6 )
+"""Turbulent Core Model initial conditions for stellar clusters.
 
-All physical variables should be AMUSE quantity instances.
+The implementation follows the Turbulent Core Model of
+[McKee & Tan (2003)](https://iopscience.iop.org/article/10.1086/346149), as
+applied to cluster formation by
+[Farias et al.
+(2017)](https://iopscience.iop.org/article/10.3847/1538-4357/aa63f6) series.
 
+Physical inputs and generated particle attributes use AMUSE quantities.
 """
 import numpy as np
 from dataclasses import dataclass, field
 
 from amuse.lab import units, Particles, new_kroupa_mass_distribution
+from amuse.units.quantities import Quantity
 from scipy.special import hyp2f1
 
 
 @dataclass
 class TurbulentCoreParams:
-    """
+    """Calculate and store parameters of the Turbulent Core Model.
+
     Class that compute and contain the parameters of the TCM.
     See Mckee & Tan 2003 and Farias et al. 2017
 
-    Inputs
-    ------
-    Mc : Total mass of the turbulent gas cloud
-    k_rho : radial density slope. Default: 1.5 
-    alpha_vir, phi_Pc, phi_B, surface_density, fg : standard TCM factors
-    aspect_ratio : z-stretch (>0), 1.0 -> spherical (Default)
-    ar_velocity_scale : if True, apply aspect-ratio velocity scaling. 
-        Default: True
+    Args:
+        Mc: Total mass of the turbulent gas cloud.
+        k_rho: Radial density slope. Default: 1.5.
+        alpha_vir: Virial parameter of the cloud.
+        phi_Pc: Core-pressure factor.
+        phi_B: Magnetic-field factor.
+        surface_density: Cloud surface density.
+        fg: Gas mass fraction entering the TCM factors.
+        aspect_ratio: z-stretch (>0), 1.0 -> spherical (Default).
+        ar_velocity_scale: if True, apply aspect-ratio velocity scaling.
+            Default: True.
 
-    Derived 
-    ---------------------------------
-    Rc : Cloud radius
-    sigma_surf : surface 1D velocity dispersion
-    sigma_1d : global 1D velocity dispersion
-    phi_Pmean : dimensionless pressure factor
-    phi_geom : geometric factor for aspect ratio
+    Attributes:
+        Rc: Cloud radius.
+        sigma_surf: Surface 1D velocity dispersion.
+        sigma_1d: Global 1D velocity dispersion.
+        phi_Pmean: Dimensionless pressure factor.
+        phi_geom: Geometric factor for aspect ratio.
     """
     # inputs
-    Mc  : object = field(default_factory = lambda : 3000 | units.MSun )
+    Mc: Quantity = field(default_factory=lambda: 3000 | units.MSun)
     k_rho : float = 1.5
     alpha_vir : float = 1.0
     phi_Pc : float = 2.0
     phi_B : float = 2.8
-    surface_density : object = field( 
-                     default_factory = lambda : 0.1 | (units.g * units.cm**-2)
-                 )
+    surface_density: Quantity = field(
+        default_factory=lambda: 0.1 | (units.g * units.cm**-2)
+    )
     fg : float = 1.0
     aspect_ratio : float = 1.0
     ar_velocity_scale : bool = True
 
     # derived 
-    Rc: object = field(init=False)
-    sigma_surf: object = field(init=False)
-    sigma_1d: object = field(init=False)
+    Rc: Quantity = field(init=False)
+    sigma_surf: Quantity = field(init=False)
+    sigma_1d: Quantity = field(init=False)
     phi_Pmean: float = field(init=False)
     phi_geom: float = field(init=False)
 
@@ -110,23 +116,24 @@ class TurbulentCoreParams:
 
 
 def make_turbulent_core_cluster(
-    Mc = 3000 | units.MSun,
-    sfe = 0.5,
-    k_rho = 1.5,
-    alpha_vir = 1.0,
-    phi_Pc = 2.0,
-    phi_B = 2.8,
-    surface_density = 0.1 | units.g * units.cm ** -2,
-    fg = 1.0,
-    aspect_ratio = 1.0,
-    keps = -1.0,
-    masses = None,
-    nstars = None,
-    m_equal = None,
-    ar_velocity_scale = True,
-    seed = 432,
-):
-    """
+    Mc: Quantity = 3000 | units.MSun,
+    sfe: float = 0.5,
+    k_rho: float = 1.5,
+    alpha_vir: float = 1.0,
+    phi_Pc: float = 2.0,
+    phi_B: float = 2.8,
+    surface_density: Quantity = 0.1 | units.g * units.cm ** -2,
+    fg: float = 1.0,
+    aspect_ratio: float = 1.0,
+    keps: float = -1.0,
+    masses: Quantity = None,
+    nstars: int = None,
+    m_equal: Quantity = None,
+    ar_velocity_scale: bool = True,
+    seed: int = 432,
+) -> tuple[Particles, TurbulentCoreParams, float]:
+    """Create a single-stars cluster realization from the Turbulent Core Model.
+
     Create a single-stars cluster realisation with positions and velocities
     consistent with the turbulent-core model.
 
@@ -134,7 +141,36 @@ def make_turbulent_core_cluster(
       - `masses`: a Quantity array of stellar masses [MSun]; or
       - `nstars` AND `m_equal`: use equal-mass stars of mass `m_equal`.
 
-    Returns (stars, params, sfe_eff)
+    Args:
+        Mc: Total gas-cloud mass.
+        sfe: Retained input parameter. It does not currently change the
+            generated stellar masses or positions.
+        k_rho: Radial density slope.
+        alpha_vir: Virial parameter passed to ``TurbulentCoreParams``.
+        phi_Pc: Core-pressure factor passed to ``TurbulentCoreParams``.
+        phi_B: Magnetic-field factor passed to ``TurbulentCoreParams``.
+        surface_density: Cloud surface density passed to ``TurbulentCoreParams``.
+        fg: Gas mass fraction passed to ``TurbulentCoreParams``.
+        aspect_ratio: z-axis stretch of the generated spatial distribution.
+        keps: Exponent parameter controlling the cumulative-mass radial sampling
+            relation.
+        masses: Stellar mass array. Provide this or both ``nstars`` and
+            ``m_equal``.
+        nstars: Number of equal-mass stars to create when ``masses`` is omitted.
+        m_equal: Mass assigned to each star when ``masses`` is omitted.
+        ar_velocity_scale: Whether to apply the aspect-ratio velocity scaling.
+        seed: Seed for the NumPy random generator.
+
+    Returns:
+        (Particles): Stars with mass, position, velocity, and
+            radius attributes.
+        (TurbulentCoreParams): Derived TCM cloud parameters.
+        (float): Realized stellar mass fraction ``sum(stars.mass) / Mc``.
+
+    Raises:
+        ValueError: If neither a mass array nor both equal-mass inputs are
+            provided, or if ``k_rho`` and ``keps`` make the radial sampling exponent
+            undefined.
     """
     if masses is None:
         if nstars is None or m_equal is None:
@@ -224,11 +260,22 @@ def make_turbulent_core_cluster(
 # sfe_ff == infty
 
 def make_kroupa_masses(
-    Mstars,
-    mmin=0.01 | units.MSun,
-    mmax=100 | units.MSun,
-):
-    """Draw Kroupa IMF masses until the sum reaches ~Mstars, then trim the last draw."""
+    Mstars: Quantity,
+    mmin: Quantity = 0.01 | units.MSun,
+    mmax: Quantity = 100 | units.MSun,
+) -> Quantity:
+    """Draw Kroupa IMF masses up to a target stellar mass.
+
+    Args:
+        Mstars: Target total stellar mass.
+        mmin: Lower stellar-mass limit for the Kroupa IMF.
+        mmax: Upper stellar-mass limit for the Kroupa IMF.
+
+    Returns:
+        (Quantity): One-dimensional stellar masses in solar masses. The final
+            draw is discarded when it would exceed ``Mstars``, so the returned
+            sum does not exceed the target.
+    """
     mtot = 0 | units.MSun
     out = []
     while mtot < Mstars:

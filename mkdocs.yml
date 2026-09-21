@@ -28,6 +28,13 @@ plugins:
   - api-autonav:
       modules:
         - dcaf
+      exclude:
+        - dcaf.cli
+        - dcaf.factory.distance_based
+        - dcaf.factory.fractal
+        - dcaf.scripts
+        - dcaf.scripts.parametric_plummer
+        - dcaf.utilities.sampler
       on_implicit_namespace_package: skip
       nav_section_title: API Reference
       api_root_uri: reference
@@ -37,6 +44,9 @@ plugins:
 nav:
   - Home: index.md
   - Installation: install.md
+  - Scripts:
+      - Overview: scripts/index.md
+      - Parametric Plummer Simulation: scripts/simulation.md
 
 extra_css:
    - stylesheets/api-reference.css

@@ -16,6 +16,19 @@ If you are using only CPU, then the GPU part below can be skipped and in princip
 **NOTE:**  Once compiled, in the current implementation, PeTar will run with or without GPU depending on the build. We can not switch back and forth. If you need both, you will need two separate installations of AMUSE.
 This is because PeTar GPU is not implemented in AMUSE naturally.
 
+## Install D-CAF
+
+After AMUSE and its required community codes are available in the active Python
+environment, install D-CAF from its repository root:
+
+```shell
+pip install -e .
+```
+
+This installs the `dcaf-plummer` command documented in the
+[Scripts guide](scripts/simulation.md). The editable install is convenient when
+developing D-CAF; use `pip install .` for a regular installation.
+
 
 ## Installation steps
 
@@ -231,4 +244,3 @@ make petar.code
 ```
 
 and if all goes well, PeTar should be ready
-
